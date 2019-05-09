@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './styles.css';
 import { BrowserRouter } from 'react-router-dom'
-import Layout from '../../layout'
+import Layout from '../../router'
 // import PropTypes from 'prop-types';
 // import { withTracker } from 'meteor/react-meteor-data';
 
