@@ -5,7 +5,7 @@ import styles from "./styles";
 
 class WelcomeContainer extends Component {
   render() {
-    return <Welcome />;
+    return <Welcome classes={this.props.classes} />;
   }
 }
 
