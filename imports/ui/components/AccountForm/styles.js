@@ -1,14 +1,18 @@
 const styles = theme => ({
   formControl: {
     marginBottom: theme.spacing.unit * 2,
-    width: "100%"
+    width: "100%",
+    color: "white"
   },
   formButton: {
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    background: "rgb(111,216,98)",
+    color: "black"
   },
   formToggle: {
     background: "none",
     border: "none",
+    color: "white",
     textDecoration: "underline",
     "&:hover": {
       cursor: "pointer"
@@ -18,10 +22,14 @@ const styles = theme => ({
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       width: "400px"
-    }
+    },
+    color: "white"
   },
   errorMessage: {
-    color: "firebrick"
+    color: "white"
+  },
+  text: {
+    color: "white"
   }
 });
 

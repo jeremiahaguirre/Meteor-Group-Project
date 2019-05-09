@@ -43,8 +43,9 @@ class AccountForm extends Component {
       >
         {!this.state.formToggle && (
           <FormControl fullWidth className={classes.formControl}>
-            <InputLabel htmlFor="fullname">Username</InputLabel>
-            {/* @TODO: Wrap in a Final Form <Field /> */}
+            <InputLabel className={classes.text} htmlFor="fullname">
+              Username
+            </InputLabel>
             <Input
               id="fullname"
               type="text"
@@ -52,12 +53,52 @@ class AccountForm extends Component {
                 autoComplete: "off"
               }}
               value={""}
+              className={classes.text}
+            />
+            {/* @TODO: Close Final Form <Field /> */}
+          </FormControl>
+        )}
+        {!this.state.formToggle && (
+          <FormControl fullWidth className={classes.formControl}>
+            <InputLabel className={classes.text} htmlFor="fulltitle">
+              Profile Status
+            </InputLabel>
+            {/* @TODO: Wrap in a Final Form <Field /> */}
+            <Input
+              id="title"
+              type="text"
+              inputProps={{
+                autoComplete: "off"
+              }}
+              value={""}
+              className={classes.text}
+            />
+            {/* @TODO: Close Final Form <Field /> */}
+          </FormControl>
+        )}
+
+        {!this.state.formToggle && (
+          <FormControl fullWidth className={classes.formControl}>
+            <InputLabel className={classes.text} htmlFor="jobdescription">
+              Jop Description
+            </InputLabel>
+            {/* @TODO: Wrap in a Final Form <Field /> */}
+            <Input
+              id="job"
+              type="text"
+              inputProps={{
+                autoComplete: "off"
+              }}
+              value={""}
+              className={classes.text}
             />
             {/* @TODO: Close Final Form <Field /> */}
           </FormControl>
         )}
         <FormControl fullWidth className={classes.formControl}>
-          <InputLabel htmlFor="email">Email</InputLabel>
+          <InputLabel className={classes.text} htmlFor="email">
+            Email
+          </InputLabel>
           {/* @TODO: Wrap in a Final Form <Field /> */}
           <Input
             id="email"
@@ -66,11 +107,14 @@ class AccountForm extends Component {
               autoComplete: "off"
             }}
             value={""}
+            className={classes.text}
           />
           {/* @TODO: Close Final Form <Field /> */}
         </FormControl>
         <FormControl fullWidth className={classes.formControl}>
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel className={classes.text} htmlFor="password">
+            Password
+          </InputLabel>
           {/* @TODO: Wrap in a Final Form <Field /> */}
           <Input
             id="password"
@@ -79,6 +123,7 @@ class AccountForm extends Component {
               autoComplete: "off"
             }}
             value={""}
+            className={classes.text}
           />
           {/* @TODO: Close Final Form <Field /> */}
         </FormControl>
@@ -101,7 +146,7 @@ class AccountForm extends Component {
             >
               {this.state.formToggle ? "Enter" : "Create Account"}
             </Button>
-            <Typography>
+            <Typography className={classes.text}>
               <button
                 className={classes.formToggle}
                 type="button"
@@ -127,7 +172,4 @@ class AccountForm extends Component {
     );
   }
 }
-
-// @TODO: Use compose to add the login and signup mutations to this components props.
-// @TODO: Refetch the VIEWER_QUERY to reload the app and access authenticated routes.
 export default withStyles(styles)(AccountForm);
