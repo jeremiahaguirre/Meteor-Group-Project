@@ -22,32 +22,13 @@ class AccountForm extends Component {
       emailInput: '',
       passwordInput: ''
     }
-    this.handleNameInput = this.handleNameInput.bind(this)
-    this.handleStatusInput = this.handleStatusInput.bind(this)
-    this.handleDescriptionInput = this.handleDescriptionInput.bind(this)
-    this.handleEmailInput = this.handleEmailInput.bind(this)
-    this.handlePasswordInput = this.handlePasswordInput.bind(this)
+
+    this.handleInput = this.handleInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleNameInput(e) {
-    this.setState({ nameInput: e.target.value })
-  }
-
-  handleStatusInput(e) {
-    this.setState({ statusInput: e.target.value })
-  }
-
-  handleDescriptionInput(e) {
-    this.setState({ descriptionInput: e.target.value })
-  }
-
-  handleEmailInput(e) {
-    this.setState({ emailInput: e.target.value })
-  }
-
-  handlePasswordInput(e) {
-    this.setState({ passwordInput: e.target.value })
+  handleInput(e, stateKey) {
+    this.setState({ [stateKey]: e.target.value })
   }
 
   handleSubmit(e) {
@@ -94,7 +75,7 @@ class AccountForm extends Component {
               type="text"
               inputProps={{ autoComplete: "off" }}
               value={nameInput}
-              onChange={this.handleNameInput}
+              onChange={e => this.handleInput(e, 'nameInput')}
               className={classes.text}
             />
           </FormControl>
@@ -107,7 +88,7 @@ class AccountForm extends Component {
               type="text"
               inputProps={{ autoComplete: "off" }}
               value={statusInput}
-              onChange={this.handleStatusInput}
+              onChange={e => this.handleInput(e, 'statusInput')}
               className={classes.text}
             />
           </FormControl>
@@ -121,7 +102,7 @@ class AccountForm extends Component {
               type="text"
               inputProps={{ autoComplete: "off" }}
               value={descriptionInput}
-              onChange={this.handleDescriptionInput}
+              onChange={e => this.handleInput(e, 'descriptionInput')}
               className={classes.text}
             />
           </FormControl>
@@ -137,7 +118,7 @@ class AccountForm extends Component {
               autoComplete: "off"
             }}
             value={emailInput}
-            onChange={this.handleEmailInput}
+            onChange={e => this.handleInput(e, 'emailInput')}
             className={classes.text}
           />
         </FormControl>
@@ -150,7 +131,7 @@ class AccountForm extends Component {
             type="password"
             inputProps={{ autoComplete: "off" }}
             value={passwordInput}
-            onChange={this.handlePasswordInput}
+            onChange={e => this.handleInput(e, 'passwordInput')}
             className={classes.text}
           />
         </FormControl>
