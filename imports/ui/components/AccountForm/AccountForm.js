@@ -1,26 +1,29 @@
+import React, { Component } from "react";
+import { Meteor } from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
-import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
 import styles from "./styles";
 
+// TODO: validate
 class AccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true,
+      isLogin: true,
       nameInput: '',
-      titleInput: '',
+      statusInput: '',
       descriptionInput: '',
       emailInput: '',
       passwordInput: ''
-    };
+    }
     this.handleNameInput = this.handleNameInput.bind(this)
-    this.handleTitleInput = this.handleTitleInput.bind(this)
+    this.handleStatusInput = this.handleStatusInput.bind(this)
     this.handleDescriptionInput = this.handleDescriptionInput.bind(this)
     this.handleEmailInput = this.handleEmailInput.bind(this)
     this.handlePasswordInput = this.handlePasswordInput.bind(this)
@@ -31,8 +34,8 @@ class AccountForm extends Component {
     this.setState({ nameInput: e.target.value })
   }
 
-  handleTitleInput(e) {
-    this.setState({ titleInput: e.target.value })
+  handleStatusInput(e) {
+    this.setState({ statusInput: e.target.value })
   }
 
   handleDescriptionInput(e) {
@@ -49,24 +52,39 @@ class AccountForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    if (this.state.isLogin) {
+      Meteor.loginWithPassword(
+        this.state.emailInput,
+        this.state.passwordInput,
+        e => e && alert(e)
+      )
+    } else {
+      Accounts.createUser({
+        name: this.state.nameInput,
+        status: this.state.statusInput,
+        description: this.state.descriptionInput,
+        email: this.state.emailInput,
+        password: this.state.passwordInput
+      })
+    }
   }
 
   render() {
     const {
       nameInput,
-      titleInput,
+      statusInput,
       descriptionInput,
       emailInput,
       passwordInput
     } = this.state
-    const { classes } = this.props;
+    const { classes } = this.props
 
     return (
       <form
         onSubmit={this.handleSubmit}
         className={classes.accountForm}
       >
-        {!this.state.formToggle && (
+        {!this.state.isLogin ? <>
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="fullname">
               Username
@@ -80,8 +98,6 @@ class AccountForm extends Component {
               className={classes.text}
             />
           </FormControl>
-        )}
-        {!this.state.formToggle && (
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="fulltitle">
               Profile Status
@@ -90,17 +106,15 @@ class AccountForm extends Component {
               id="title"
               type="text"
               inputProps={{ autoComplete: "off" }}
-              value={titleInput}
-              onChange={this.handleTitleInput}
+              value={statusInput}
+              onChange={this.handleStatusInput}
               className={classes.text}
             />
           </FormControl>
-        )}
-
-        {!this.state.formToggle && (
+        </> : (
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="jobdescription">
-              Jop Description
+              Job Description
             </InputLabel>
             <Input
               id="job"
@@ -155,7 +169,7 @@ class AccountForm extends Component {
               color="secondary"
               disabled={false}
             >
-              {this.state.formToggle ? "Enter" : "Create Account"}
+              {this.state.isLogin ? "Enter" : "Create Account"}
             </Button>
             <Typography className={classes.text}>
               <button
@@ -163,11 +177,11 @@ class AccountForm extends Component {
                 type="button"
                 onClick={() => {
                   this.setState({
-                    formToggle: !this.state.formToggle
+                    isLogin: !this.state.isLogin
                   });
                 }}
               >
-                {this.state.formToggle
+                {this.state.isLogin
                   ? "Create an account."
                   : "Login to existing account."}
               </button>
@@ -180,4 +194,5 @@ class AccountForm extends Component {
     );
   }
 }
+
 export default withStyles(styles)(AccountForm);
