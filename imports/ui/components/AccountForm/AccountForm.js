@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { withStyles } from "@material-ui/core/styles";
@@ -41,18 +42,21 @@ class AccountForm extends Component {
       Meteor.loginWithPassword(
         this.state.emailInput,
         this.state.passwordInput,
-        e => e && alert(e)
+        e => e ? alert(e) : this.props.history.push('/')
       );
     } else {
-      Accounts.createUser({
-        profile: {
-          name: this.state.nameInput,
-          employer: this.state.statusInput === "employer" ? true : false,
-          description: this.state.descriptionInput,
+      Accounts.createUser(
+        {
+          profile: {
+            name: this.state.nameInput,
+            employer: this.state.statusInput === "employer" ? true : false,
+            description: this.state.descriptionInput,
+          },
+          email: this.state.emailInput,
+          password: this.state.passwordInput
         },
-        email: this.state.emailInput,
-        password: this.state.passwordInput
-      });
+        e => e ? alert(e) : this.props.history.push('/')
+      );
     }
   }
 
@@ -66,7 +70,8 @@ class AccountForm extends Component {
     } = this.state;
     const { classes } = this.props;
 
-    return (
+    Meteor.userId() && this.props.history.push('/')
+    return (<>
       <form onSubmit={this.handleSubmit} className={classes.accountForm}>
         {!this.state.isLogin && (<>
           <FormControl fullWidth className={classes.formControl}>
@@ -83,7 +88,7 @@ class AccountForm extends Component {
               required
             />
           </FormControl>
-          <FormControl fullWidth component="fieldset" className={{...classes.formControl, ...classes.radioFormControl}}>
+          <FormControl fullWidth component="fieldset" className={classes.radioFormControl}>
             <FormLabel component="legend">Profile Status</FormLabel>
             <RadioGroup
               aria-label="Profile status"
@@ -177,8 +182,8 @@ class AccountForm extends Component {
         </FormControl>
         <Typography className={classes.errorMessage} />
       </form>
-    );
+    </>);
   }
 }
 
-export default withStyles(styles)(AccountForm);
+export default withStyles(styles)(withRouter(AccountForm));
