@@ -5,7 +5,12 @@ import styles from "./styles";
 
 class EmployerContainer extends Component {
   render() {
-    return <Employer />;
+    const { classes } = this.props;
+    return (
+      <div className={classes.main}>
+        <Employer />;
+      </div>
+    );
   }
 }
 

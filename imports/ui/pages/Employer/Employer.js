@@ -1,11 +1,7 @@
 import React from "react";
 
 const Employer = ({ classes }) => {
-  return (
-    <div>
-      <p>This is the Employer page.</p>
-    </div>
-  );
+  return <div>Hello</div>;
 };
 
 export default Employer;
