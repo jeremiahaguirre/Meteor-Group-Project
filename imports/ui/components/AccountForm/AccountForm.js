@@ -62,36 +62,33 @@ class AccountForm extends Component {
 
     return (
       <form onSubmit={this.handleSubmit} className={classes.accountForm}>
-        {!this.state.isLogin ? (
-          <>
-            <FormControl fullWidth className={classes.formControl}>
-              <InputLabel className={classes.text} htmlFor="fullname">
-                Username
-              </InputLabel>
-              <Input
-                id="fullname"
-                type="text"
-                inputProps={{ autoComplete: "off" }}
-                value={nameInput}
-                onChange={e => this.handleInput(e, "nameInput")}
-                className={classes.text}
-              />
-            </FormControl>
-            <FormControl fullWidth className={classes.formControl}>
-              <InputLabel className={classes.text} htmlFor="fulltitle">
-                Profile Status
-              </InputLabel>
-              <Input
-                id="title"
-                type="text"
-                inputProps={{ autoComplete: "off" }}
-                value={statusInput}
-                onChange={e => this.handleInput(e, "statusInput")}
-                className={classes.text}
-              />
-            </FormControl>
-          </>
-        ) : (
+        {!this.state.isLogin && (<>
+          <FormControl fullWidth className={classes.formControl}>
+            <InputLabel className={classes.text} htmlFor="fullname">
+              Username
+            </InputLabel>
+            <Input
+              id="fullname"
+              type="text"
+              inputProps={{ autoComplete: "off" }}
+              value={nameInput}
+              onChange={e => this.handleInput(e, "nameInput")}
+              className={classes.text}
+            />
+          </FormControl>
+          <FormControl fullWidth className={classes.formControl}>
+            <InputLabel className={classes.text} htmlFor="fulltitle">
+              Profile Status
+            </InputLabel>
+            <Input
+              id="title"
+              type="text"
+              inputProps={{ autoComplete: "off" }}
+              value={statusInput}
+              onChange={e => this.handleInput(e, "statusInput")}
+              className={classes.text}
+            />
+          </FormControl>
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="jobdescription">
               Job Description
@@ -105,7 +102,7 @@ class AccountForm extends Component {
               className={classes.text}
             />
           </FormControl>
-        )}
+        </>)}
         <FormControl fullWidth className={classes.formControl}>
           <InputLabel className={classes.text} htmlFor="email">
             Email
