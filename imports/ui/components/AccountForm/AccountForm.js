@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Meteor } from 'meteor/meteor'
-import { Accounts } from 'meteor/accounts-base'
+import { Meteor } from "meteor/meteor";
+import { Accounts } from "meteor/accounts-base";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
@@ -16,29 +16,29 @@ class AccountForm extends Component {
     super(props);
     this.state = {
       isLogin: true,
-      nameInput: '',
-      statusInput: '',
-      descriptionInput: '',
-      emailInput: '',
-      passwordInput: ''
-    }
+      nameInput: "",
+      statusInput: "",
+      descriptionInput: "",
+      emailInput: "",
+      passwordInput: ""
+    };
 
-    this.handleInput = this.handleInput.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleInput(e, stateKey) {
-    this.setState({ [stateKey]: e.target.value })
+    this.setState({ [stateKey]: e.target.value });
   }
 
   handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (this.state.isLogin) {
       Meteor.loginWithPassword(
         this.state.emailInput,
         this.state.passwordInput,
         e => e && alert(e)
-      )
+      );
     } else {
       Accounts.createUser({
         name: this.state.nameInput,
@@ -46,7 +46,7 @@ class AccountForm extends Component {
         description: this.state.descriptionInput,
         email: this.state.emailInput,
         password: this.state.passwordInput
-      })
+      });
     }
   }
 
@@ -57,42 +57,41 @@ class AccountForm extends Component {
       descriptionInput,
       emailInput,
       passwordInput
-    } = this.state
-    const { classes } = this.props
+    } = this.state;
+    const { classes } = this.props;
 
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        className={classes.accountForm}
-      >
-        {!this.state.isLogin ? <>
-          <FormControl fullWidth className={classes.formControl}>
-            <InputLabel className={classes.text} htmlFor="fullname">
-              Username
-            </InputLabel>
-            <Input
-              id="fullname"
-              type="text"
-              inputProps={{ autoComplete: "off" }}
-              value={nameInput}
-              onChange={e => this.handleInput(e, 'nameInput')}
-              className={classes.text}
-            />
-          </FormControl>
-          <FormControl fullWidth className={classes.formControl}>
-            <InputLabel className={classes.text} htmlFor="fulltitle">
-              Profile Status
-            </InputLabel>
-            <Input
-              id="title"
-              type="text"
-              inputProps={{ autoComplete: "off" }}
-              value={statusInput}
-              onChange={e => this.handleInput(e, 'statusInput')}
-              className={classes.text}
-            />
-          </FormControl>
-        </> : (
+      <form onSubmit={this.handleSubmit} className={classes.accountForm}>
+        {!this.state.isLogin ? (
+          <>
+            <FormControl fullWidth className={classes.formControl}>
+              <InputLabel className={classes.text} htmlFor="fullname">
+                Username
+              </InputLabel>
+              <Input
+                id="fullname"
+                type="text"
+                inputProps={{ autoComplete: "off" }}
+                value={nameInput}
+                onChange={e => this.handleInput(e, "nameInput")}
+                className={classes.text}
+              />
+            </FormControl>
+            <FormControl fullWidth className={classes.formControl}>
+              <InputLabel className={classes.text} htmlFor="fulltitle">
+                Profile Status
+              </InputLabel>
+              <Input
+                id="title"
+                type="text"
+                inputProps={{ autoComplete: "off" }}
+                value={statusInput}
+                onChange={e => this.handleInput(e, "statusInput")}
+                className={classes.text}
+              />
+            </FormControl>
+          </>
+        ) : (
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="jobdescription">
               Job Description
@@ -102,7 +101,7 @@ class AccountForm extends Component {
               type="text"
               inputProps={{ autoComplete: "off" }}
               value={descriptionInput}
-              onChange={e => this.handleInput(e, 'descriptionInput')}
+              onChange={e => this.handleInput(e, "descriptionInput")}
               className={classes.text}
             />
           </FormControl>
@@ -118,7 +117,7 @@ class AccountForm extends Component {
               autoComplete: "off"
             }}
             value={emailInput}
-            onChange={e => this.handleInput(e, 'emailInput')}
+            onChange={e => this.handleInput(e, "emailInput")}
             className={classes.text}
           />
         </FormControl>
@@ -131,7 +130,7 @@ class AccountForm extends Component {
             type="password"
             inputProps={{ autoComplete: "off" }}
             value={passwordInput}
-            onChange={e => this.handleInput(e, 'passwordInput')}
+            onChange={e => this.handleInput(e, "passwordInput")}
             className={classes.text}
           />
         </FormControl>
@@ -169,8 +168,7 @@ class AccountForm extends Component {
             </Typography>
           </Grid>
         </FormControl>
-        <Typography className={classes.errorMessage}>
-        </Typography>
+        <Typography className={classes.errorMessage} />
       </form>
     );
   }
