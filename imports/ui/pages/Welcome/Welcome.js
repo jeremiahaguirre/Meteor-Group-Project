@@ -26,7 +26,7 @@ const Welcome = ({ classes }) => {
       </Grid>
       <Grid item xs={12} sm={12} md={6}>
         <Typography className={classes.text} gutterBottom variant="headline">
-          Welcome home.
+          Welcome!
         </Typography>
         <Form />
       </Grid>
