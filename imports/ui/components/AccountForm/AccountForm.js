@@ -21,7 +21,7 @@ class AccountForm extends Component {
     this.state = {
       isLogin: true,
       nameInput: "",
-      statusInput: "",
+      statusInput: "employee",
       descriptionInput: "",
       emailInput: "",
       passwordInput: ""
@@ -80,6 +80,7 @@ class AccountForm extends Component {
               value={nameInput}
               onChange={e => this.handleInput(e, "nameInput")}
               className={classes.text}
+              required
             />
           </FormControl>
           <FormControl fullWidth component="fieldset" className={classes.formControl}>
@@ -106,6 +107,7 @@ class AccountForm extends Component {
               value={descriptionInput}
               onChange={e => this.handleInput(e, "descriptionInput")}
               className={classes.text}
+              required
             />
           </FormControl>
         </>)}
@@ -122,6 +124,7 @@ class AccountForm extends Component {
             value={emailInput}
             onChange={e => this.handleInput(e, "emailInput")}
             className={classes.text}
+            required
           />
         </FormControl>
         <FormControl fullWidth className={classes.formControl}>
@@ -135,6 +138,7 @@ class AccountForm extends Component {
             value={passwordInput}
             onChange={e => this.handleInput(e, "passwordInput")}
             className={classes.text}
+            required
           />
         </FormControl>
         <FormControl className={classes.formControl}>
