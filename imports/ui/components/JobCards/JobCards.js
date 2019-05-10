@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,60 +13,78 @@ import { Users } from "../../../mock";
 import { users } from "../../../mock/mockdatabase";
 import { Paper } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
+import Notification from "../../components/Notifications";
 
-const JobCards = ({ classes, user }) => {
-  console.log(users, "user");
+class JobCards extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
+    };
+  }
 
-  return (
-    <div className={classes.alignCard}>
-      <Card className={classes.card}>
-        <Fragment>
-          <CardContent>
-            <div>
-              <div className={classes.aicon}>
-                <Avatar className={classes.avatar} />
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  render() {
+    const { classes, users } = this.props;
+    return (
+      <div className={classes.alignCard}>
+        <Card className={classes.card}>
+          <Fragment>
+            <CardContent>
+              <div>
+                <div className={classes.aicon}>
+                  <Avatar className={classes.avatar} />
+                </div>
               </div>
-            </div>
-            <Typography variant="display1">{user.name}</Typography>
+              {/* <Typography variant="display1">{users.name}</Typography> */}
 
-            <Typography variant="display1">Date</Typography>
+              <Typography variant="display1">Date</Typography>
 
-            <Typography variant="display1">Location</Typography>
+              <Typography variant="display1">Location</Typography>
 
-            <Typography variant="display1">
-              {user.professions.join(", ")}
-            </Typography>
+              {/* <Typography variant="display1">
+                {users.professions.join(", ")}
+              </Typography> */}
 
-            <Typography variant="display1">Description</Typography>
+              <Typography variant="display1">Description</Typography>
 
-            <Typography variant="display1">{user.workplaces}</Typography>
-          </CardContent>
-        </Fragment>
-        <CardActions className={classes.aicon}>
-          <Button
-            className={classes.button}
-            variant="outlined"
-            size="small"
-            color="primary"
-          >
-            Request
-          </Button>
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={this.state.open}
-            onClose={this.handleClose}
-          >
-            <div className={classes.paper}>
-              {" "}
-              <JobCards />
-            </div>
-          </Modal>
-        </CardActions>
-      </Card>
-    </div>
-  );
-};
+              {/* <Typography variant="display1">{users.workplaces}</Typography> */}
+            </CardContent>
+          </Fragment>
+          <CardActions className={classes.aicon}>
+            <Button
+              onClick={this.handleOpen}
+              className={classes.button}
+              variant="outlined"
+              size="small"
+              color="primary"
+            >
+              Request
+            </Button>
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={this.state.open}
+              onClose={this.handleClose}
+            >
+              <div className={classes.paper}>
+                {" "}
+                <Notification />
+              </div>
+            </Modal>
+          </CardActions>
+        </Card>
+      </div>
+    );
+  }
+}
 
 JobCards.defaultProps = { user: users };
 
