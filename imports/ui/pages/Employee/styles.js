@@ -1,3 +1,7 @@
-const styles = {};
+const styles = {
+  paper: {
+    margin: "auto"
+  }
+};
 
 export default styles;
