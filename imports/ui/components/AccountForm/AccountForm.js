@@ -83,7 +83,7 @@ class AccountForm extends Component {
               required
             />
           </FormControl>
-          <FormControl fullWidth component="fieldset" className={classes.formControl}>
+          <FormControl fullWidth component="fieldset" className={{...classes.formControl, ...classes.radioFormControl}}>
             <FormLabel component="legend">Profile Status</FormLabel>
             <RadioGroup
               aria-label="Profile status"
@@ -92,8 +92,8 @@ class AccountForm extends Component {
               value={statusInput}
               onChange={e => this.handleInput(e, "statusInput")}
             >
-              <FormControlLabel value="employee" control={<Radio />} label="Employee" />
-              <FormControlLabel value="employer" control={<Radio />} label="Employer" />
+              <FormControlLabel value="employee" control={<Radio />}  label="Employee" />
+              <FormControlLabel value="employer" control={<Radio />}  label="Employer" />
             </RadioGroup>
           </FormControl>
           <FormControl fullWidth className={classes.formControl}>
