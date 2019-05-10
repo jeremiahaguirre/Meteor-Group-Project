@@ -11,41 +11,38 @@ import styles from "./styles";
 import TextField from "@material-ui/core/TextField";
 import { Users } from "../../../mock";
 import { users } from "../../../mock/mockdatabase";
+import { Paper } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
 
 const JobCards = ({ classes, user }) => {
   console.log(users, "user");
 
   return (
-    <div>
+    <div className={classes.alignCard}>
       <Card className={classes.card}>
         <Fragment>
           <CardContent>
             <div>
-              <div>
+              <div className={classes.aicon}>
                 <Avatar className={classes.avatar} />
-              </div>
-              <div>
-                <Typography />
-                <Typography />
               </div>
             </div>
             <Typography variant="display1">{user.name}</Typography>
 
-            {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
             <Typography variant="display1">Date</Typography>
-            {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+
             <Typography variant="display1">Location</Typography>
-            {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+
             <Typography variant="display1">
               {user.professions.join(", ")}
             </Typography>
-            {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+
             <Typography variant="display1">Description</Typography>
-            {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+
             <Typography variant="display1">{user.workplaces}</Typography>
           </CardContent>
         </Fragment>
-        <CardActions>
+        <CardActions className={classes.aicon}>
           <Button
             className={classes.button}
             variant="outlined"
@@ -54,6 +51,17 @@ const JobCards = ({ classes, user }) => {
           >
             Request
           </Button>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.handleClose}
+          >
+            <div className={classes.paper}>
+              {" "}
+              <JobCards />
+            </div>
+          </Modal>
         </CardActions>
       </Card>
     </div>
