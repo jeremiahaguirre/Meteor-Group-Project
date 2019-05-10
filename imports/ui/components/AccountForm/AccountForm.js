@@ -4,9 +4,13 @@ import { Accounts } from "meteor/accounts-base";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import Grid from "@material-ui/core/Grid";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from "@material-ui/core/Typography";
 import styles from "./styles";
 
@@ -41,9 +45,11 @@ class AccountForm extends Component {
       );
     } else {
       Accounts.createUser({
-        name: this.state.nameInput,
-        status: this.state.statusInput,
-        description: this.state.descriptionInput,
+        profile: {
+          name: this.state.nameInput,
+          employer: this.state.statusInput === "employer" ? true : false,
+          description: this.state.descriptionInput,
+        },
         email: this.state.emailInput,
         password: this.state.passwordInput
       });
@@ -76,18 +82,18 @@ class AccountForm extends Component {
               className={classes.text}
             />
           </FormControl>
-          <FormControl fullWidth className={classes.formControl}>
-            <InputLabel className={classes.text} htmlFor="fulltitle">
-              Profile Status
-            </InputLabel>
-            <Input
-              id="title"
-              type="text"
-              inputProps={{ autoComplete: "off" }}
+          <FormControl fullWidth component="fieldset" className={classes.formControl}>
+            <FormLabel component="legend">Profile Status</FormLabel>
+            <RadioGroup
+              aria-label="Profile status"
+              name="profile-status"
+              className={classes.radioGroup}
               value={statusInput}
               onChange={e => this.handleInput(e, "statusInput")}
-              className={classes.text}
-            />
+            >
+              <FormControlLabel value="employee" control={<Radio />} label="Employee" />
+              <FormControlLabel value="employer" control={<Radio />} label="Employer" />
+            </RadioGroup>
           </FormControl>
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="jobdescription">
