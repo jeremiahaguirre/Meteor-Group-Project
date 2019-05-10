@@ -6,39 +6,64 @@ import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
 import React, { Component } from "react";
 import Typography from "@material-ui/core/Typography";
-/**
- * @TODO: Uncomment the following lines when authentication is added to the form
- *
- * import { Form, Field } from 'react-final-form'
- *
- * import {
- *    LOGIN_MUTATION,
- *    SIGNUP_MUTATION,
- *    VIEWER_QUERY
- * } from '../../apollo/queries';
- * import { graphql, compose } from 'react-apollo';
- * import validate from './helpers/validation'
- */
-
 import styles from "./styles";
 
 class AccountForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      formToggle: true
+      formToggle: true,
+      nameInput: '',
+      titleInput: '',
+      descriptionInput: '',
+      emailInput: '',
+      passwordInput: ''
     };
+    this.handleNameInput = this.handleNameInput.bind(this)
+    this.handleTitleInput = this.handleTitleInput.bind(this)
+    this.handleDescriptionInput = this.handleDescriptionInput.bind(this)
+    this.handleEmailInput = this.handleEmailInput.bind(this)
+    this.handlePasswordInput = this.handlePasswordInput.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleNameInput(e) {
+    this.setState({ nameInput: e.target.value })
+  }
+
+  handleTitleInput(e) {
+    this.setState({ titleInput: e.target.value })
+  }
+
+  handleDescriptionInput(e) {
+    this.setState({ descriptionInput: e.target.value })
+  }
+
+  handleEmailInput(e) {
+    this.setState({ emailInput: e.target.value })
+  }
+
+  handlePasswordInput(e) {
+    this.setState({ passwordInput: e.target.value })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
   }
 
   render() {
+    const {
+      nameInput,
+      titleInput,
+      descriptionInput,
+      emailInput,
+      passwordInput
+    } = this.state
     const { classes } = this.props;
 
     return (
-      // @TODO: Wrap in Final Form <Form />
       <form
-        onSubmit={() => {
-          console.log("Submitted");
-        }}
+        onSubmit={this.handleSubmit}
         className={classes.accountForm}
       >
         {!this.state.formToggle && (
@@ -49,13 +74,11 @@ class AccountForm extends Component {
             <Input
               id="fullname"
               type="text"
-              inputProps={{
-                autoComplete: "off"
-              }}
-              value={""}
+              inputProps={{ autoComplete: "off" }}
+              value={nameInput}
+              onChange={this.handleNameInput}
               className={classes.text}
             />
-            {/* @TODO: Close Final Form <Field /> */}
           </FormControl>
         )}
         {!this.state.formToggle && (
@@ -63,17 +86,14 @@ class AccountForm extends Component {
             <InputLabel className={classes.text} htmlFor="fulltitle">
               Profile Status
             </InputLabel>
-            {/* @TODO: Wrap in a Final Form <Field /> */}
             <Input
               id="title"
               type="text"
-              inputProps={{
-                autoComplete: "off"
-              }}
-              value={""}
+              inputProps={{ autoComplete: "off" }}
+              value={titleInput}
+              onChange={this.handleTitleInput}
               className={classes.text}
             />
-            {/* @TODO: Close Final Form <Field /> */}
           </FormControl>
         )}
 
@@ -82,50 +102,43 @@ class AccountForm extends Component {
             <InputLabel className={classes.text} htmlFor="jobdescription">
               Jop Description
             </InputLabel>
-            {/* @TODO: Wrap in a Final Form <Field /> */}
             <Input
               id="job"
               type="text"
-              inputProps={{
-                autoComplete: "off"
-              }}
-              value={""}
+              inputProps={{ autoComplete: "off" }}
+              value={descriptionInput}
+              onChange={this.handleDescriptionInput}
               className={classes.text}
             />
-            {/* @TODO: Close Final Form <Field /> */}
           </FormControl>
         )}
         <FormControl fullWidth className={classes.formControl}>
           <InputLabel className={classes.text} htmlFor="email">
             Email
           </InputLabel>
-          {/* @TODO: Wrap in a Final Form <Field /> */}
           <Input
             id="email"
             type="text"
             inputProps={{
               autoComplete: "off"
             }}
-            value={""}
+            value={emailInput}
+            onChange={this.handleEmailInput}
             className={classes.text}
           />
-          {/* @TODO: Close Final Form <Field /> */}
         </FormControl>
         <FormControl fullWidth className={classes.formControl}>
           <InputLabel className={classes.text} htmlFor="password">
             Password
           </InputLabel>
-          {/* @TODO: Wrap in a Final Form <Field /> */}
           <Input
             id="password"
             type="password"
-            inputProps={{
-              autoComplete: "off"
-            }}
-            value={""}
+            inputProps={{ autoComplete: "off" }}
+            value={passwordInput}
+            onChange={this.handlePasswordInput}
             className={classes.text}
           />
-          {/* @TODO: Close Final Form <Field /> */}
         </FormControl>
         <FormControl className={classes.formControl}>
           <Grid
@@ -140,9 +153,7 @@ class AccountForm extends Component {
               variant="contained"
               size="large"
               color="secondary"
-              disabled={
-                false // @TODO: This prop should depend on pristine or valid state of form
-              }
+              disabled={false}
             >
               {this.state.formToggle ? "Enter" : "Create Account"}
             </Button>
@@ -151,7 +162,6 @@ class AccountForm extends Component {
                 className={classes.formToggle}
                 type="button"
                 onClick={() => {
-                  // @TODO: Reset the form on submit
                   this.setState({
                     formToggle: !this.state.formToggle
                   });
@@ -165,10 +175,8 @@ class AccountForm extends Component {
           </Grid>
         </FormControl>
         <Typography className={classes.errorMessage}>
-          {/* @TODO: Display sign-up and login errors */}
         </Typography>
       </form>
-      // @TODO: Close Final Form <Form />
     );
   }
 }
