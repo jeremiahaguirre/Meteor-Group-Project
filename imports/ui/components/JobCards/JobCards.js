@@ -13,7 +13,7 @@ import { Users } from "../../../mock";
 import { users } from "../../../mock/mockdatabase";
 import { Paper } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
-import Notification from "../../components/Notifications";
+import Notification from "../Notifications";
 
 class JobCards extends Component {
   constructor(props) {

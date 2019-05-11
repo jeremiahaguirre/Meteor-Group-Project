@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
+import styles from "./styles";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -21,17 +22,6 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`
   };
 }
-
-const styles = theme => ({
-  paper: {
-    position: "absolute",
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: "none"
-  }
-});
 
 class SimpleModal extends React.Component {
   state = {
@@ -66,7 +56,6 @@ class SimpleModal extends React.Component {
           onClose={this.handleClose}
         >
           <div className={classes.paper}>
-            {" "}
             <JobCards />
           </div>
         </Modal>

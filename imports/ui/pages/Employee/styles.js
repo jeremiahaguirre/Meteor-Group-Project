@@ -1,6 +1,10 @@
 const styles = {
   paper: {
-    margin: "auto"
+    //margin: "auto",
+    paddingTop: 200,
+
+    justifyContent: "center",
+    alignSelf: "center"
   }
 };
 
