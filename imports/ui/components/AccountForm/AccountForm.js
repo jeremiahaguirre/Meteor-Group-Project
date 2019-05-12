@@ -1,12 +1,17 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import Grid from "@material-ui/core/Grid";
 import Input from "@material-ui/core/Input";
 import InputLabel from "@material-ui/core/InputLabel";
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Typography from "@material-ui/core/Typography";
 import styles from "./styles";
 
@@ -17,7 +22,7 @@ class AccountForm extends Component {
     this.state = {
       isLogin: true,
       nameInput: "",
-      statusInput: "",
+      statusInput: "employee",
       descriptionInput: "",
       emailInput: "",
       passwordInput: ""
@@ -37,16 +42,21 @@ class AccountForm extends Component {
       Meteor.loginWithPassword(
         this.state.emailInput,
         this.state.passwordInput,
-        e => e && alert(e)
+        e => e ? alert(e) : this.props.history.push('/')
       );
     } else {
-      Accounts.createUser({
-        name: this.state.nameInput,
-        status: this.state.statusInput,
-        description: this.state.descriptionInput,
-        email: this.state.emailInput,
-        password: this.state.passwordInput
-      });
+      Accounts.createUser(
+        {
+          profile: {
+            name: this.state.nameInput,
+            employer: this.state.statusInput === "employer" ? true : false,
+            description: this.state.descriptionInput,
+          },
+          email: this.state.emailInput,
+          password: this.state.passwordInput
+        },
+        e => e ? alert(e) : this.props.history.push('/')
+      );
     }
   }
 
@@ -60,38 +70,37 @@ class AccountForm extends Component {
     } = this.state;
     const { classes } = this.props;
 
-    return (
+    Meteor.userId() && this.props.history.push('/')
+    return (<>
       <form onSubmit={this.handleSubmit} className={classes.accountForm}>
-        {!this.state.isLogin ? (
-          <>
-            <FormControl fullWidth className={classes.formControl}>
-              <InputLabel className={classes.text} htmlFor="fullname">
-                Username
-              </InputLabel>
-              <Input
-                id="fullname"
-                type="text"
-                inputProps={{ autoComplete: "off" }}
-                value={nameInput}
-                onChange={e => this.handleInput(e, "nameInput")}
-                className={classes.text}
-              />
-            </FormControl>
-            <FormControl fullWidth className={classes.formControl}>
-              <InputLabel className={classes.text} htmlFor="fulltitle">
-                Profile Status
-              </InputLabel>
-              <Input
-                id="title"
-                type="text"
-                inputProps={{ autoComplete: "off" }}
-                value={statusInput}
-                onChange={e => this.handleInput(e, "statusInput")}
-                className={classes.text}
-              />
-            </FormControl>
-          </>
-        ) : (
+        {!this.state.isLogin && (<>
+          <FormControl fullWidth className={classes.formControl}>
+            <InputLabel className={classes.text} htmlFor="fullname">
+              Username
+            </InputLabel>
+            <Input
+              id="fullname"
+              type="text"
+              inputProps={{ autoComplete: "off" }}
+              value={nameInput}
+              onChange={e => this.handleInput(e, "nameInput")}
+              className={classes.text}
+              required
+            />
+          </FormControl>
+          <FormControl fullWidth component="fieldset" className={classes.radioFormControl}>
+            <FormLabel component="legend">Profile Status</FormLabel>
+            <RadioGroup
+              aria-label="Profile status"
+              name="profile-status"
+              className={classes.radioGroup}
+              value={statusInput}
+              onChange={e => this.handleInput(e, "statusInput")}
+            >
+              <FormControlLabel value="employee" control={<Radio />}  label="Employee" />
+              <FormControlLabel value="employer" control={<Radio />}  label="Employer" />
+            </RadioGroup>
+          </FormControl>
           <FormControl fullWidth className={classes.formControl}>
             <InputLabel className={classes.text} htmlFor="jobdescription">
               Job Description
@@ -103,9 +112,10 @@ class AccountForm extends Component {
               value={descriptionInput}
               onChange={e => this.handleInput(e, "descriptionInput")}
               className={classes.text}
+              required
             />
           </FormControl>
-        )}
+        </>)}
         <FormControl fullWidth className={classes.formControl}>
           <InputLabel className={classes.text} htmlFor="email">
             Email
@@ -119,6 +129,7 @@ class AccountForm extends Component {
             value={emailInput}
             onChange={e => this.handleInput(e, "emailInput")}
             className={classes.text}
+            required
           />
         </FormControl>
         <FormControl fullWidth className={classes.formControl}>
@@ -132,6 +143,7 @@ class AccountForm extends Component {
             value={passwordInput}
             onChange={e => this.handleInput(e, "passwordInput")}
             className={classes.text}
+            required
           />
         </FormControl>
         <FormControl className={classes.formControl}>
@@ -170,8 +182,8 @@ class AccountForm extends Component {
         </FormControl>
         <Typography className={classes.errorMessage} />
       </form>
-    );
+    </>);
   }
 }
 
-export default withStyles(styles)(AccountForm);
+export default withStyles(styles)(withRouter(AccountForm));

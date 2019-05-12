@@ -30,6 +30,10 @@ const styles = theme => ({
   },
   text: {
     color: "white"
+  },
+  radioGroup: {
+    "flex-direction": "row",
+    "margin-bottom": 0
   }
 });
 
