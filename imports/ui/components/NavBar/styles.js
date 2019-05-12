@@ -5,7 +5,7 @@ const styles = theme => ({
     width: "100%"
   },
   menu: {
-    background: "rgb(118, 142, 97)"
+    background: "rgb(233,86,86)"
   },
   grow: {
     flexGrow: 1

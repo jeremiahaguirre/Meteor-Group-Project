@@ -1,6 +1,6 @@
 const styles = {
   main: {
-    background: "blue",
+    background: "rgb(108,157,142)",
     height: "100vh",
     margin: 0
   }

@@ -8,7 +8,7 @@ class EmployerContainer extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.main}>
-        <Employer />;
+        <Employer />
       </div>
     );
   }
