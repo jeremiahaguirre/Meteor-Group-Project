@@ -8,22 +8,22 @@ import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
 export default () => (
   <div>
-    <Fragment>
-      <NavBar />
-      <Switch>
-        <Route path="/welcome" component={Welcome} />
-        <Route path="/employer" component={Employer} />
-        <Route path="/test" component={Test} />
-        <Route path="/" component={EmployeePage} />
-        <Redirect to="/welcome" />
-        {/* TODO: remove test routes, uncomment redirect (for development only) */}
+    {/* <Fragment> */}
+    <NavBar />
+    <Switch>
+      <Route path="/welcome" component={Welcome} />
+      <Route path="/employer" component={Employer} />
+      <Route path="/test" component={Test} />
+      <Route path="/" component={EmployeePage} />
+      <Redirect to="/welcome" />
+      {/* TODO: remove test routes, uncomment redirect (for development only) */}
 
-        {/* <Route path="/" render={() => (
+      {/* <Route path="/" render={() => (
       Meteor.userId()
         ? <Test />
         : <Redirect to='/welcome' />
     )} /> */}
-      </Switch>
-    </Fragment>
+    </Switch>
+    {/* </Fragment> */}
   </div>
 );
