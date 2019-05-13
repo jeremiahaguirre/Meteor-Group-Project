@@ -10,6 +10,7 @@ Meteor.methods({
     // }
 
     Jobs.insert({
+      id,
       title,
       description,
       location: undefined,
