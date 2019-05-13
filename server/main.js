@@ -1,5 +1,4 @@
 import { Meteor } from "meteor/meteor";
-import { Jobs } from "../imports/api/jobs";
-import { User } from "../imports/api/user";
+import '../imports/start-up/server';
 
 Meteor.startup(() => {});
