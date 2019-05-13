@@ -28,7 +28,6 @@ class Form extends React.Component {
           variant="outlined"
           type="text"
           // value={jobInput}
-          ref={this.textInput}
         />
         <TextField
           id="outlined-name"
@@ -40,7 +39,6 @@ class Form extends React.Component {
           variant="outlined"
           type="text"
           // value={descriptionInput}
-          ref={this.textInput}
         />
         <TextField
           id="outlined-name"
@@ -52,7 +50,6 @@ class Form extends React.Component {
           variant="outlined"
           type="text"
           // value={shiftInput}
-          ref={this.textInput}
         />
       </div>
     );
