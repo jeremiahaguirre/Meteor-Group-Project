@@ -44,16 +44,7 @@ class AccountForm extends Component {
       Meteor.loginWithPassword(
         this.state.emailInput,
         this.state.passwordInput,
-<<<<<<< HEAD
         e => (e ? alert(e) : this.props.history.push("/"))
-=======
-        e =>
-          e
-            ? setError(
-                "Unable to log in. Please check your login details and try again."
-              )
-            : this.props.history.push("/")
->>>>>>> c331fc3ccfec0ad096bf198f544829eac14b0402
       );
     } else {
       Accounts.createUser(
@@ -66,19 +57,7 @@ class AccountForm extends Component {
           email: this.state.emailInput,
           password: this.state.passwordInput
         },
-<<<<<<< HEAD
         e => (e ? alert(e) : this.props.history.push("/"))
-=======
-        e =>
-          e
-            ? e.reason === "Email already exists."
-              ? this.setError("Email already in use")
-              : console.log(e.reason) &&
-                alert(
-                  "Something went wrong. 😭 Please refresh and try again..."
-                )
-            : this.props.history.push("/")
->>>>>>> c331fc3ccfec0ad096bf198f544829eac14b0402
       );
     }
   }
@@ -98,11 +77,7 @@ class AccountForm extends Component {
     } = this.state;
     const { classes } = this.props;
 
-<<<<<<< HEAD
     // Meteor.userId() && this.props.history.push('/')
-=======
-    Meteor.userId() && this.props.history.push("/");
->>>>>>> c331fc3ccfec0ad096bf198f544829eac14b0402
     return (
       <>
         <form onSubmit={this.handleSubmit} className={classes.accountForm}>
@@ -169,11 +144,7 @@ class AccountForm extends Component {
             </InputLabel>
             <Input
               id="email"
-<<<<<<< HEAD
               type="text"
-=======
-              type="email"
->>>>>>> c331fc3ccfec0ad096bf198f544829eac14b0402
               inputProps={{
                 autoComplete: "off"
               }}
@@ -197,12 +168,9 @@ class AccountForm extends Component {
               required
             />
           </FormControl>
-<<<<<<< HEAD
-=======
           {error && (
             <Typography className={classes.errorMessage}>{error}</Typography>
           )}
->>>>>>> c331fc3ccfec0ad096bf198f544829eac14b0402
           <FormControl className={classes.formControl}>
             <Grid
               container
@@ -237,10 +205,6 @@ class AccountForm extends Component {
               </Typography>
             </Grid>
           </FormControl>
-<<<<<<< HEAD
-          <Typography className={classes.errorMessage} />
-=======
->>>>>>> c331fc3ccfec0ad096bf198f544829eac14b0402
         </form>
       </>
     );

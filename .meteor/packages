@@ -22,3 +22,4 @@ accounts-base
 static-html
 react-meteor-data
 accounts-password
+momentjs:moment
