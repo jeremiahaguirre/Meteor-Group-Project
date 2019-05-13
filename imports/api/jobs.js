@@ -1,5 +1,5 @@
 import { Mongo } from "meteor/mongo";
-import { Meteor } from "meteor/meteor"
+import { Meteor } from "meteor/meteor";
 
 export const Jobs = new Mongo.Collection("jobs");
 
@@ -10,7 +10,6 @@ Meteor.methods({
     // }
 
     Jobs.insert({
-      id,
       title,
       description,
       location: undefined,
