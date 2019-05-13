@@ -2,14 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import ReactDOM from "react-dom";
 import styles from "./styles";
+import { Jobs } from "../../../api/jobs";
 
 class Form extends React.Component {
   render() {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
+      <div>
         <TextField
           id="outlined-name"
           label="Job"
@@ -18,6 +20,7 @@ class Form extends React.Component {
           onChange={console.log("Filled")}
           margin="normal"
           variant="outlined"
+          ref="textInput"
         />
         <TextField
           id="outlined-name"
@@ -27,6 +30,7 @@ class Form extends React.Component {
           onChange={console.log("Filled")}
           margin="normal"
           variant="outlined"
+          ref="textInput"
         />
         <TextField
           id="outlined-name"
@@ -36,8 +40,9 @@ class Form extends React.Component {
           onChange={console.log("Filled")}
           margin="normal"
           variant="outlined"
+          ref="textInput"
         />
-      </form>
+      </div>
     );
   }
 }

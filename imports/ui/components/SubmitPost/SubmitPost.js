@@ -8,11 +8,26 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Form from "../Form";
+import ReactDOM from "react-dom";
+import TextField from "@material-ui/core/TextField";
+import { Jobs } from "../../../api/jobs";
 
 class SubmitPost extends React.Component {
-  state = {
-    open: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      job: "",
+      description: "",
+      Shift: ""
+    };
+    this.handleInput = this.handleInput.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleInput(e, stateKey) {
+    this.setState({ [stateKey]: e.target.value });
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -22,10 +37,26 @@ class SubmitPost extends React.Component {
     this.setState({ open: false });
   };
 
+  handleSubmit(e) {
+    e.preventDefault();
+
+    Jobs.insert({
+      text
+    });
+
+    // Clear form
+    ReactDOM.findDOMNode(this.refs.textInput).value = "";
+  }
+
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <form
+        className={classes.container}
+        onSubmit={this.handleSubmit}
+        noValidate
+        autoComplete="off"
+      >
         <Button
           variant="outlined"
           color="primary"
@@ -48,12 +79,17 @@ class SubmitPost extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
+            <Button
+              type="submit"
+              onSubmit={this.handleSubmit.bind(this)}
+              color="primary"
+              autoFocus
+            >
               Submit
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </form>
     );
   }
 }
