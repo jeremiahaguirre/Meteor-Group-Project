@@ -16,6 +16,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import styles from "./styles";
+import MenuDrawer from "../MenuDrawer";
 
 class NavBar extends Component {
   state = {
@@ -55,7 +56,7 @@ class NavBar extends Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-        <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
+        <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
       </Menu>
     );
 
@@ -88,13 +89,8 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar className={classes.menu} position="static">
           <Toolbar>
-            <IconButton
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="Open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
+            <MenuDrawer />
+
             <Typography
               className={classes.title}
               variant="h6"
