@@ -1,11 +1,8 @@
 import React from "react";
+import SubmitPost from "../../components/SubmitPost";
 
 const Employer = ({ classes }) => {
-  return (
-    <div>
-      <p>This is the Employer page.</p>
-    </div>
-  );
+  return <SubmitPost />;
 };
 
 export default Employer;

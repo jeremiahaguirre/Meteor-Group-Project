@@ -1,5 +1,5 @@
 import React from "react";
-import EmployeeCard from "../../components/EmployeeCard";
+import JobsCards from "../../components/JobCards";
 
 const Test = ({ classes }) => {
   return (
@@ -8,7 +8,7 @@ const Test = ({ classes }) => {
         This is the Test page.Import whatever component you need to test inside
         this div
       </p>
-      <EmployeeCard />
+      <JobsCards />
     </div>
   );
 };
