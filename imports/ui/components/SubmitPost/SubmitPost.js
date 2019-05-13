@@ -40,7 +40,6 @@ class SubmitPost extends React.Component {
   handleSubmit = values => {
     Meteor.call("jobs.insert", values.job, values.description, values.shift);
     this.handleClose();
-    this.values = "";
   };
 
   render() {
