@@ -1,22 +1,29 @@
 import React from "react";
-import { Meteor } from "meteor/meteor"
+import { Meteor } from "meteor/meteor";
 import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
+import NavBar from "../components/NavBar";
+import Employer from "../pages/Employer";
 import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
-
 export default () => (
-  <Switch>
-    <Route path="/welcome" component={Welcome} />
+  <div>
+    {/* <Fragment> */}
+    <NavBar />
+    <Switch>
+      <Route path="/welcome" component={Welcome} />
+      <Route path="/employer" component={Employer} />
+      <Route path="/test" component={Test} />
+      <Route path="/" component={EmployeePage} />
+      <Redirect to="/welcome" />
+      {/* TODO: remove test routes, uncomment redirect (for development only) */}
 
-    {/* TODO: remove test routes, uncomment redirect (for development only) */}
-    <Route path="/test" component={Test} />
-    <Route path="/" component={EmployeePage} />
-
-    {/* <Route path="/" render={() => (
+      {/* <Route path="/" render={() => (
       Meteor.userId()
         ? <Test />
         : <Redirect to='/welcome' />
     )} /> */}
-  </Switch>
+    </Switch>
+    {/* </Fragment> */}
+  </div>
 );

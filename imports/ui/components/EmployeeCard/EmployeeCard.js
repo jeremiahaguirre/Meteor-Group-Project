@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,32 +10,30 @@ import Gravatar from "react-gravatar";
 import styles from "./styles";
 import TextField from "@material-ui/core/TextField";
 
-
-const EmployeeCard = ({ classes, }) => {
+const EmployeeCard = ({ classes }) => {
   return (
     <div>
       <Card className={classes.card}>
-        <Fragment>
-          <CardContent>
+        <CardContent>
+          <div>
             <div>
-              <div>
-                <Avatar className={classes.avatar} />
-              </div>
-              <div>
-                <Typography />
-                <Typography />
-              </div>
+              <Avatar className={classes.avatar} />
             </div>
-            <div className={classes.employeeInfo}>
-              <Typography variant="display1">Name</Typography>
-              <Typography className={classes.eName} >kghrkghr</Typography>
+            <div>
+              <Typography />
+              <Typography />
             </div>
-            <div className={classes.employeeInfo}>
-              <Typography  variant="display1">Profession</Typography>
-              <Typography className={classes.eName} >sdfgh</Typography>
-            </div>
-          </CardContent>
-        </Fragment>
+          </div>
+          <div className={classes.employeeInfo}>
+            <Typography variant="display1">Name</Typography>
+            <Typography className={classes.eName}>kghrkghr</Typography>
+          </div>
+          <div className={classes.employeeInfo}>
+            <Typography variant="display1">Profession</Typography>
+            <Typography className={classes.eName}>sdfgh</Typography>
+          </div>
+        </CardContent>
+
         <CardActions>
           <Button
             className={classes.button}
