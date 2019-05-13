@@ -5,8 +5,14 @@ import TextField from "@material-ui/core/TextField";
 import ReactDOM from "react-dom";
 import styles from "./styles";
 import { Jobs } from "../../../api/jobs";
+import AccountForm from "../SubmitPost/index";
 
 class Form extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.textInput = React.createRef();
+  }
   render() {
     const { classes } = this.props;
 
@@ -17,10 +23,12 @@ class Form extends React.Component {
           label="Job"
           className={classes.textField}
           placeholder={"Job"}
-          onChange={console.log("Filled")}
+          // onChange={e => this.handleInput(e, "jobInput")}
           margin="normal"
           variant="outlined"
-          ref="textInput"
+          type="text"
+          // value={jobInput}
+          ref={this.textInput}
         />
         <TextField
           id="outlined-name"
@@ -30,7 +38,9 @@ class Form extends React.Component {
           onChange={console.log("Filled")}
           margin="normal"
           variant="outlined"
-          ref="textInput"
+          type="text"
+          // value={descriptionInput}
+          ref={this.textInput}
         />
         <TextField
           id="outlined-name"
@@ -40,7 +50,9 @@ class Form extends React.Component {
           onChange={console.log("Filled")}
           margin="normal"
           variant="outlined"
-          ref="textInput"
+          type="text"
+          // value={shiftInput}
+          ref={this.textInput}
         />
       </div>
     );

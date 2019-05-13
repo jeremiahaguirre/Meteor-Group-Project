@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -11,15 +11,16 @@ import Form from "../Form";
 import ReactDOM from "react-dom";
 import TextField from "@material-ui/core/TextField";
 import { Jobs } from "../../../api/jobs";
+import { Meteor } from "meteor/meteor";
 
 class SubmitPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      job: "",
-      description: "",
-      Shift: ""
+      jobInput: "",
+      descriptionInput: "",
+      shiftInput: ""
     };
     this.handleInput = this.handleInput.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,23 +41,13 @@ class SubmitPost extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    Jobs.insert({
-      text
-    });
-
-    // Clear form
-    ReactDOM.findDOMNode(this.refs.textInput).value = "";
+    Meteor.call("jobs.insert");
   }
 
   render() {
     const { classes } = this.props;
     return (
-      <form
-        className={classes.container}
-        onSubmit={this.handleSubmit}
-        noValidate
-        autoComplete="off"
-      >
+      <Fragment>
         <Button
           variant="outlined"
           color="primary"
@@ -72,24 +63,26 @@ class SubmitPost extends React.Component {
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">{"New Shift Post"}</DialogTitle>
-          <DialogContent>
-            <Form />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button
-              type="submit"
-              onSubmit={this.handleSubmit.bind(this)}
-              color="primary"
-              autoFocus
-            >
-              Submit
-            </Button>
-          </DialogActions>
+          <form
+            className={classes.container}
+            onSubmit={this.handleSubmit.bind(this)}
+            noValidate
+            autoComplete="off"
+          >
+            <DialogContent>
+              <Form />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button type="submit" color="primary" autoFocus>
+                Submit
+              </Button>
+            </DialogActions>
+          </form>
         </Dialog>
-      </form>
+      </Fragment>
     );
   }
 }
