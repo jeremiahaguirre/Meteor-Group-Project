@@ -1,5 +1,5 @@
 import { Mongo } from "meteor/mongo";
-import { Meteor } from "meteor/meteor"
+import { Meteor } from "meteor/meteor";
 
 export const Jobs = new Mongo.Collection("jobs");
 
@@ -16,7 +16,7 @@ Meteor.methods({
       professions: [],
       // workspace
       createdAt: new Date(),
-      owner: 0 // change when auth set up: (this.userId)
+      owner: this.userId // change when auth set up: (this.userId)
     });
   }
 });
