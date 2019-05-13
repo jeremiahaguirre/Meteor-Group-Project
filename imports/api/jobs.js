@@ -4,7 +4,7 @@ import { Meteor } from "meteor/meteor";
 export const Jobs = new Mongo.Collection("jobs");
 
 Meteor.methods({
-  "jobs.insert"(title, description) {
+  "jobs.insert"(title, description, shift) {
     // if (!this.userId) {
     //   throw new Meteor.Error("not-authorized");
     // }
@@ -15,8 +15,9 @@ Meteor.methods({
       location: undefined,
       professions: [],
       // workspace
+      shift,
       createdAt: new Date(),
-      owner: 0 // change when auth set up: (this.userId)
+      owner: this.userId // change when auth set up: (this.userId)
     });
   }
 });

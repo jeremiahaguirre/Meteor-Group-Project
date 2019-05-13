@@ -6,61 +6,76 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-// import Gravatar from "react-gravatar";
+import Gravatar from "react-gravatar";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
 import styles from "./styles";
 import TextField from "@material-ui/core/TextField";
-import { Users } from "../../../mock";
 import { users } from "../../../mock/mockdatabase";
-import { Paper } from "@material-ui/core";
-import Modal from "@material-ui/core/Modal";
-import Notification from "../Notifications";
 
 class JobCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false
+      jobTitleInput: "",
+      jobDescriptionInput: ""
     };
+    this.handleInput = this.handleInput.bind(this);
+    this.jobInput = React.createRef();
   }
-
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
-
+  handleSubmit(e) {
+    e.preventDefault();
+  }
   render() {
-    const { classes, users } = this.props;
+    const { jobTitleInput, jobDescriptionInput } = this.state;
+    const { classes, user } = this.props;
+
     return (
-      <div className={classes.alignCard}>
+      <div>
         <Card className={classes.card}>
           <Fragment>
             <CardContent>
               <div>
-                <div className={classes.aicon}>
+                <div>
                   <Avatar className={classes.avatar} />
                 </div>
               </div>
-              {/* <Typography variant="display1">{users.name}</Typography> */}
+              {/* <Typography variant="display1">{user.name}</Typography> */}
 
+              <form onSubmit={this.handleSubmit}>
+                <FormControl fullWidth className={classes.formControl}>
+                  <InputLabel className={classes.text} htmlFor="fullname">
+                    Username
+                  </InputLabel>
+                  <Input
+                    id="title"
+                    type="text"
+                    inputProps={{ autoComplete: "off" }}
+                    value={jobTitleInput}
+                    onChange={e => this.handleInput(e, "jobTitleInput")}
+                    className={classes.text}
+                    ref={this.jobInput}
+                  />
+                </FormControl>
+              </form>
+
+              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">Date</Typography>
-
+              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">Location</Typography>
-
-              {/* <Typography variant="display1">
-                {users.professions.join(", ")}
-              </Typography> */}
-
+              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+              <Typography variant="display1">
+                {user.professions.join(", ")}
+              </Typography>
+              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">Description</Typography>
-
-              {/* <Typography variant="display1">{users.workplaces}</Typography> */}
+              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+              <Typography variant="display1">{user.workplaces}</Typography>
             </CardContent>
           </Fragment>
-          <CardActions className={classes.aicon}>
+          <CardActions>
             <Button
-              onClick={this.handleOpen}
               className={classes.button}
               variant="outlined"
               size="small"
@@ -68,17 +83,6 @@ class JobCards extends Component {
             >
               Request
             </Button>
-            <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              open={this.state.open}
-              onClose={this.handleClose}
-            >
-              <div className={classes.paper}>
-                {" "}
-                <Notification />
-              </div>
-            </Modal>
           </CardActions>
         </Card>
       </div>

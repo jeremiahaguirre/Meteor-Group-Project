@@ -90,7 +90,8 @@ class AccountForm extends Component {
     } = this.state;
     const { classes } = this.props;
 
-    // Meteor.userId() && this.props.history.push('/')
+    Meteor.userId() && this.props.history.push("/");
+
     return (
       <>
         <form onSubmit={this.handleSubmit} className={classes.accountForm}>
@@ -157,7 +158,7 @@ class AccountForm extends Component {
             </InputLabel>
             <Input
               id="email"
-              type="text"
+              type="email"
               inputProps={{
                 autoComplete: "off"
               }}
