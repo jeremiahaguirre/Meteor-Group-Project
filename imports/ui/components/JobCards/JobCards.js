@@ -14,50 +14,6 @@ import styles from "./styles";
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
 
-// const JobCards = ({ classes, user }) => {
-//   console.log(users, "user");
-
-//   return (
-//     <div>
-//       <Card className={classes.card}>
-//         <Fragment>
-//           <CardContent>
-//             <div>
-//               <div>
-//                 <Avatar className={classes.avatar} />
-//               </div>
-//             </div>
-//             <Typography variant="display1">{user.name}</Typography>
-
-//             {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-//             <Typography variant="display1">Date</Typography>
-//             {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-//             <Typography variant="display1">Location</Typography>
-//             {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-//             <Typography variant="display1">
-//               {user.professions.join(", ")}
-//             </Typography>
-//             {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-//             <Typography variant="display1">Description</Typography>
-//             {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-//             <Typography variant="display1">{user.workplaces}</Typography>
-//           </CardContent>
-//         </Fragment>
-//         <CardActions>
-//           <Button
-//             className={classes.button}
-//             variant="outlined"
-//             size="small"
-//             color="primary"
-//           >
-//             Request
-//           </Button>
-//         </CardActions>
-//       </Card>
-//     </div>
-//   );
-// };
-
 class JobCards extends Component {
   constructor(props) {
     super(props);
