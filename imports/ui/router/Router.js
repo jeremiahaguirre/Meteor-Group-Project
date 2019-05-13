@@ -30,6 +30,7 @@ const Router = ({ currentUser, currentUserId }) => (
       <Fragment>
         <NavBar />
         <Switch>
+          <Route path="/employer" component={Employer} />
           <Route path="/employee" component={EmployeePage} />
           <Redirect from="/*" to="/employee" />
         </Switch>

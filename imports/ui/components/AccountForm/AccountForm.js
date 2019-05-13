@@ -44,7 +44,12 @@ class AccountForm extends Component {
       Meteor.loginWithPassword(
         this.state.emailInput,
         this.state.passwordInput,
-        e => (e ? alert(e) : this.props.history.push("/"))
+        e =>
+          e
+            ? setError(
+                "Unable to log in. Please check your login details and try again."
+              )
+            : this.props.history.push("/")
       );
     } else {
       Accounts.createUser(
@@ -57,7 +62,15 @@ class AccountForm extends Component {
           email: this.state.emailInput,
           password: this.state.passwordInput
         },
-        e => (e ? alert(e) : this.props.history.push("/"))
+        e =>
+          e
+            ? e.reason === "Email already exists."
+              ? this.setError("Email already in use")
+              : console.log(e.reason) &&
+                alert(
+                  "Something went wrong. 😭 Please refresh and try again..."
+                )
+            : this.props.history.push("/")
       );
     }
   }
