@@ -18,8 +18,6 @@ class SimpleModal extends React.Component {
     selectedDate: new Date("2014-08-18T21")
   };
 
-  
-
   handleDateChange = date => {
     this.setState({ selectedDate: date });
   };
@@ -38,38 +36,47 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Typography gutterBottom>
-          Click to get the full Modal experience!
-        </Typography>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid container className={classes.grid} justify="space-around">
-            <DatePicker
-              margin="normal"
-              label="Date picker"
-              value={selectedDate}
-              onChange={this.handleDateChange}
-            />
+        <Grid container spacing={24}>
+          <Grid item x={12}>
+            {" "}
+            <Typography gutterBottom>TEST 1</Typography>
+            <Typography gutterBottom>TEST 2</Typography>
+            <Typography gutterBottom>TEST 3</Typography>
+
+            {/* { {jobs.map(job => {
+            <div key={job.id}> }
+            { <Button onClick={this.handleOpen}>{job.title}</Button> }; */}
+
           </Grid>
-        </MuiPickersUtilsProvider>
-
-        {/* {jobs.map(job => {
-          <div key={job.id}> */}
-        {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
-        <Button onClick={this.handleOpen}>Open Modal</Button>
-
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
-          <div className={classes.paper}>
-            <JobCards />
-          </div>
-        </Modal>
-
-        {/* </div>;
+          <Grid item x={12}>
+            <Typography gutterBottom>
+              <h2>Select a Date to View Job Posts</h2>
+            </Typography>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Grid container className={classes.grid} justify="space-around">
+                <DatePicker
+                  margin="normal"
+                  label="Date picker"
+                  value={selectedDate}
+                  onChange={this.handleDateChange}
+                />
+              </Grid>
+            </MuiPickersUtilsProvider>
+            <Button onClick={this.handleOpen}>Open Modal</Button>{" "}
+            <Modal
+              aria-labelledby="simple-modal-title"
+              aria-describedby="simple-modal-description"
+              open={this.state.open}
+              onClose={this.handleClose}
+            >
+              <div className={classes.paper}>
+                <JobCards />
+              </div>
+            </Modal>
+            {/* </div>;
         })} */}
+          </Grid>
+        </Grid>
       </div>
     );
   }

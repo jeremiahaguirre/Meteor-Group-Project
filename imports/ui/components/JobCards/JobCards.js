@@ -13,13 +13,15 @@ import Input from "@material-ui/core/Input";
 import styles from "./styles";
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
+import Modal from "@material-ui/core/Modal";
 
 class JobCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
       jobTitleInput: "",
-      jobDescriptionInput: ""
+      jobDescriptionInput: "",
+      open: false
     };
     //this.handleInput = this.handleInput.bind(this);
     this.jobInput = React.createRef();
@@ -80,6 +82,7 @@ class JobCards extends Component {
               variant="outlined"
               size="small"
               color="primary"
+              onClick={this.handleOpen}
             >
               Request
             </Button>
