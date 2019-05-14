@@ -28,12 +28,18 @@ Meteor.startup(() => {
     Meteor.call(
       "jobs.insert",
       "Cover shift at Starbucks",
-      "Need help covering 3 hour shift! plz someone!"
+      "Need help covering 3 hour shift! plz someone!",
+      "Vancouver",
+      "Thursday",
+      "Cashier"
     );
     Meteor.call(
       "jobs.insert",
       "Need chef!",
-      "URGENT: Chef with experience cooking vegan food neede for tomorrow!"
+      "URGENT: Chef with experience cooking vegan food neede for tomorrow!",
+      "Richmond",
+      "Wednesday",
+      "Chef"
     );
   }
 });

@@ -1,7 +1,7 @@
 const styles = {
   popup: {
     margin: "auto",
-    width: 150,
+    width: 250,
     paddingTop: 400
   }
 };
