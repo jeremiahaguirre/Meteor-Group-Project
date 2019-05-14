@@ -43,7 +43,7 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    //.format("MMM D")
+    console.log(moment(this.state.date._d).format("ddd, MMM D"));
     Meteor.call(
       "jobs.insert",
       values.job,
