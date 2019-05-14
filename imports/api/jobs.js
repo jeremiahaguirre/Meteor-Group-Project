@@ -23,8 +23,10 @@ Meteor.methods({
       professions,
       workspaces,
       time,
-      createdAt: new Date()
-      // change when auth set up: (this.userId)
+      createdAt: new Date(),
+
+      taken: false,
+      applicant: undefined
     });
   }
 });
