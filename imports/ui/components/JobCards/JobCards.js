@@ -21,7 +21,7 @@ class JobCards extends Component {
       jobTitleInput: "",
       jobDescriptionInput: ""
     };
-    this.handleInput = this.handleInput.bind(this);
+    // this.handleInput = this.handleInput.bind(this);
     this.jobInput = React.createRef();
   }
   handleSubmit(e) {

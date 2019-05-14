@@ -37,9 +37,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        {moment()
-          .startOf("day")
-          .fromNow()}
+      
 
         <Typography gutterBottom>
           Click to get the full Modal experience!
