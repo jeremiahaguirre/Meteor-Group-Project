@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import "date-fns";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import styles from "./styles";
@@ -7,28 +8,30 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Meteor } from "meteor/meteor";
+import Grid from "@material-ui/core/Grid";
 import { Form, Field } from "react-final-form";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
+import "react-dates/initialize";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController
+} from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
 
 class SubmitPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      jobInput: "",
-      descriptionInput: "",
-      shiftInput: "",
-      selectedDate: new Date("2014-08-18T21")
+      selectedDate: new Date("2014-08-18T21:11:54"),
+      date: null
     };
   }
 
   handleDateChange = date => {
     this.setState({ selectedDate: date });
-  };
-
-  handleInput = (e, stateKey) => {
-    this.setState({ [stateKey]: e.target.value });
   };
 
   handleClickOpen = () => {
@@ -40,7 +43,15 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    Meteor.call("jobs.insert", values.job, values.description, values.shift);
+    console.log(this.state.date);
+    Meteor.call(
+      "jobs.insert",
+      values.job,
+      values.description,
+      values.shift,
+      values.location,
+      this.state.date
+    );
     this.handleClose();
   };
 
@@ -65,6 +76,9 @@ class SubmitPost extends React.Component {
               onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
+              className="modalSize"
+              fullScreen={true}
+              fullWidth={true}
             >
               <DialogTitle id="alert-dialog-title">
                 {"New Shift Post"}
@@ -103,7 +117,16 @@ class SubmitPost extends React.Component {
                     variant="outlined"
                     type="text"
                   />
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <Field
+                    name="location"
+                    component="input"
+                    className={classes.textField}
+                    placeholder="Location"
+                    margin="normal"
+                    variant="outlined"
+                    type="text"
+                  />
+                  {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid
                       container
                       className={classes.grid}
@@ -116,8 +139,15 @@ class SubmitPost extends React.Component {
                         onChange={this.handleDateChange}
                       />
                     </Grid>
-                  </MuiPickersUtilsProvider>
+                  </MuiPickersUtilsProvider> */}
 
+                  <SingleDatePicker
+                    date={this.state.date} // momentPropTypes.momentObj or null
+                    onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                    focused={this.state.focused} // PropTypes.bool
+                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                    id="datePicker" // PropTypes.string.isRequired,
+                  />
                   <DialogActions>
                     <Button onClick={() => this.handleClose()} color="primary">
                       Cancel
