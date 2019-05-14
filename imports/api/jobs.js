@@ -17,7 +17,10 @@ Meteor.methods({
       workspaces,
       time,
       createdAt: new Date(),
-      owner: this.userId // change when auth set up: (this.userId)
+      owner: this.userId, // change when auth set up: (this.userId)
+      taken: false,
+      applicants=[],
+      
     });
   }
 });
