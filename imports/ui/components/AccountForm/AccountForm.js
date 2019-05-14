@@ -90,8 +90,6 @@ class AccountForm extends Component {
     } = this.state;
     const { classes } = this.props;
 
-    Meteor.userId() && this.props.history.push("/");
-
     return (
       <>
         <form onSubmit={this.handleSubmit} className={classes.accountForm}>
