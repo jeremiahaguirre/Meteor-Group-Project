@@ -25,14 +25,14 @@ class SubmitPost extends React.Component {
     super(props);
     this.state = {
       open: false,
-      selectedDate: new Date("2014-08-18T21:11:54"),
+      // selectedDate: new Date("2014-08-18T21:11:54"),
       date: null
     };
   }
 
-  handleDateChange = date => {
-    this.setState({ selectedDate: date });
-  };
+  // handleDateChange = date => {
+  //   this.setState({ selectedDate: date });
+  // };
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -43,21 +43,19 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    console.log(this.state.date);
+    //.format("MMM D")
     Meteor.call(
       "jobs.insert",
       values.job,
       values.description,
-      values.shift,
       values.location,
-      this.state.date
+      this.state.date._d
     );
     this.handleClose();
   };
 
   render() {
     const { classes } = this.props;
-    const { selectedDate } = this.state;
     return (
       <div>
         <Button
@@ -108,7 +106,7 @@ class SubmitPost extends React.Component {
                     variant="outlined"
                     type="text"
                   />
-                  <Field
+                  {/* <Field
                     name="shift"
                     component="input"
                     className={classes.textField}
@@ -116,7 +114,7 @@ class SubmitPost extends React.Component {
                     margin="normal"
                     variant="outlined"
                     type="text"
-                  />
+                  /> */}
                   <Field
                     name="location"
                     component="input"
@@ -147,6 +145,7 @@ class SubmitPost extends React.Component {
                     focused={this.state.focused} // PropTypes.bool
                     onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
                     id="datePicker" // PropTypes.string.isRequired,
+                    numberOfMonths={1}
                   />
                   <DialogActions>
                     <Button onClick={() => this.handleClose()} color="primary">
