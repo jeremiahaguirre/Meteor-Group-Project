@@ -15,7 +15,8 @@ const styles = {
   },
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    height: "100%"
   },
 
   dense: {
