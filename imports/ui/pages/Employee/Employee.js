@@ -1,23 +1,24 @@
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
-import { startOfDay } from "date-fns";
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
 import styles from "./styles";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
+import { Jobs } from "../../../api/jobs";
+import { withTracker } from "meteor/react-meteor-data";
 
 class SimpleModal extends React.Component {
   state = {
     open: false,
     selectedDate: new Date("2014-08-18T21")
   };
+
+  
 
   handleDateChange = date => {
     this.setState({ selectedDate: date });
@@ -37,8 +38,6 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-      
-
         <Typography gutterBottom>
           Click to get the full Modal experience!
         </Typography>
@@ -83,4 +82,11 @@ SimpleModal.propTypes = {
 // We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
-export default SimpleModalWrapped;
+export default withTracker(() => {
+  Meteor.subscribe("jobs");
+  return {
+    currentUser: Meteor.user(),
+    currentUserId: Meteor.userId(),
+    jobs: Jobs.find({}).fetch()
+  };
+})(SimpleModalWrapped);
