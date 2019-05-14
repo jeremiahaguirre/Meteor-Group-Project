@@ -38,8 +38,9 @@ const Router = ({ currentUser, currentUserId }) => (
   </div>
 );
 
-export default withTracker(({ id }) => {
-  Meteor.subscribe("users");
+//       <Route path="/test" component={Test} />
+
+export default withTracker(() => {
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId()
