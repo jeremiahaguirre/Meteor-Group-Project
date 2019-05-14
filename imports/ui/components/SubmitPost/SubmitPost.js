@@ -1,5 +1,4 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import styles from "./styles";
@@ -7,12 +6,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControl from "@material-ui/core/FormControl";
-import ReactDOM from "react-dom";
-import TextField from "@material-ui/core/TextField";
-import { Jobs } from "../../../api/jobs";
 import { Meteor } from "meteor/meteor";
 import { Form, Field } from "react-final-form";
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
 class SubmitPost extends React.Component {
   constructor(props) {
@@ -21,9 +18,14 @@ class SubmitPost extends React.Component {
       open: false,
       jobInput: "",
       descriptionInput: "",
-      shiftInput: ""
+      shiftInput: "",
+      selectedDate: new Date("2014-08-18T21")
     };
   }
+
+  handleDateChange = date => {
+    this.setState({ selectedDate: date });
+  };
 
   handleInput = (e, stateKey) => {
     this.setState({ [stateKey]: e.target.value });
@@ -44,6 +46,7 @@ class SubmitPost extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { selectedDate } = this.state;
     return (
       <div>
         <Button
@@ -108,6 +111,20 @@ class SubmitPost extends React.Component {
                     variant="outlined"
                     type="text"
                   />
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid
+                      container
+                      className={classes.grid}
+                      justify="space-around"
+                    >
+                      <DatePicker
+                        margin="normal"
+                        label="Date picker"
+                        value={selectedDate}
+                        onChange={this.handleDateChange}
+                      />
+                    </Grid>
+                  </MuiPickersUtilsProvider>
 
                   <DialogActions>
                     <Button onClick={() => this.handleClose()} color="primary">

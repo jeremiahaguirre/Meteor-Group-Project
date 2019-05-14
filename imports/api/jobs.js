@@ -17,7 +17,17 @@ Meteor.methods({
       workspaces,
       time,
       createdAt: new Date(),
-      owner: this.userId // change when auth set up: (this.userId)
+      owner: this.userId, // change when auth set up: (this.userId)
+      taken: false,
+      applicant:undefined,
     });
   }
+  
 });
+
+if (Meteor.isServer) {
+  Meteor.publish('jobs', function () {
+    return Jobs.find({});
+  });
+}
+
