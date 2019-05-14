@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
 import styles from "./styles";
-import moment from "moment";
 
 // function rand() {
 //   return Math.round(Math.random() * 20) - 10;
@@ -42,10 +41,6 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        {moment()
-          .startOf("day")
-          .fromNow()}
-
         <Typography gutterBottom>
           Click to get the full Modal experience!
         </Typography>

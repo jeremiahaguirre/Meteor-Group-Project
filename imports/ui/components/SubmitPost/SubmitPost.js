@@ -73,12 +73,8 @@ class SubmitPost extends React.Component {
                 autoComplete="off"
               >
                 <DialogContent>
-                  {/* <Form /> */}
-
                   <Field
-                    // id="outlined-name"
                     name="job"
-                    // label="Job"
                     component="input"
                     className={classes.textField}
                     placeholder="Job"
@@ -87,8 +83,6 @@ class SubmitPost extends React.Component {
                     type="text"
                   />
                   <Field
-                    // id="outlined-name"
-                    // label="Description"
                     name="description"
                     component="input"
                     className={classes.textField}
@@ -98,8 +92,6 @@ class SubmitPost extends React.Component {
                     type="text"
                   />
                   <Field
-                    // id="outlined-name"
-                    // label="Shift"
                     name="shift"
                     component="input"
                     className={classes.textField}

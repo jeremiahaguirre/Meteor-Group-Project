@@ -4,7 +4,6 @@ import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
 import NavBar from "../components/NavBar";
 import Employer from "../pages/Employer";
-import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
 import { withTracker } from "meteor/react-meteor-data";
 
@@ -17,7 +16,7 @@ const Router = ({ currentUser, currentUserId }) => (
           <Redirect from="/*" to="/home" />
         </Switch>
       </div>
-    ) : currentUserId && currentUser.profile.employer === false ? (
+    ) : currentUserId && currentUser === false ? (
       <Fragment>
         <NavBar />
         <Switch>
@@ -38,8 +37,6 @@ const Router = ({ currentUser, currentUserId }) => (
     )}
   </div>
 );
-
-//       <Route path="/test" component={Test} />
 
 export default withTracker(({ id }) => {
   Meteor.subscribe("users");
