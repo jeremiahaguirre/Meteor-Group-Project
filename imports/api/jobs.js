@@ -19,12 +19,15 @@ Meteor.methods({
       createdAt: new Date(),
       owner: this.userId, // change when auth set up: (this.userId)
       taken: false,
-      requests=[],
+      applicant:undefined,
     });
   }
   
 });
 
-Meteor.publish('jobs', function () {
-  return Jobs.find({});
-});
+if (Meteor.isServer) {
+  Meteor.publish('jobs', function () {
+    return Jobs.find({});
+  });
+}
+
