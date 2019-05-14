@@ -8,6 +8,7 @@ import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
 import { withTracker } from "meteor/react-meteor-data";
 
+
 const Router = ({ currentUser, currentUserId }) => (
   <div>
     {currentUserId === null ? (
@@ -17,7 +18,7 @@ const Router = ({ currentUser, currentUserId }) => (
           <Redirect from="/*" to="/home" />
         </Switch>
       </div>
-    ) : currentUserId && currentUser.profile.employer === false ? (
+    ) : currentUserId && currentUser === false ? (
       <Fragment>
         <NavBar />
         <Switch>

@@ -11,6 +11,12 @@ import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import { Jobs } from "../../../api/jobs";
 import { withTracker } from "meteor/react-meteor-data";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+import { GridList } from "@material-ui/core";
 
 class SimpleModal extends React.Component {
   state = {
@@ -36,22 +42,12 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Grid container spacing={24}>
-          <Grid item x={12}>
-            {" "}
-            <Typography gutterBottom>TEST 1</Typography>
-            <Typography gutterBottom>TEST 2</Typography>
-            <Typography gutterBottom>TEST 3</Typography>
-
-            {/* { {jobs.map(job => {
-            <div key={job.id}> }
-            { <Button onClick={this.handleOpen}>{job.title}</Button> }; */}
-
+        <Grid container spacing={12} justify="space-between">
+          <Grid item x={8}>
+            Job Posts (made from employer)
           </Grid>
-          <Grid item x={12}>
-            <Typography gutterBottom>
-              <h2>Select a Date to View Job Posts</h2>
-            </Typography>
+          <Grid item x={8}>
+            {" "}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid container className={classes.grid} justify="space-around">
                 <DatePicker
@@ -62,7 +58,24 @@ class SimpleModal extends React.Component {
                 />
               </Grid>
             </MuiPickersUtilsProvider>
-            <Button onClick={this.handleOpen}>Open Modal</Button>{" "}
+            <Typography gutterBottom>
+              <h1>List of Jobs:</h1>
+            </Typography>
+            <List dense className={classes.root}>
+              {[0, 1, 2, 3].map(value => (
+                <ListItem key={value} button>
+                  <JobCards />
+                  <ListItemSecondaryAction>
+                    {/* <Checkbox
+                      onChange={this.handleToggle(value)}
+                      checked={this.state.checked.indexOf(value) !== -1}
+                    /> */}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ))}
+            </List>
+          </Grid>{" "}
+          {/* <Button onClick={this.handleOpen}>Open Modal</Button>{" "}
             <Modal
               aria-labelledby="simple-modal-title"
               aria-describedby="simple-modal-description"
@@ -72,19 +85,18 @@ class SimpleModal extends React.Component {
               <div className={classes.paper}>
                 <JobCards />
               </div>
-            </Modal>
-            {/* </div>;
+            </Modal> */}
+          {/* </div>;
         })} */}
-          </Grid>
         </Grid>
       </div>
     );
   }
 }
 
-SimpleModal.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// SimpleModal.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 // We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
