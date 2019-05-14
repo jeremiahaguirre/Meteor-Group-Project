@@ -7,43 +7,49 @@ import Employer from "../pages/Employer";
 import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
 import { withTracker } from "meteor/react-meteor-data";
+import { Jobs } from "../../api/jobs";
 
-const Router = ({ currentUser, currentUserId }) => (
-  <div>
-    {currentUserId === null ? (
-      <div>
-        <Switch>
-          <Route exact path="/home" component={Welcome} />
-          <Redirect from="/*" to="/home" />
-        </Switch>
-      </div>
-    ) : currentUserId && currentUser.profile.employer === false ? (
-      <Fragment>
-        <NavBar />
-        <Switch>
-          <Route path="/employee" component={EmployeePage} />
-          <Redirect from="/*" to="/employee" />
-          <Route component={EmployeePage} />
-        </Switch>
-      </Fragment>
-    ) : (
-      <Fragment>
-        <NavBar />
-        <Switch>
-          <Route path="/employer" component={Employer} />
-          <Route path="/employee" component={EmployeePage} />
-          <Redirect from="/*" to="/employee" />
-        </Switch>
-      </Fragment>
-    )}
-  </div>
-);
+const Router = ({ jobs, currentUser, currentUserId }) => {
+  return (
+    <div>
+      {currentUserId === null ? (
+        <div>
+          <Switch>
+            <Route exact path="/home" component={Welcome} />
+            <Redirect from="/*" to="/home" />
+          </Switch>
+        </div>
+      ) : currentUser && currentUser.profile.employer === false ? (
+        <Fragment>
+          <NavBar />
+          <Switch>
+            <Route path="/employee" component={EmployeePage} />
+            <Redirect from="/*" to="/employee" />
+            <Route component={EmployeePage} />
+          </Switch>
+        </Fragment>
+      ) : (
+        <Fragment>
+          <NavBar />
+          <Switch>
+            <Route path="/employer" component={Employer} />
+            <Route path="/employee" component={EmployeePage} />
+            <Redirect from="/*" to="/employee" />
+          </Switch>
+        </Fragment>
+      )}
+    </div>
+  );
+};
 
 //       <Route path="/test" component={Test} />
 
 export default withTracker(() => {
+  Meteor.subscribe("jobs");
+
   return {
     currentUser: Meteor.user(),
-    currentUserId: Meteor.userId()
+    currentUserId: Meteor.userId(),
+    jobs: Jobs.find({}).fetch()
   };
 })(Router);
