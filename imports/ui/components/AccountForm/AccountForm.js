@@ -46,7 +46,7 @@ class AccountForm extends Component {
         this.state.passwordInput,
         e =>
           e
-            ? setError(
+            ? this.setError(
                 "Unable to log in. Please check your login details and try again."
               )
             : this.props.history.push("/")
