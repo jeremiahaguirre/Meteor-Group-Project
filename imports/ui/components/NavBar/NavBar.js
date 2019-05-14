@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { withTracker } from "meteor/react-meteor-data";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,10 +10,8 @@ import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { withStyles } from "@material-ui/core/styles";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import styles from "./styles";
@@ -43,7 +42,7 @@ class NavBar extends Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes } = this.props;
+    const { classes, currentUser } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -89,8 +88,7 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar className={classes.menu} position="static">
           <Toolbar>
-            <MenuDrawer />
-
+            {currentUser.profile.employer === true ? <MenuDrawer /> : null}
             <Typography
               className={classes.title}
               variant="h6"
@@ -149,4 +147,11 @@ NavBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(NavBar);
+export default withTracker(() => {
+  Meteor.subscribe("jobs");
+
+  return {
+    currentUser: Meteor.user(),
+    currentUserId: Meteor.userId()
+  };
+})(withStyles(styles)(NavBar));

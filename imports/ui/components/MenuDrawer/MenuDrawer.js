@@ -75,15 +75,15 @@ class MenuDrawer extends React.Component {
             </IconButton>
           </div>
           <List>
-            <ListItem button>
+            <ListItem button className={classes.content}>
               <ListItemIcon>
-                <Link to="/employer">
+                <Link to="/employer" className={classes.contentShift}>
                   <InboxIcon />
                   <ListItemText primary={"Employer"} />
                 </Link>
               </ListItemIcon>
               <ListItemIcon>
-                <Link to="/employee">
+                <Link to="/employee" className={classes.contentShift}>
                   <MailIcon />
                   <ListItemText primary={"Employee"} />
                 </Link>
