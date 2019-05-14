@@ -9,6 +9,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Meteor } from "meteor/meteor";
 import { Form, Field } from "react-final-form";
 import DateFnsUtils from "@date-io/date-fns";
+import Grid from "@material-ui/core/Grid";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
 class SubmitPost extends React.Component {

@@ -4,7 +4,14 @@ import { Meteor } from "meteor/meteor";
 export const Jobs = new Mongo.Collection("jobs");
 
 Meteor.methods({
-  "jobs.insert"(title, description, location, time, professions=[], workspaces=[]) {
+  "jobs.insert"(
+    title,
+    description,
+    location,
+    time,
+    professions = [],
+    workspaces = []
+  ) {
     // if (!this.userId) {
     //   throw new Meteor.Error("not-authorized");
     // }
@@ -17,17 +24,15 @@ Meteor.methods({
       workspaces,
       time,
       createdAt: new Date(),
-      owner: this.userId, // change when auth set up: (this.userId)
+
       taken: false,
-      applicant:undefined,
+      applicant: undefined
     });
   }
-  
 });
 
 if (Meteor.isServer) {
-  Meteor.publish('jobs', function () {
+  Meteor.publish("jobs", function jobsPublication() {
     return Jobs.find({});
   });
 }
-
