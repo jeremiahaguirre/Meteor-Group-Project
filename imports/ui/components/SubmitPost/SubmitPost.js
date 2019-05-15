@@ -19,6 +19,9 @@ import {
   DayPickerRangeController
 } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
+import Chip from "@material-ui/core/Chip";
+import Paper from "@material-ui/core/Paper";
+import TagFacesIcon from "@material-ui/icons/TagFaces";
 
 class SubmitPost extends React.Component {
   constructor(props) {
@@ -26,9 +29,30 @@ class SubmitPost extends React.Component {
     this.state = {
       open: false,
       // selectedDate: new Date("2014-08-18T21:11:54"),
-      date: null
+      date: null,
+      chipData: [
+        { key: 0, label: "Angular" },
+        { key: 1, label: "jQuery" },
+        { key: 2, label: "Polymer" },
+        { key: 3, label: "React" },
+        { key: 4, label: "Vue.js" }
+      ]
     };
   }
+
+  handleDelete = data => () => {
+    if (data.label === "React") {
+      alert("Why would you want to delete React?! :)"); // eslint-disable-line no-alert
+      return;
+    }
+
+    this.setState(state => {
+      const chipData = [...state.chipData];
+      const chipToDelete = chipData.indexOf(data);
+      chipData.splice(chipToDelete, 1);
+      return { chipData };
+    });
+  };
 
   // handleDateChange = date => {
   //   this.setState({ selectedDate: date });
@@ -147,6 +171,25 @@ class SubmitPost extends React.Component {
                     id="datePicker" // PropTypes.string.isRequired,
                     numberOfMonths={1}
                   />
+                  <Paper className={classes.root}>
+                    {this.state.chipData.map(data => {
+                      let icon = null;
+
+                      if (data.label === "React") {
+                        icon = <TagFacesIcon />;
+                      }
+
+                      return (
+                        <Chip
+                          key={data.key}
+                          icon={icon}
+                          label={data.label}
+                          onDelete={this.handleDelete(data)}
+                          className={classes.chip}
+                        />
+                      );
+                    })}
+                  </Paper>
                   <DialogActions>
                     <Button onClick={() => this.handleClose()} color="primary">
                       Cancel
