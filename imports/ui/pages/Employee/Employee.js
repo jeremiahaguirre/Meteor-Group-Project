@@ -8,6 +8,7 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
+import NavBar from "../../components/NavBar";
 import styles from "./styles";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
@@ -37,6 +38,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
+        <NavBar />
         <Typography gutterBottom>
           Click to get the full Modal experience!
         </Typography>

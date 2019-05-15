@@ -11,12 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
 import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
-import { Jobs } from "../../../api/jobs";
+// import { Jobs } from "../../../api/jobs";
 import moment from "moment";
 import styles from "./styles";
+import MOCK_DB from "../../../mock";
+const { Jobs: MOCK_JOBS } = MOCK_DB;
 
 const ItemsList = props => {
-  const { classes, jobs } = props;
+  const { classes, filter } = props;
+
   return (
     <div>
       <Typography className={classes.h2} component="h2">
@@ -24,18 +27,18 @@ const ItemsList = props => {
       </Typography>
       <Card className={classes.card}>
         <List className={classes.root}>
-          {jobs.map(job => {
+          {MOCK_JOBS.filter(j =>
+            filter ? new RegExp(filter, "i").test(j.location) : 1
+          ).map(job => {
             return (
               <div key={job._id}>
                 <Divider />
                 <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
+                  {/* <ListItemAvatar>
                     <Avatar>
-                      <Gravatar
-                        email={job.owner && job.owner.emails[0].address}
-                      />
+                      <Gravatar email={job.owner} />
                     </Avatar>
-                  </ListItemAvatar>
+                  </ListItemAvatar> */}
                   <ListItemText
                     primary={job.title}
                     secondary={
@@ -53,7 +56,7 @@ const ItemsList = props => {
                           color="textPrimary"
                         >
                           Date:{" "}
-                          {moment(jobs.createdAt)
+                          {moment(job.createdAt)
                             .add(10, "days")
                             .calendar()}
                         </Typography>
@@ -72,18 +75,23 @@ const ItemsList = props => {
 };
 
 ItemsList.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  filter: PropTypes.string.isRequired
 };
 
 export default withTracker(() => {
   Meteor.subscribe("jobs");
   Meteor.subscribe("allUsers");
-  console.log(Jobs.find().fetch());
-  const jobs = Jobs.find({}).map(job => {
-    const owner = Meteor.users.findOne({ _id: job.owner });
+
+  // const jobs = Jobs.find({}).map(job => {
+  //   const owner = Meteor.users.findOne({ _id: job.ownerId });
+  //   return { ...job, owner: owner };
+  // });
+
+  const jobs = MOCK_JOBS.map(job => {
+    const owner = Meteor.users.findOne({ _id: job.ownerId });
     return { ...job, owner: owner };
   });
-
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),

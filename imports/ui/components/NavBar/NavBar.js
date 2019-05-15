@@ -42,7 +42,7 @@ class NavBar extends Component {
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, currentUser } = this.props;
+    const { classes, currentUser, onChange } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -105,6 +105,7 @@ class NavBar extends Component {
               </div>
               <InputBase
                 placeholder="Search…"
+                onChange={e => onChange(e.target.value)}
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
@@ -146,7 +147,8 @@ class NavBar extends Component {
 }
 
 NavBar.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 export default withTracker(() => {
