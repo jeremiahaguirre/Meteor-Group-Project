@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import "date-fns";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import styles from "./styles";
@@ -7,30 +8,81 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Meteor } from "meteor/meteor";
+import Grid from "@material-ui/core/Grid";
 import { Form, Field } from "react-final-form";
 import DateFnsUtils from "@date-io/date-fns";
-import Grid from "@material-ui/core/Grid";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
+import "react-dates/initialize";
+import {
+  DateRangePicker,
+  SingleDatePicker,
+  DayPickerRangeController
+} from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import FormControl from "@material-ui/core/FormControl";
+import Chip from "@material-ui/core/Chip";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/MenuItem";
 
+const professions = [
+  "React",
+  "React Native",
+  "Meteor",
+  "Node.js",
+  "Express",
+  "Javascript",
+  "CSS",
+  "MongoDB"
+];
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
 class SubmitPost extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      jobInput: "",
-      descriptionInput: "",
-      shiftInput: "",
-      selectedDate: new Date("2014-08-18T21")
+      // selectedDate: new Date("2014-08-18T21:11:54"),
+      date: null,
+      profession: [],
+      location: ""
     };
   }
 
-  handleDateChange = date => {
-    this.setState({ selectedDate: date });
+  handleMultiChange = event => {
+    this.setState({ profession: event.target.value });
   };
 
-  handleInput = (e, stateKey) => {
-    this.setState({ [stateKey]: e.target.value });
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
+
+  // handleChangeMultiple = event => {
+  //   const { options } = event.target;
+  //   const value = [];
+  //   for (let i = 0, l = options.length; i < l; i += 1) {
+  //     if (options[i].selected) {
+  //       value.push(options[i].value);
+  //     }
+  //   }
+  //   this.setState({
+  //     name: value
+  //   });
+  // };
+
+  // handleDateChange = date => {
+  //   this.setState({ selectedDate: date });
+  // };
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -41,13 +93,19 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    Meteor.call("jobs.insert", values.job, values.description, values.shift);
+    Meteor.call(
+      "jobs.open",
+      values.job,
+      values.description,
+      this.state.location,
+      moment(this.state.date._d).format("ddd, MMM D"),
+      this.state.profession
+    );
     this.handleClose();
   };
 
   render() {
     const { classes } = this.props;
-    const { selectedDate } = this.state;
     return (
       <div>
         <Button
@@ -66,6 +124,9 @@ class SubmitPost extends React.Component {
               onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
+              className="modalSize"
+              fullScreen={true}
+              fullWidth={true}
             >
               <DialogTitle id="alert-dialog-title">
                 {"New Shift Post"}
@@ -77,12 +138,8 @@ class SubmitPost extends React.Component {
                 autoComplete="off"
               >
                 <DialogContent>
-                  {/* <Form /> */}
-
                   <Field
-                    // id="outlined-name"
                     name="job"
-                    // label="Job"
                     component="input"
                     className={classes.textField}
                     placeholder="Job"
@@ -91,8 +148,6 @@ class SubmitPost extends React.Component {
                     type="text"
                   />
                   <Field
-                    // id="outlined-name"
-                    // label="Description"
                     name="description"
                     component="input"
                     className={classes.textField}
@@ -101,9 +156,7 @@ class SubmitPost extends React.Component {
                     variant="outlined"
                     type="text"
                   />
-                  <Field
-                    // id="outlined-name"
-                    // label="Shift"
+                  {/* <Field
                     name="shift"
                     component="input"
                     className={classes.textField}
@@ -111,8 +164,33 @@ class SubmitPost extends React.Component {
                     margin="normal"
                     variant="outlined"
                     type="text"
-                  />
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  /> */}
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="location-simple">Location</InputLabel>
+                    <Select
+                      value={this.state.location}
+                      onChange={this.handleChange}
+                      inputProps={{
+                        name: "location",
+                        id: "location-simple"
+                      }}
+                    >
+                      <MenuItem value="Vancouver">Vancouver</MenuItem>
+                      <MenuItem value="Burnaby">Burnaby</MenuItem>
+                      <MenuItem value="Richmond">Richmond</MenuItem>
+                      <MenuItem value="Surrey">Surrey</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {/* <Field
+                    name="location"
+                    component="input"
+                    className={classes.textField}
+                    placeholder="Location"
+                    margin="normal"
+                    variant="outlined"
+                    type="text"
+                  /> */}
+                  {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid
                       container
                       className={classes.grid}
@@ -125,8 +203,47 @@ class SubmitPost extends React.Component {
                         onChange={this.handleDateChange}
                       />
                     </Grid>
-                  </MuiPickersUtilsProvider>
+                  </MuiPickersUtilsProvider> */}
 
+                  <SingleDatePicker
+                    date={this.state.date} // momentPropTypes.momentObj or null
+                    onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                    focused={this.state.focused} // PropTypes.bool
+                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                    id="datePicker" // PropTypes.string.isRequired,
+                    numberOfMonths={1}
+                  />
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
+                    <Select
+                      multiple
+                      value={this.state.profession}
+                      onChange={this.handleMultiChange}
+                      input={<Input id="select-multiple-chip" />}
+                      renderValue={selected => (
+                        <div className={classes.chips}>
+                          {selected.map(value => (
+                            <Chip
+                              key={value}
+                              label={value}
+                              className={classes.chip}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      MenuProps={MenuProps}
+                    >
+                      {professions.map(profession => (
+                        <MenuItem
+                          key={profession}
+                          value={profession}
+                          // style={getStyles(profession, this)}
+                        >
+                          {profession}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                   <DialogActions>
                     <Button onClick={() => this.handleClose()} color="primary">
                       Cancel
