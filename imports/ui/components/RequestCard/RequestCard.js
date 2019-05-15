@@ -42,18 +42,10 @@ function RequestCard(props) {
                     primary={job.title}
                     secondary={
                       <React.Fragment>
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
+                        <Typography component="span" color="textPrimary">
                           Description: {job.description}{" "}
                         </Typography>
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
+                        <Typography component="span" color="textPrimary">
                           Date:{" "}
                           {moment(jobs.createdAt)
                             .add(10, "days")

@@ -30,7 +30,7 @@ const Employer = ({ classes }) => {
       </div>
       <div className={classes.main}>
         <div className={classes.leftSide}>
-          <ItemsList />
+          <ItemsList filter={jobsQuery} />
         </div>
         <div className={classes.rightSide}>
           <RequestCard />

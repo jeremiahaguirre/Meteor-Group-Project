@@ -1,10 +1,7 @@
 const styles = theme => ({
   root: {
-    width: "100%",
-    backgroundColor: theme.palette.background.paper
-  },
-  inline: {
-    display: "inline"
+    marginTop: "5px",
+    marginbottom: "5px"
   },
   card: {
     minWidth: 275,

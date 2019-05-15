@@ -26,12 +26,12 @@ const ItemsList = props => {
         All Jobs
       </Typography>
       <Card className={classes.card}>
-        <List className={classes.root}>
+        <List>
           {MOCK_JOBS.filter(j =>
             filter ? new RegExp(filter, "i").test(j.location) : 1
           ).map(job => {
             return (
-              <div key={job._id}>
+              <div className={classes.root} key={job._id}>
                 <Divider />
                 <ListItem alignItems="flex-start">
                   {/* <ListItemAvatar>
@@ -43,35 +43,19 @@ const ItemsList = props => {
                     primary={job.title}
                     secondary={
                       <React.Fragment>
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
+                        <Typography component="span" color="textPrimary">
                           Description: {job.description}{" "}
                         </Typography>{" "}
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
+                        <Typography component="span" color="textPrimary">
                           Date:{" "}
                           {moment(job.createdAt)
                             .add(10, "days")
                             .calendar()}
                         </Typography>{" "}
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
+                        <Typography component="span" color="textPrimary">
                           Requierments: {job.professions.join(", ")}
                         </Typography>{" "}
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
+                        <Typography component="span" color="textPrimary">
                           Location: {job.location}
                         </Typography>
                       </React.Fragment>
