@@ -39,13 +39,11 @@ class SimpleModal extends React.Component {
   render() {
     const { classes, jobs } = this.props;
     const { selectedDate } = this.state;
-
+    console.log('employee',jobs);
     return (
       <div>
         <Grid container spacing={8}>
-          <Grid item x={8}>
-            
-          </Grid>
+          <Grid item x={8} />
           <Grid item x={8}>
             {" "}
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -58,13 +56,11 @@ class SimpleModal extends React.Component {
                 />
               </Grid>
             </MuiPickersUtilsProvider>
-            <Typography gutterBottom>
-              List of Jobs:
-            </Typography>
+            <Typography gutterBottom>List of Jobs:</Typography>
             <List dense className={classes.root}>
-              {[0, 1, 2, 3, 4].map(value => (
-                <ListItem key={value} button>
-                  <JobCards />
+              {jobs.map(job => (
+                <ListItem key={job._id} button>
+                  <JobCards job={job} />
                   <ListItemSecondaryAction>
                     {/* <Checkbox
                       onChange={this.handleToggle(value)}
@@ -104,15 +100,13 @@ const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
 export default withTracker(() => {
   Meteor.subscribe("jobs");
-  Meteor.subscribe("userEmails");
   const jobs = Jobs.find({}).map(job => {
-    const owner = Meteor.users.findOne({ _id: job.ownerId });
-    return { ...job, owner: owner };
+    return { ...job };
   });
-  
+
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: Jobs.find({}).fetch()
+    jobs: jobs
   };
 })(SimpleModalWrapped);

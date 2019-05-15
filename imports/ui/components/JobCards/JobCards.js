@@ -11,6 +11,9 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import styles from "./styles";
+import { withTracker } from "meteor/react-meteor-data";
+import { Jobs } from "../../../api/jobs";
+
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
 import Modal from "@material-ui/core/Modal";
@@ -31,8 +34,8 @@ class JobCards extends Component {
   }
   render() {
     const { jobTitleInput, jobDescriptionInput } = this.state;
-    const { classes, user } = this.props;
-
+    const { classes, job } = this.props;
+    console.log('Job card',job);
     return (
       <div>
         <Card className={classes.card}>
@@ -65,15 +68,15 @@ class JobCards extends Component {
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">Date</Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">{user.email}</Typography>
+              {/* <Typography variant="display1">{user.email}</Typography> */}
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">
-                {user.professions.join(", ")}
+                {/* {job.title ? job.title : ""} */}
               </Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">{user.name}</Typography>
+              <Typography variant="display1">{}</Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">{user.workplaces}</Typography>
+              <Typography variant="display1">{}</Typography>
             </CardContent>
           </Fragment>
           <CardActions>
@@ -93,6 +96,19 @@ class JobCards extends Component {
   }
 }
 
-JobCards.defaultProps = { user: users };
+// JobCards.defaultProps = { user: users };
 
-export default withStyles(styles)(JobCards);
+const JobCards123 = withStyles(styles)(JobCards);
+
+export default withTracker(() => {
+  Meteor.subscribe("jobs");
+  const jobs = Jobs.find({}).map(job => {
+    return { ...job };
+  });
+
+  return {
+    currentUser: Meteor.user(),
+    currentUserId: Meteor.userId(),
+    jobs: jobs
+  };
+})(JobCards123);
