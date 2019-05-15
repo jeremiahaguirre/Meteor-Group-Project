@@ -23,7 +23,7 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
         <Fragment>
           <NavBar />
           <Switch>
-            <Route path="/employee" component={EmployeePage} />
+            <Route exact path="/employee" component={EmployeePage} />
             <Redirect from="/*" to="/employee" />
             <Route component={EmployeePage} />
           </Switch>
@@ -32,9 +32,9 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
         <Fragment>
           <NavBar />
           <Switch>
-            <Route path="/employer" component={Employer} />
-            <Route path="/employee" component={EmployeePage} />
-            <Redirect from="/*" to="/employee" />
+            <Route exact path="/employer" component={Employer} />
+            <Route exact path="/employee" component={EmployeePage} />
+            <Redirect from="/*" to="/employer" />
           </Switch>
         </Fragment>
       )}
