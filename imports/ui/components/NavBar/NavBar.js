@@ -88,7 +88,9 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar className={classes.menu} position="static">
           <Toolbar>
-            {currentUser.profile.employer === true ? <MenuDrawer /> : null}
+            {currentUser && currentUser.profile.employer === true ? (
+              <MenuDrawer />
+            ) : null}
             <Typography
               className={classes.title}
               variant="h6"

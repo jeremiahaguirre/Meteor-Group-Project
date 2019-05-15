@@ -42,9 +42,9 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Grid container spacing={12} justify="space-between">
+        <Grid container spacing={12}>
           <Grid item x={8}>
-            Job Posts (made from employer)
+            
           </Grid>
           <Grid item x={8}>
             {" "}
@@ -62,7 +62,7 @@ class SimpleModal extends React.Component {
               <h1>List of Jobs:</h1>
             </Typography>
             <List dense className={classes.root}>
-              {[0, 1, 2, 3].map(value => (
+              {[0, 1, 2, 3, 4].map(value => (
                 <ListItem key={value} button>
                   <JobCards />
                   <ListItemSecondaryAction>
@@ -75,7 +75,8 @@ class SimpleModal extends React.Component {
               ))}
             </List>
           </Grid>{" "}
-          {/* <Button onClick={this.handleOpen}>Open Modal</Button>{" "}
+          Jobs Requested
+          {/* { <Button onClick={this.handleOpen}>Open Modal</Button> {" "}
             <Modal
               aria-labelledby="simple-modal-title"
               aria-describedby="simple-modal-description"
@@ -85,7 +86,7 @@ class SimpleModal extends React.Component {
               <div className={classes.paper}>
                 <JobCards />
               </div>
-            </Modal> */}
+            </Modal> } */}
           {/* </div>;
         })} */}
         </Grid>

@@ -26,7 +26,7 @@ const ItemsList = props => {
               <ListItemAvatar>
                 <Avatar>
                   <Gravatar
-                    email={fetchUserEmails(job.ownerId)[0].emails[0].address}
+                    // email={fetchUserEmails(job.ownerId)[0].emails[0].address}
                   />
                 </Avatar>
               </ListItemAvatar>

@@ -65,13 +65,13 @@ class JobCards extends Component {
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">Date</Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Location</Typography>
+              <Typography variant="display1">{user.email}</Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">
                 {user.professions.join(", ")}
               </Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Description</Typography>
+              <Typography variant="display1">{user.name}</Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">{user.workplaces}</Typography>
             </CardContent>
