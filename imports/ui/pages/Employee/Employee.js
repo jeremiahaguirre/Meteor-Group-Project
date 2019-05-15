@@ -1,3 +1,5 @@
+import { format, formatDistance, formatRelative, subDays } from "date-fns";
+import { startOfDay } from "date-fns";
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
@@ -8,26 +10,18 @@ import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
 import NavBar from "../../components/NavBar";
 import styles from "./styles";
-import moment from "moment";
-
-// function rand() {
-//   return Math.round(Math.random() * 20) - 10;
-// }
-
-// function getModalStyle() {
-//   const top = 50 + rand();
-//   const left = 50 + rand();
-
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`
-//   };
-// }
+import Grid from "@material-ui/core/Grid";
+import DateFnsUtils from "@date-io/date-fns";
+import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 
 class SimpleModal extends React.Component {
   state = {
-    open: false
+    open: false,
+    selectedDate: new Date("2014-08-18T21")
+  };
+
+  handleDateChange = date => {
+    this.setState({ selectedDate: date });
   };
 
   handleOpen = () => {
@@ -40,17 +34,24 @@ class SimpleModal extends React.Component {
 
   render() {
     const { classes, jobs } = this.props;
+    const { selectedDate } = this.state;
 
     return (
-      <>
-        <NavBar />
-        {moment()
-          .startOf("day")
-          .fromNow()}
-
+      <div>
         <Typography gutterBottom>
           Click to get the full Modal experience!
         </Typography>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Grid container className={classes.grid} justify="space-around">
+            <DatePicker
+              margin="normal"
+              label="Date picker"
+              value={selectedDate}
+              onChange={this.handleDateChange}
+            />
+          </Grid>
+        </MuiPickersUtilsProvider>
+
         {/* {jobs.map(job => {
           <div key={job.id}> */}
         {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
@@ -69,7 +70,7 @@ class SimpleModal extends React.Component {
 
         {/* </div>;
         })} */}
-      </>
+      </div>
     );
   }
 }

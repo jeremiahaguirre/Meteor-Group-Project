@@ -3,7 +3,6 @@ import { Meteor } from "meteor/meteor";
 import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
 import Employer from "../pages/Employer";
-// import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
 import { withTracker } from "meteor/react-meteor-data";
 import { Jobs } from "../../api/jobs";
