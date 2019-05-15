@@ -55,12 +55,15 @@ class SubmitPost extends React.Component {
       // selectedDate: new Date("2014-08-18T21:11:54"),
       date: null,
       name: [],
-      age: ""
+      location: ""
     };
   }
 
-  handleChange = event => {
+  handleMultiChange = event => {
     this.setState({ name: event.target.value });
+  };
+
+  handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -163,13 +166,13 @@ class SubmitPost extends React.Component {
                     type="text"
                   /> */}
                   <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="age-simple">Age</InputLabel>
+                    <InputLabel htmlFor="location-simple">Location</InputLabel>
                     <Select
-                      value={this.state.age}
+                      value={this.state.location}
                       onChange={this.handleChange}
                       inputProps={{
-                        name: "age",
-                        id: "age-simple"
+                        name: "location",
+                        id: "location-simple"
                       }}
                     >
                       <MenuItem value="Vancouver">Vancouver</MenuItem>
@@ -215,7 +218,7 @@ class SubmitPost extends React.Component {
                     <Select
                       multiple
                       value={this.state.name}
-                      onChange={this.handleChange}
+                      onChange={this.handleMultiChange}
                       input={<Input id="select-multiple-chip" />}
                       renderValue={selected => (
                         <div className={classes.chips}>
