@@ -1,7 +1,7 @@
-// import { Meteor } from "meteor/meteor";
+import { Meteor } from "meteor/meteor";
 
-// if (Meteor.isServer) {
-//   Meteor.publish("userEmails", () => {
-//     return Meteor.users.find({ emails: true }).fetch();
-//   });
-// }
+if (Meteor.isServer) {
+  Meteor.publish("allUsers", () => {
+    return Meteor.users.find();
+  });
+}
