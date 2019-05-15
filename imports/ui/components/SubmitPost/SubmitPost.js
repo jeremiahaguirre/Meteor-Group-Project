@@ -54,12 +54,14 @@ class SubmitPost extends React.Component {
       open: false,
       // selectedDate: new Date("2014-08-18T21:11:54"),
       date: null,
-      name: []
+      name: [],
+      age: ""
     };
   }
 
   handleChange = event => {
     this.setState({ name: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   // handleChangeMultiple = event => {
@@ -160,7 +162,23 @@ class SubmitPost extends React.Component {
                     variant="outlined"
                     type="text"
                   /> */}
-                  <Field
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="age-simple">Age</InputLabel>
+                    <Select
+                      value={this.state.age}
+                      onChange={this.handleChange}
+                      inputProps={{
+                        name: "age",
+                        id: "age-simple"
+                      }}
+                    >
+                      <MenuItem value="Vancouver">Vancouver</MenuItem>
+                      <MenuItem value="Burnaby">Burnaby</MenuItem>
+                      <MenuItem value="Richmond">Richmond</MenuItem>
+                      <MenuItem value="Surrey">Surrey</MenuItem>
+                    </Select>
+                  </FormControl>
+                  {/* <Field
                     name="location"
                     component="input"
                     className={classes.textField}
@@ -168,7 +186,7 @@ class SubmitPost extends React.Component {
                     margin="normal"
                     variant="outlined"
                     type="text"
-                  />
+                  /> */}
                   {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid
                       container
