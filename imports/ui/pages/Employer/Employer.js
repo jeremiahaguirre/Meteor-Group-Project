@@ -1,14 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import SubmitPost from "../../components/SubmitPost";
-import ItemsList from "../../components/List";
+import ItemsList from "../../components/AllJobs";
+import RequestCard from "../../components/RequestCard";
+import NavBar from "../../components/NavBar";
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = {
+  main: {
+    display: "flex",
+    justifyContent: "space-between",
+    width: "90%",
+    margin: "auto"
+  },
+  top: {
+    width: "100%",
+    padding: "30px",
+    textAlign: "center"
+  }
+};
 
 const Employer = ({ classes }) => {
+  const [jobsQuery, setJobsQuery] = useState("");
+
   return (
     <div>
-      <SubmitPost />
-      <ItemsList />
+      <NavBar onChange={setJobsQuery} />
+      <div className={classes.top}>
+        <SubmitPost />
+      </div>
+      <div className={classes.main}>
+        <div className={classes.leftSide}>
+          <ItemsList />
+        </div>
+        <div className={classes.rightSide}>
+          <RequestCard />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Employer;
+export default withStyles(styles)(Employer);
