@@ -6,6 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
+import NavBar from "../../components/NavBar";
 import styles from "./styles";
 import moment from "moment";
 
@@ -41,7 +42,8 @@ class SimpleModal extends React.Component {
     const { classes, jobs } = this.props;
 
     return (
-      <div>
+      <>
+        <NavBar />
         {moment()
           .startOf("day")
           .fromNow()}
@@ -67,7 +69,7 @@ class SimpleModal extends React.Component {
 
         {/* </div>;
         })} */}
-      </div>
+      </>
     );
   }
 }

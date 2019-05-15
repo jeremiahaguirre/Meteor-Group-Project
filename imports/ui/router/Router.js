@@ -2,9 +2,8 @@ import React, { Fragment } from "react";
 import { Meteor } from "meteor/meteor";
 import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
-import NavBar from "../components/NavBar";
 import Employer from "../pages/Employer";
-import Test from "../pages/Test";
+// import Test from "../pages/Test";
 import EmployeePage from "../pages/Employee";
 import { withTracker } from "meteor/react-meteor-data";
 import { Jobs } from "../../api/jobs";
@@ -21,7 +20,6 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
         </div>
       ) : currentUser && currentUser.profile.employer === false ? (
         <Fragment>
-          <NavBar />
           <Switch>
             <Route exact path="/employee" component={EmployeePage} />
             <Redirect from="/*" to="/employee" />
@@ -30,7 +28,6 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
         </Fragment>
       ) : (
         <Fragment>
-          <NavBar />
           <Switch>
             <Route exact path="/employer" component={Employer} />
             <Route exact path="/employee" component={EmployeePage} />
