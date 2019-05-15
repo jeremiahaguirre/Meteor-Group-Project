@@ -17,6 +17,9 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { GridList } from "@material-ui/core";
+// import "react-dates/initialize";
+// import { SingleDatePicker } from "react-dates";
+// import "react-dates/lib/css/_datepicker.css";
 
 class SimpleModal extends React.Component {
   state = {
@@ -54,12 +57,24 @@ class SimpleModal extends React.Component {
                   value={selectedDate}
                   onChange={this.handleDateChange}
                 />
+
+
+              {/* <SingleDatePicker
+                    date={this.state.date} // momentPropTypes.momentObj or null
+                    onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                    focused={this.state.focused} // PropTypes.bool
+                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                    id="datePicker" // PropTypes.string.isRequired,
+                    numberOfMonths={1}
+                  /> */}
+
+
               </Grid>
             </MuiPickersUtilsProvider>
             <Typography gutterBottom>List of Jobs:</Typography>
             <List dense className={classes.root}>
               {jobs.map(job => (
-                <ListItem key={job._id} button>
+                <ListItem key={job._id} >
                   <JobCards job={job} />
                   <ListItemSecondaryAction>
                     {/* <Checkbox
