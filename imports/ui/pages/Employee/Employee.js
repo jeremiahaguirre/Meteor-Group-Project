@@ -42,7 +42,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Grid container spacing={12}>
+        <Grid container spacing={8}>
           <Grid item x={8}>
             
           </Grid>
@@ -59,7 +59,7 @@ class SimpleModal extends React.Component {
               </Grid>
             </MuiPickersUtilsProvider>
             <Typography gutterBottom>
-              <h1>List of Jobs:</h1>
+              List of Jobs:
             </Typography>
             <List dense className={classes.root}>
               {[0, 1, 2, 3, 4].map(value => (
@@ -104,6 +104,12 @@ const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
 export default withTracker(() => {
   Meteor.subscribe("jobs");
+  Meteor.subscribe("userEmails");
+  const jobs = Jobs.find({}).map(job => {
+    const owner = Meteor.users.findOne({ _id: job.ownerId });
+    return { ...job, owner: owner };
+  });
+  
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
