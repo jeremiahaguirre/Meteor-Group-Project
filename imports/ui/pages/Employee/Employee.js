@@ -17,9 +17,9 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 import { GridList } from "@material-ui/core";
-// import "react-dates/initialize";
-// import { SingleDatePicker } from "react-dates";
-// import "react-dates/lib/css/_datepicker.css";
+import "react-dates/initialize";
+import { SingleDatePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
 
 class SimpleModal extends React.Component {
   state = {
@@ -49,7 +49,7 @@ class SimpleModal extends React.Component {
           <Grid item x={8} />
           <Grid item x={8}>
             {" "}
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <Grid container className={classes.grid} justify="space-around">
                 <DatePicker
                   margin="normal"
@@ -57,20 +57,22 @@ class SimpleModal extends React.Component {
                   value={selectedDate}
                   onChange={this.handleDateChange}
                 />
+              </Grid>
 
+              
+            </MuiPickersUtilsProvider> */}
 
-              {/* <SingleDatePicker
+{ <SingleDatePicker
+
                     date={this.state.date} // momentPropTypes.momentObj or null
                     onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                     focused={this.state.focused} // PropTypes.bool
                     onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
                     id="datePicker" // PropTypes.string.isRequired,
                     numberOfMonths={1}
-                  /> */}
+                  /> }
 
 
-              </Grid>
-            </MuiPickersUtilsProvider>
             <Typography gutterBottom>List of Jobs:</Typography>
             <List dense className={classes.root}>
               {jobs.map(job => (
