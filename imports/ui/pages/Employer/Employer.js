@@ -10,18 +10,27 @@ const styles = {
     justifyContent: "space-between",
     width: "90%",
     margin: "auto"
+  },
+  top: {
+    width: "100%",
+    padding: "30px",
+    textAlign: "center"
   }
 };
 
 const Employer = ({ classes }) => {
   return (
-    <div className={classes.main}>
-      <div className={classes.leftSide}>
+    <div>
+      <div className={classes.top}>
         <SubmitPost />
-        <ItemsList />
       </div>
-      <div className={classes.rightSide}>
-        <RequestCard />
+      <div className={classes.main}>
+        <div className={classes.leftSide}>
+          <ItemsList />
+        </div>
+        <div className={classes.rightSide}>
+          <RequestCard />
+        </div>
       </div>
     </div>
   );

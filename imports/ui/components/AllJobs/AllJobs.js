@@ -25,6 +25,7 @@ const ItemsList = props => {
       <Card className={classes.card}>
         <List className={classes.root}>
           {jobs.map(job => {
+            console.log(job);
             return (
               <div key={job._id}>
                 <Divider />
@@ -45,8 +46,8 @@ const ItemsList = props => {
                           className={classes.inline}
                           color="textPrimary"
                         >
-                          {job.description}{" "}
-                        </Typography>
+                          Description: {job.description}{" "}
+                        </Typography>{" "}
                         <Typography
                           component="span"
                           className={classes.inline}
@@ -56,6 +57,20 @@ const ItemsList = props => {
                           {moment(jobs.createdAt)
                             .add(10, "days")
                             .calendar()}
+                        </Typography>{" "}
+                        <Typography
+                          component="span"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          Requierments: {job.professions.join(", ")}
+                        </Typography>{" "}
+                        <Typography
+                          component="span"
+                          className={classes.inline}
+                          color="textPrimary"
+                        >
+                          Location: {job.location}
                         </Typography>
                       </React.Fragment>
                     }
