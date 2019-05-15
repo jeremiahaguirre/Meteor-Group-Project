@@ -11,7 +11,6 @@ import { Meteor } from "meteor/meteor";
 import Grid from "@material-ui/core/Grid";
 import { Form, Field } from "react-final-form";
 import DateFnsUtils from "@date-io/date-fns";
-import Grid from "@material-ui/core/Grid";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import "react-dates/initialize";
 import {
@@ -20,10 +19,34 @@ import {
   DayPickerRangeController
 } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
+import FormControl from "@material-ui/core/FormControl";
 import Chip from "@material-ui/core/Chip";
-import Paper from "@material-ui/core/Paper";
-import TagFacesIcon from "@material-ui/icons/TagFaces";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
+import MenuItem from "@material-ui/core/MenuItem";
 
+const names = [
+  "React",
+  "React Native",
+  "Meteor",
+  "Node.js",
+  "Express",
+  "Javascript",
+  "CSS",
+  "MongoDB"
+];
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250
+    }
+  }
+};
 class SubmitPost extends React.Component {
   constructor(props) {
     super(props);
@@ -31,29 +54,26 @@ class SubmitPost extends React.Component {
       open: false,
       // selectedDate: new Date("2014-08-18T21:11:54"),
       date: null,
-      chipData: [
-        { key: 0, label: "Angular" },
-        { key: 1, label: "jQuery" },
-        { key: 2, label: "Polymer" },
-        { key: 3, label: "React" },
-        { key: 4, label: "Vue.js" }
-      ]
+      name: []
     };
   }
 
-  handleDelete = data => () => {
-    if (data.label === "React") {
-      alert("Why would you want to delete React?! :)"); // eslint-disable-line no-alert
-      return;
-    }
-
-    this.setState(state => {
-      const chipData = [...state.chipData];
-      const chipToDelete = chipData.indexOf(data);
-      chipData.splice(chipToDelete, 1);
-      return { chipData };
-    });
+  handleChange = event => {
+    this.setState({ name: event.target.value });
   };
+
+  // handleChangeMultiple = event => {
+  //   const { options } = event.target;
+  //   const value = [];
+  //   for (let i = 0, l = options.length; i < l; i += 1) {
+  //     if (options[i].selected) {
+  //       value.push(options[i].value);
+  //     }
+  //   }
+  //   this.setState({
+  //     name: value
+  //   });
+  // };
 
   // handleDateChange = date => {
   //   this.setState({ selectedDate: date });
@@ -70,11 +90,11 @@ class SubmitPost extends React.Component {
   handleSubmit = values => {
     console.log(moment(this.state.date._d).format("ddd, MMM D"));
     Meteor.call(
-      "jobs.insert",
+      "jobs.open",
       values.job,
       values.description,
       values.location,
-      this.state.date._d
+      moment(this.state.date._d).format("ddd, MMM D")
     );
     this.handleClose();
   };
@@ -172,25 +192,37 @@ class SubmitPost extends React.Component {
                     id="datePicker" // PropTypes.string.isRequired,
                     numberOfMonths={1}
                   />
-                  <Paper className={classes.root}>
-                    {this.state.chipData.map(data => {
-                      let icon = null;
-
-                      if (data.label === "React") {
-                        icon = <TagFacesIcon />;
-                      }
-
-                      return (
-                        <Chip
-                          key={data.key}
-                          icon={icon}
-                          label={data.label}
-                          onDelete={this.handleDelete(data)}
-                          className={classes.chip}
-                        />
-                      );
-                    })}
-                  </Paper>
+                  <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
+                    <Select
+                      multiple
+                      value={this.state.name}
+                      onChange={this.handleChange}
+                      input={<Input id="select-multiple-chip" />}
+                      renderValue={selected => (
+                        <div className={classes.chips}>
+                          {selected.map(value => (
+                            <Chip
+                              key={value}
+                              label={value}
+                              className={classes.chip}
+                            />
+                          ))}
+                        </div>
+                      )}
+                      MenuProps={MenuProps}
+                    >
+                      {names.map(name => (
+                        <MenuItem
+                          key={name}
+                          value={name}
+                          // style={getStyles(name, this)}
+                        >
+                          {name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                   <DialogActions>
                     <Button onClick={() => this.handleClose()} color="primary">
                       Cancel
