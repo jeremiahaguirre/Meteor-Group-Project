@@ -19,6 +19,7 @@
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
+    "react-dates": "^20.2.0",
     "react-dom": "^16.8.6",
     "react-final-form": "^4.1.0",
     "react-gravatar": "^2.6.3",
