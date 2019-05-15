@@ -29,9 +29,6 @@ Meteor.methods({
 });
 
 if (Meteor.isServer) {
-  Meteor.publish('allApplications', function () {
-    return Applications.find({});
-  });
   Meteor.publish('sentApplications', function () {
     return Applications.find({applicant:this.userId});
   });
