@@ -5,8 +5,10 @@ import Welcome from "../pages/Welcome";
 import NavBar from "../components/NavBar";
 import Test from "../pages/Test";
 import { withTracker } from "meteor/react-meteor-data";
-import { Jobs } from "../../api/jobs";
 
+// const insertData=()=>{
+
+// }
 const Router = ({ jobs, currentUser, currentUserId }) => {
   return (
     <div>
@@ -24,6 +26,9 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
           <Route exact path="/test" component={Test} />
           <Redirect from="/*" to="/test" />
         </Switch>
+        <button onClick={() => {  }}>
+            Click Me To Insert Data to the database!
+        </button>
       </div>
       )
       }
@@ -32,7 +37,10 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
 };
 
 export default withTracker(() => {
-
+  Meteor.subscribe('userProfiles');
+  // console.log(Jobs.find({}).fetch());
+  // console.log(Applications.find({}).fetch());
+  // console.log(Meteor.users.find({}).fetch());
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),

@@ -1,2 +1,2 @@
-import Router from './Router';
-export default Router;
+import TestRouter from './TestRouter';
+export default TestRouter;
