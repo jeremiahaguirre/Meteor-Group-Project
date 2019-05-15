@@ -43,19 +43,15 @@ const styles = theme => ({
     justifyContent: "flex-end"
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    }),
-    marginLeft: 170
+    display: "flex",
+    flexDirection: "column",
+    flexGrow: 1
   },
   contentShift: {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    }),
+    display: "flex",
+    flexDirection: "row",
+    padding: "10px",
+    textAlign: "left",
     marginLeft: 0
   }
 });

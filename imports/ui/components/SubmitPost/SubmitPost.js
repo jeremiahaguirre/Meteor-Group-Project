@@ -11,6 +11,7 @@ import { Meteor } from "meteor/meteor";
 import Grid from "@material-ui/core/Grid";
 import { Form, Field } from "react-final-form";
 import DateFnsUtils from "@date-io/date-fns";
+import Grid from "@material-ui/core/Grid";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import "react-dates/initialize";
 import {
