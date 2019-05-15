@@ -1,47 +1,47 @@
 export const Users = [
   {
-  _id:'string',
-  email:'string',
-  password:'string',
+  _id:'user1',
+  email:'user1@gmail.com',
+  password:'password1',
   profile: {
-    name:'string',
-    employer:'boolean',
-    professions:'array of strings',
+    name:'Gavin',
+    employer:'Cactus Club',
+    professions:['Manager'],
     }
   }
 ];
 
 export const Jobs = [
-{  _id:'string',
-  title:'string',
-  description:'string',
-  location:'string',
-  professions:'an array of string',
-  time:'string',
+{  _id:'Employee1',
+  title:'Chef',
+  description:'Looking for someone who can cook',
+  location:'Vancouver, BC',
+  professions:['an array of string'],
+  time:'3-12',
   createdAt: new Date(),
-  owner:'string(id of the employer that posted this)',
+  owner:'user1',
   taken: false},
 ];
 
 export const Applications = [
   {
   aplicant: {
-    _id:'string',
-    email:'string',
+    _id:'user1',
+    email:'user1@gmail.com',
     profile: {
-      name:'string',
-      professions:'array of strings',
+      name:'Gavin',
+      professions:'Chef',
       }
   },
     job: {
-      _id:'string',
-      title:'string',
-      description:'string',
-      location:'string',
-      professions:'an array of string',
-      time:'string',
+      _id:'Employee1',
+      title:'Chef',
+      description:'Looking for someone who can cook',
+      location:'Vancouver, BC',
+      professions:'an array ',
+      time:'3-12',
       createdAt: new Date(),
-      owner:'string(id of the employer that posted this)',
+      owner:'user1',
       taken: false
     },
   status:'boolean (null if pending,true if accepted, false if declined)',
