@@ -35,7 +35,7 @@ class JobCards extends Component {
   render() {
     const { jobTitleInput, jobDescriptionInput } = this.state;
     const { classes, job } = this.props;
-    console.log('Job card',job);
+    console.log("Job card", job);
     return (
       <div>
         <Card className={classes.card}>
@@ -72,6 +72,7 @@ class JobCards extends Component {
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">
                 {/* {job.title ? job.title : ""} */}
+                {job.title}
               </Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">{}</Typography>
@@ -98,17 +99,4 @@ class JobCards extends Component {
 
 // JobCards.defaultProps = { user: users };
 
-const JobCards123 = withStyles(styles)(JobCards);
-
-export default withTracker(() => {
-  Meteor.subscribe("jobs");
-  const jobs = Jobs.find({}).map(job => {
-    return { ...job };
-  });
-
-  return {
-    currentUser: Meteor.user(),
-    currentUserId: Meteor.userId(),
-    jobs: jobs
-  };
-})(JobCards123);
+export default withStyles(styles)(JobCards);

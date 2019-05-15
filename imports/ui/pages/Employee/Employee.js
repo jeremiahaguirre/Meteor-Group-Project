@@ -109,7 +109,7 @@ class SimpleModal extends React.Component {
             onClose={this.handleClose}
           >
             <div className={classes.paper}>
-              <JobCards />
+              <JobCards job={jobs} />
             </div>
           </Modal>
           {/* </div>;
