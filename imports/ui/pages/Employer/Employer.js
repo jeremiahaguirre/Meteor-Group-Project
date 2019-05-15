@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import SubmitPost from "../../components/SubmitPost";
 import ItemsList from "../../components/AllJobs";
 import RequestCard from "../../components/RequestCard";
+import NavBar from "../../components/NavBar";
 import { withStyles } from "@material-ui/core/styles";
 
 const styles = {
@@ -19,8 +20,11 @@ const styles = {
 };
 
 const Employer = ({ classes }) => {
+  const [jobsQuery, setJobsQuery] = useState("");
+
   return (
     <div>
+      <NavBar onChange={setJobsQuery} />
       <div className={classes.top}>
         <SubmitPost />
       </div>
