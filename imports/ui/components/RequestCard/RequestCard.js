@@ -34,7 +34,7 @@ function RequestCard(props) {
                   <ListItemAvatar>
                     <Avatar>
                       <Gravatar
-                        email={job.owner && job.owner[0].emails[0].address}
+                        email={job.owner && job.owner.emails[0].address}
                       />
                     </Avatar>
                   </ListItemAvatar>
@@ -96,15 +96,16 @@ RequestCard.propTypes = {
 
 export default withTracker(() => {
   Meteor.subscribe("jobs");
-  Meteor.subscribe("userEmails");
+  Meteor.subscribe("allUsers");
+  console.log(Jobs.find().fetch());
   const jobs = Jobs.find({}).map(job => {
-    const owner = Meteor.users.findOne({ _id: job.ownerId });
+    const owner = Meteor.users.findOne({ _id: job.owner });
     return { ...job, owner: owner };
   });
 
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: jobs
+    jobs
   };
 })(withStyles(styles)(RequestCard));

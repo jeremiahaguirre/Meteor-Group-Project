@@ -17,7 +17,6 @@ import styles from "./styles";
 
 const ItemsList = props => {
   const { classes, jobs } = props;
-  console.log(props.jobs);
   return (
     <div>
       <Typography className={classes.h2} component="h2">
@@ -79,13 +78,12 @@ ItemsList.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe("jobs");
   Meteor.subscribe("allUsers");
-
-  console.log(Meteor.users.find().fetch());
+  console.log(Jobs.find().fetch());
   const jobs = Jobs.find({}).map(job => {
-    const owner = Meteor.users.findOne({ _id: job.ownerId });
+    const owner = Meteor.users.findOne({ _id: job.owner });
     return { ...job, owner: owner };
   });
-  // console.log("this", jobs);
+
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
