@@ -1,25 +1,53 @@
-export const users = {
-  _id: 0,
-  name: "Bob",
-  email: "bob@email.com",
-  professions: ["Meteor", "React", "MongoDB"],
-  employer: true,
-  password: "123456",
-  workplaces: ["Red", "Lysol"]
-};
+export const Users = [
+  {
+  _id:'string',
+  email:'string',
+  password:'string',
+  profile: {
+    name:'string',
+    employer:'boolean',
+    professions:'array of strings',
+    }
+  }
+];
 
-export const jobs = {
-  _id: 0,
-  title: "White board cleaner",
-  description: "Need some one to clean white boards",
-  location: "Red academy",
-  time: "forever",
-  professions: ["React"],
-  workplaces: ["Lysol"],
-  poster: 0
-};
+export const Jobs = [
+{  _id:'string',
+  title:'string',
+  description:'string',
+  location:'string',
+  professions:'an array of string',
+  time:'string',
+  createdAt: new Date(),
+  owner:'string(id of the employer that posted this)',
+  taken: false},
+];
 
-// export const workplace = {
-//   _id: 0,
-//   name: "Red academny"
-// };
+export const Applications = [
+  {
+  aplicant: {
+    _id:'string',
+    email:'string',
+    profile: {
+      name:'string',
+      professions:'array of strings',
+      }
+  },
+    job: {
+      _id:'string',
+      title:'string',
+      description:'string',
+      location:'string',
+      professions:'an array of string',
+      time:'string',
+      createdAt: new Date(),
+      owner:'string(id of the employer that posted this)',
+      taken: false
+    },
+  status:'boolean (null if pending,true if accepted, false if declined)',
+  createdAt: new Date(),
+  },
+  
+]
+
+//import {Jobs,Applications,Users} form '..d'
