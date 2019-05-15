@@ -8,38 +8,6 @@ import EmployeePage from "../pages/Employee";
 import { withTracker } from "meteor/react-meteor-data";
 import { Jobs } from "../../api/jobs";
 
-<<<<<<< HEAD
-const Router = ({ currentUser, currentUserId }) => (
-  <div>
-    {currentUserId === null ? (
-      <div>
-        <Switch>
-          <Route exact path="/home" component={Welcome} />
-          <Redirect from="/*" to="/home" />
-        </Switch>
-      </div>
-    ) : currentUserId && currentUser === false ? (
-      <Fragment>
-        <NavBar />
-        <Switch>
-          <Route path="/employee" component={EmployeePage} />
-          <Redirect from="/*" to="/employee" />
-          <Route component={EmployeePage} />
-        </Switch>
-      </Fragment>
-    ) : (
-      <Fragment>
-        <NavBar />
-        <Switch>
-          <Route path="/employer" component={Employer} />
-          <Route path="/employee" component={EmployeePage} />
-          <Redirect from="/*" to="/employee" />
-        </Switch>
-      </Fragment>
-    )}
-  </div>
-);
-=======
 const Router = ({ jobs, currentUser, currentUserId }) => {
   return (
     <div>
@@ -72,7 +40,6 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
     </div>
   );
 };
->>>>>>> b36d22a1fe25545be5ac44c87f39b272d9b60e1b
 
 //       <Route path="/test" component={Test} />
 
