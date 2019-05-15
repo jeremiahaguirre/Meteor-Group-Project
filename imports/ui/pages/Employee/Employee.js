@@ -38,6 +38,7 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
+        <NavBar />
         <Typography gutterBottom>
           Click to get the full Modal experience!
         </Typography>
