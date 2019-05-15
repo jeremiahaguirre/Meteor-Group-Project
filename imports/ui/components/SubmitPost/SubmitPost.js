@@ -93,13 +93,13 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    console.log(moment(this.state.date._d).format("ddd, MMM D"));
     Meteor.call(
       "jobs.open",
       values.job,
       values.description,
-      values.location,
-      moment(this.state.date._d).format("ddd, MMM D")
+      this.state.location,
+      moment(this.state.date._d).format("ddd, MMM D"),
+      this.state.name
     );
     this.handleClose();
   };
