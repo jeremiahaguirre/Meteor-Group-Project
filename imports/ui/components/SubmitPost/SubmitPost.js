@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import "date-fns";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -8,16 +8,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Meteor } from "meteor/meteor";
-import Grid from "@material-ui/core/Grid";
 import { Form, Field } from "react-final-form";
-import DateFnsUtils from "@date-io/date-fns";
-import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
 import "react-dates/initialize";
-import {
-  DateRangePicker,
-  SingleDatePicker,
-  DayPickerRangeController
-} from "react-dates";
+import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import FormControl from "@material-ui/core/FormControl";
 import Chip from "@material-ui/core/Chip";
@@ -52,7 +45,6 @@ class SubmitPost extends React.Component {
     super(props);
     this.state = {
       open: false,
-      // selectedDate: new Date("2014-08-18T21:11:54"),
       date: null,
       profession: [],
       location: ""
@@ -66,23 +58,6 @@ class SubmitPost extends React.Component {
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-
-  // handleChangeMultiple = event => {
-  //   const { options } = event.target;
-  //   const value = [];
-  //   for (let i = 0, l = options.length; i < l; i += 1) {
-  //     if (options[i].selected) {
-  //       value.push(options[i].value);
-  //     }
-  //   }
-  //   this.setState({
-  //     name: value
-  //   });
-  // };
-
-  // handleDateChange = date => {
-  //   this.setState({ selectedDate: date });
-  // };
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -156,15 +131,7 @@ class SubmitPost extends React.Component {
                     variant="outlined"
                     type="text"
                   />
-                  {/* <Field
-                    name="shift"
-                    component="input"
-                    className={classes.textField}
-                    placeholder="Shift"
-                    margin="normal"
-                    variant="outlined"
-                    type="text"
-                  /> */}
+
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="location-simple">Location</InputLabel>
                     <Select
@@ -181,29 +148,6 @@ class SubmitPost extends React.Component {
                       <MenuItem value="Surrey">Surrey</MenuItem>
                     </Select>
                   </FormControl>
-                  {/* <Field
-                    name="location"
-                    component="input"
-                    className={classes.textField}
-                    placeholder="Location"
-                    margin="normal"
-                    variant="outlined"
-                    type="text"
-                  /> */}
-                  {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Grid
-                      container
-                      className={classes.grid}
-                      justify="space-around"
-                    >
-                      <DatePicker
-                        margin="normal"
-                        label="Date picker"
-                        value={selectedDate}
-                        onChange={this.handleDateChange}
-                      />
-                    </Grid>
-                  </MuiPickersUtilsProvider> */}
 
                   <SingleDatePicker
                     date={this.state.date} // momentPropTypes.momentObj or null
@@ -234,11 +178,7 @@ class SubmitPost extends React.Component {
                       MenuProps={MenuProps}
                     >
                       {professions.map(profession => (
-                        <MenuItem
-                          key={profession}
-                          value={profession}
-                          // style={getStyles(profession, this)}
-                        >
+                        <MenuItem key={profession} value={profession}>
                           {profession}
                         </MenuItem>
                       ))}
