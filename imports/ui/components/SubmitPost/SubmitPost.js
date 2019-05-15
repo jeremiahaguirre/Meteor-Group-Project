@@ -26,7 +26,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 
-const names = [
+const professions = [
   "React",
   "React Native",
   "Meteor",
@@ -54,13 +54,13 @@ class SubmitPost extends React.Component {
       open: false,
       // selectedDate: new Date("2014-08-18T21:11:54"),
       date: null,
-      name: [],
+      profession: [],
       location: ""
     };
   }
 
   handleMultiChange = event => {
-    this.setState({ name: event.target.value });
+    this.setState({ profession: event.target.value });
   };
 
   handleChange = event => {
@@ -99,7 +99,7 @@ class SubmitPost extends React.Component {
       values.description,
       this.state.location,
       moment(this.state.date._d).format("ddd, MMM D"),
-      this.state.name
+      this.state.profession
     );
     this.handleClose();
   };
@@ -217,7 +217,7 @@ class SubmitPost extends React.Component {
                     <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
                     <Select
                       multiple
-                      value={this.state.name}
+                      value={this.state.profession}
                       onChange={this.handleMultiChange}
                       input={<Input id="select-multiple-chip" />}
                       renderValue={selected => (
@@ -233,13 +233,13 @@ class SubmitPost extends React.Component {
                       )}
                       MenuProps={MenuProps}
                     >
-                      {names.map(name => (
+                      {professions.map(profession => (
                         <MenuItem
-                          key={name}
-                          value={name}
-                          // style={getStyles(name, this)}
+                          key={profession}
+                          value={profession}
+                          // style={getStyles(profession, this)}
                         >
-                          {name}
+                          {profession}
                         </MenuItem>
                       ))}
                     </Select>
