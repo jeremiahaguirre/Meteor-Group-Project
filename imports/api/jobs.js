@@ -40,10 +40,10 @@ if (Meteor.isServer) {
   Meteor.publish("jobs", function jobsPublication() {
     return Jobs.find({});
   });
-  Meteor.publish("openjobs", function jobsPublication() {
+  Meteor.publish("openJobs", function openJobsPublication() {
     return Jobs.find({taken:false});
   });
-  Meteor.publish("postedjobs", function jobsPublication() {
+  Meteor.publish("postedJobs", function postedJobsPublication() {
     return Jobs.find({owner:this.userId});
   });
 }
