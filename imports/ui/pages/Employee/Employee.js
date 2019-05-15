@@ -39,7 +39,7 @@ class SimpleModal extends React.Component {
   render() {
     const { classes, jobs } = this.props;
     const { selectedDate } = this.state;
-    console.log('employee',jobs);
+    console.log("employee", jobs);
     return (
       <div>
         <Grid container spacing={8}>
@@ -83,6 +83,35 @@ class SimpleModal extends React.Component {
                 <JobCards />
               </div>
             </Modal> } */}
+          {/* </div>;
+        <Typography gutterBottom>
+          Click to get the full Modal experience!
+        </Typography>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Grid container className={classes.grid} justify="space-around">
+            <DatePicker
+              margin="normal"
+              label="Date picker"
+              value={selectedDate}
+              onChange={this.handleDateChange}
+            />
+          </Grid>
+        </MuiPickersUtilsProvider>
+
+        {/* {jobs.map(job => {
+          <div key={job.id}> */}
+          {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
+          <Button onClick={this.handleOpen}>Open Modal</Button>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.handleClose}
+          >
+            <div className={classes.paper}>
+              <JobCards />
+            </div>
+          </Modal>
           {/* </div>;
         })} */}
         </Grid>

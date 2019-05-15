@@ -1,5 +1,4 @@
 import { Meteor } from "meteor/meteor";
-import { Jobs } from "../../api/jobs";
 import { Accounts } from "meteor/accounts-base";
 
 Meteor.startup(() => {
@@ -22,24 +21,5 @@ Meteor.startup(() => {
         professions: ["Meteor", "React", "MongoDB"]
       }
     });
-  }
-
-  if (Jobs.find().count() === 0) {
-    Meteor.call(
-      "jobs.insert",
-      "Cover shift at Starbucks",
-      "Need help covering 3 hour shift! plz someone!",
-      "Vancouver",
-      "Thursday",
-      "Cashier"
-    );
-    Meteor.call(
-      "jobs.insert",
-      "Need chef!",
-      "URGENT: Chef with experience cooking vegan food neede for tomorrow!",
-      "Richmond",
-      "Wednesday",
-      "Chef"
-    );
   }
 });

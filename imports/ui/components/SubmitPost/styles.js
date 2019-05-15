@@ -15,7 +15,8 @@ const styles = {
   },
   container: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    height: "100%"
   },
 
   dense: {
@@ -27,6 +28,9 @@ const styles = {
   btn: {
     color: "white",
     background: "rgb(233,86,86)"
+  },
+  modalSize: {
+    width: "80vw"
   }
 };
 
