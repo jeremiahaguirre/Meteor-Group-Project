@@ -6,7 +6,7 @@ const styles = {
   card: {
     minWidth: 275,
     width: "600px",
-    height: "500px",
+    height: "400px",
     overflowY: "scroll"
   },
   h2: {
