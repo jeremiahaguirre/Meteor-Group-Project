@@ -16,7 +16,7 @@ import { Jobs } from "../../../api/jobs";
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
 import Modal from "@material-ui/core/Modal";
-import { applyToJob } from "../../../api/functions";
+import { applyToJob } from "../../../ui/helpers/functions";
 
 const JobCards = ({ classes, job, status }) => {
   return (

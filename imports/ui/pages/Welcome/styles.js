@@ -2,17 +2,18 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     height: "100vh",
-    background: "rgb(108,157,142)",
+     //background: "#1589FF",
+    backgroundImage: `url(${"/background.png"})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
     padding: theme.spacing.unit * 5,
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing.unit * 20
-    },
-    width: "100%",
-    margin: 0
+    }
   },
   headline: {
     fontWeight: 400,
-    color: "rgb(64,64,64)",
+    color: "white",
     fontSize: theme.typography.display3.fontSize,
     [theme.breakpoints.up("md")]: {
       fontSize: theme.typography.display4.fontSize
@@ -25,6 +26,9 @@ const styles = theme => ({
   },
   text: {
     color: "white"
+  },
+  welcomePage: {
+    height: 400, 
   }
 });
 

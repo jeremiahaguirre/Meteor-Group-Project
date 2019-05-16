@@ -6,7 +6,6 @@ import Employer from "../pages/Employer";
 import EmployeePage from "../pages/Employee";
 import Profile from "../pages/Profile";
 import { withTracker } from "meteor/react-meteor-data";
-import { Jobs } from "../../api/jobs";
 import posed, { PoseGroup } from "react-pose";
 
 const RouteContainer = posed.div({
@@ -14,7 +13,7 @@ const RouteContainer = posed.div({
   exit: { opacity: 0 }
 });
 
-const Router = ({ jobs, currentUser, currentUserId }) => {
+const Router = ({ currentUser, currentUserId }) => {
   return (
     <div>
       {currentUserId === null ? (
@@ -48,11 +47,8 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("jobs");
-
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: Jobs.find({}).fetch()
   };
 })(Router);
