@@ -139,7 +139,6 @@ NavBar.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("jobs");
 
   return {
     currentUser: Meteor.user(),

@@ -1,5 +1,5 @@
-import { Jobs } from "../api/jobs";
-import { Applications } from "../api/applications";
+import { Jobs } from "../../api/jobs";
+import { Applications } from "../../api/applications";
 
 export function getJobPosts() {
   const jobs = Jobs.find({}).map(job => {
@@ -32,7 +32,12 @@ export function replyToApplication(app, reply) {
 }
 
 export function createJob(job) {
-    Meteor.call('jobs.open',job.title, job.description, job.location, moment(job.time).format("ddd, MMM D"), job.professions );
- }
-
-
+  Meteor.call(
+    "jobs.open",
+    job.title,
+    job.description,
+    job.location,
+    moment(job.time).format("ddd, MMM D"),
+    job.professions
+  );
+}

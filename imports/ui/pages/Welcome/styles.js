@@ -4,9 +4,6 @@ const styles = theme => ({
     height: "100vh",
      //background: "#1589FF",
     backgroundImage: `url(${"/background.png"})`,
-    
-    
-   //backgroundImage: `url(${"/shaking-hands.png"})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     padding: theme.spacing.unit * 5,

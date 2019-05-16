@@ -13,11 +13,10 @@ import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
-import { getJobPosts } from "../../../api/functions";
+import { getJobPosts } from "../../../ui/helpers/functions";
 
 const ItemsList = props => {
   const { classes, filter, jobs } = props;
-
   return (
     <div>
       <Typography className={classes.h2} component="h2">
@@ -30,7 +29,6 @@ const ItemsList = props => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
-              console.log(job);
               return (
                 <div className={classes.root} key={job._id}>
                   <ListItem className={classes.list} alignItems="flex-start">
