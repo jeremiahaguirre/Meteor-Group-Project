@@ -13,10 +13,11 @@ import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
-import { getJobPosts } from "../../../api/functions";
+import { getJobPosts } from "../../../ui/helpers/functions";
 
 const ItemsList = props => {
   const { classes, filter, jobs } = props;
+  console.log(jobs);
   return (
     <div>
       <Typography className={classes.h2} component="h2">
@@ -78,11 +79,11 @@ ItemsList.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("postedJobs");
+  Meteor.subscribe("openJobs");
   Meteor.subscribe("userProfiles");
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: getJobPosts().filter((job)=>!job.taken)
+    jobs: getJobPosts()
   };
 })(withStyles(styles)(ItemsList));

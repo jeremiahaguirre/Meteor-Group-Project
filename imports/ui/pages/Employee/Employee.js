@@ -11,7 +11,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import "react-dates/lib/css/_datepicker.css";
 import Drawer from "@material-ui/core/Drawer";
-import { getJobPosts, getApplications } from "../../../api/functions";
+import { getJobPosts, getApplications } from "../../../ui/helpers/functions";
 
 class SimpleModal extends React.Component {
   state = {

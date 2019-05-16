@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
-import {createJob} from "../../../api/functions"
+import {createJob} from "../../../ui/helpers/functions"
 
 const professions = [
   "React",
