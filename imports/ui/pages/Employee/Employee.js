@@ -22,6 +22,7 @@ import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
 import Drawer from "@material-ui/core/Drawer";
+import { getJobPosts, getApplications } from "../../../api/functions";
 
 class SimpleModal extends React.Component {
   state = {
@@ -40,22 +41,36 @@ class SimpleModal extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
-
+  findStatus(job) {
+    const { applications } = this.props;
+    const myApp = applications.find(
+      application => application.job._id === job._id
+    );
+    if (!myApp) {
+      return "Request";
+    } else {
+      const status = myApp.status;
+      if (status === true) {
+        return "Accepted";
+      } else if (status === false) {
+        return "Declined";
+      } else {
+        return "Pending";
+      }
+    }
+  }
   render() {
     const { classes, jobs } = this.props;
-    const { selectedDate } = this.state;
     return (
       <div>
         <NavBar />
-        <Typography gutterBottom>
-         Request A Job 
-        </Typography>
+        <Typography gutterBottom>Request A Job</Typography>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container className={classes.grid} justify="space-around">
             <DatePicker
               margin="normal"
               label="Date picker"
-              value={selectedDate}
+              value={this.state.selectedDate}
               onChange={this.handleDateChange}
             />
           </Grid>
@@ -88,13 +103,12 @@ class SimpleModal extends React.Component {
           <List dense className={classes.root}>
             {jobs.map(job => (
               <ListItem key={job._id}>
-                <JobCards job={job} />
+                <JobCards status={this.findStatus(job)} job={job} />
                 <ListItemSecondaryAction />
               </ListItem>
             ))}
           </List>
         </Drawer>
-
       </div>
     );
   }
@@ -102,14 +116,14 @@ class SimpleModal extends React.Component {
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
 export default withTracker(() => {
-  Meteor.subscribe("jobs");
-  const jobs = Jobs.find({}).map(job => {
-    return { ...job };
-  });
+  Meteor.subscribe("openJobs");
+  Meteor.subscribe("userProfiles");
+  Meteor.subscribe("sentApplications");
 
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: jobs
+    jobs: getJobPosts(),
+    applications: getApplications()
   };
 })(SimpleModalWrapped);
