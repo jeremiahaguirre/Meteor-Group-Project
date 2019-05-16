@@ -33,7 +33,6 @@ const ItemsList = props => {
               console.log(job);
               return (
                 <div className={classes.root} key={job._id}>
-                  <Divider />
                   <ListItem className={classes.list} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
@@ -43,6 +42,7 @@ const ItemsList = props => {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
+                      className={classes.h1}
                       primary={job.title}
                       secondary={
                         <React.Fragment>
@@ -65,7 +65,6 @@ const ItemsList = props => {
                       }
                     />
                   </ListItem>
-                  <Divider />
                 </div>
               );
             })}
