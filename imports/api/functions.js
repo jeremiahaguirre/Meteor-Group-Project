@@ -18,3 +18,21 @@ export function getApplications(){
     });
     return applications;
 }
+
+export function applyToJob(jobid, ownerid) {
+    Meteor.call('applications.apply', jobid, ownerid );
+}
+
+export function replyToApplication(app, reply) {
+    Meteor.call('applications.reply', app._id, reply);
+    if (reply) {
+        const jobId = app.job._id;
+        Meteor.call('jobs.close',jobId );
+    }
+}
+
+export function createJob(job) {
+    Meteor.call('jobs.open',job.title, job.description, job.location, job.time, job.professions );
+ }
+
+
