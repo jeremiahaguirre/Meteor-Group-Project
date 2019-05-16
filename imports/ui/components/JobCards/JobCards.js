@@ -29,9 +29,25 @@ class JobCards extends Component {
     //this.handleInput = this.handleInput.bind(this);
     this.jobInput = React.createRef();
   }
-  handleSubmit(e) {
-    e.preventDefault();
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  // }
+
+  handleSubmit = values => {
+    Meteor.call(
+      "jobs.open",
+      values.job,
+      values.description,
+      values.professions,
+      // this.state.location,
+      // moment(this.state.date._d).format("ddd, MMM D"),
+      // this.state.profession,
+      (this.state.requested = true)
+    );
+    console.log(">>>>>>hello>>>>>>>");
+    this.handleClose();
+  };
+
   render() {
     const { jobTitleInput, jobDescriptionInput } = this.state;
     const { classes, job } = this.props;
@@ -43,27 +59,10 @@ class JobCards extends Component {
             <CardContent>
               <div>
                 <div>
-                  <Avatar className={classes.avatar} />
+                  <Avatar className={classes.avatar} > <Gravita email= {Employer.users}> </Gravita></Avatar>
                 </div>
               </div>
               {/* <Typography variant="display1">{user.name}</Typography> */}
-
-              <form onSubmit={this.handleSubmit}>
-                <FormControl fullWidth className={classes.formControl}>
-                  <InputLabel className={classes.text} htmlFor="fullname">
-                    Username
-                  </InputLabel>
-                  <Input
-                    id="title"
-                    type="text"
-                    inputProps={{ autoComplete: "off" }}
-                    value={jobTitleInput}
-                    onChange={e => this.handleInput(e, "jobTitleInput")}
-                    className={classes.text}
-                    ref={this.jobInput}
-                  />
-                </FormControl>
-              </form>
 
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">{job.description}</Typography>
@@ -73,13 +72,14 @@ class JobCards extends Component {
               <Typography variant="display1">
                 {/* {job.title ? job.title : ""} */}
                 {job.title}
-
               </Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">{job.time}</Typography>
               {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">{job.location}</Typography>
-              <Typography variant="display1">{job.professions.join(', ')}</Typography>
+              {/* <Typography variant="display1">
+                {job.professions.join(", ")}
+              </Typography> */}
             </CardContent>
           </Fragment>
           <CardActions>
@@ -87,8 +87,9 @@ class JobCards extends Component {
               className={classes.button}
               variant="outlined"
               size="small"
+              type="submit"
               color="primary"
-              onClick={this.handleOpen}
+              onClick={this.handleSubmit}
             >
               Request
             </Button>

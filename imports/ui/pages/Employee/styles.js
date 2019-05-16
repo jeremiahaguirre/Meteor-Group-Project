@@ -6,7 +6,11 @@ const styles = {
 
     justifyContent: "center",
     alignSelf: "center"
-  }
+  },
+drawerPaper: {
+  top: 100,
+  width: '50%'
+}
 };
 
 export default styles;

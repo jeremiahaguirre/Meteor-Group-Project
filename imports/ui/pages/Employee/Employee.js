@@ -20,6 +20,7 @@ import { GridList } from "@material-ui/core";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
 import "react-dates/lib/css/_datepicker.css";
+import Drawer from "@material-ui/core/Drawer";
 
 class SimpleModal extends React.Component {
   state = {
@@ -61,76 +62,58 @@ class SimpleModal extends React.Component {
 
               
             </MuiPickersUtilsProvider> */}
-
-{ <SingleDatePicker
-
-                    date={this.state.date} // momentPropTypes.momentObj or null
-                    onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-                    focused={this.state.focused} // PropTypes.bool
-                    onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                    id="datePicker" // PropTypes.string.isRequired,
-                    numberOfMonths={1}
-                  /> }
-
-
+            {
+              <SingleDatePicker
+                date={this.state.date} // momentPropTypes.momentObj or null
+                onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
+                focused={this.state.focused} // PropTypes.bool
+                onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
+                id="datePicker" // PropTypes.string.isRequired,
+                numberOfMonths={1}
+              />
+            }
             <Typography gutterBottom>List of Jobs:</Typography>
-            <List dense className={classes.root}>
-              {jobs.map(job => (
-                <ListItem key={job._id} >
-                  <JobCards job={job} />
-                  <ListItemSecondaryAction>
-                    {/* <Checkbox
-                      onChange={this.handleToggle(value)}
-                      checked={this.state.checked.indexOf(value) !== -1}
-                    /> */}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
-            </List>
-          </Grid>{" "}
-          Jobs Requested
-          {/* { <Button onClick={this.handleOpen}>Open Modal</Button> {" "}
-            <Modal
-              aria-labelledby="simple-modal-title"
-              aria-describedby="simple-modal-description"
-              open={this.state.open}
-              onClose={this.handleClose}
+            <Drawer
+              className={classes.drawer}
+              variant="persistent"
+              anchor="left"
+              open={open}
+              classes={{
+                paper: classes.drawerPaper
+              }}
             >
-              <div className={classes.paper}>
-                <JobCards />
-              </div>
-            </Modal> } */}
-          {/* </div>;
-        <Typography gutterBottom>
-          Click to get the full Modal experience!
-        </Typography>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid container className={classes.grid} justify="space-around">
-            <DatePicker
-              margin="normal"
-              label="Date picker"
-              value={selectedDate}
-              onChange={this.handleDateChange}
-            />
+              <List dense className={classes.root}>
+                {jobs.map(job => (
+                  <ListItem key={job._id}>
+                    <JobCards job={job} />
+                    <ListItemSecondaryAction />
+                  </ListItem>
+                ))}
+              </List>
+            </Drawer>
+          </Grid>{" "}
+          <Grid item>
+            <Typography>Jobs Requested</Typography>
+            <Drawer
+              className={classes.drawer}
+              variant="persistent"
+              anchor="right"
+              open={open}
+              classes={{
+                paper: classes.drawerPaper
+              }}
+            >
+              <List dense className={classes.root}>
+                {jobs.map(job => (
+                  <ListItem key={job._id}>
+                    {(job.requested = true ? <JobCards job={job} /> : " null")}
+                    ;
+                    <ListItemSecondaryAction />
+                  </ListItem>
+                ))}
+              </List>
+            </Drawer>
           </Grid>
-        </MuiPickersUtilsProvider>
-
-        {/* {jobs.map(job => {
-          <div key={job.id}> */}
-          {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
-          <Button onClick={this.handleOpen}>Open Modal</Button>
-          <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
-            open={this.state.open}
-            onClose={this.handleClose}
-          >
-            <div className={classes.paper}>
-              <JobCards job={jobs} />
-            </div>
-          </Modal>
-          {/* </div>;
-        })} */}
         </Grid>
       </div>
     );

@@ -17,7 +17,8 @@ Meteor.methods({
       professions,
       createdAt: new Date(),
       owner: this.userId,
-      taken: false
+      taken: false,
+      requested: false,
     });
   },
   "jobs.close"(_id) {
