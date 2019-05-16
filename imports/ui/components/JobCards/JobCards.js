@@ -18,92 +18,50 @@ import { users } from "../../../mock/mockdatabase";
 import Modal from "@material-ui/core/Modal";
 import { applyToJob } from "../../../api/functions";
 
-class JobCards extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      jobTitleInput: "",
-      jobDescriptionInput: "",
-      open: false,
-      requested: false
-    };
-    //this.handleInput = this.handleInput.bind(this);
-    this.jobInput = React.createRef();
-  }
-  // handleSubmit(e) {
-  //   e.preventDefault();
-  // }
-
-  handleSubmit = (jobid, ownerid) => {
-    this.setState({
-      requested: true
-    });
-    applyToJob(jobid, ownerid);
-    this.handleClose();
-  };
-
-  render() {
-    const { jobTitleInput, jobDescriptionInput } = this.state;
-    const { classes, job } = this.props;
-
-    return (
-      <div>
-        <Card className={classes.card}>
-          <Fragment>
-            <CardContent>
+const JobCards = ({ classes, job, status }) => {
+  return (
+    <div>
+      <Card className={classes.card}>
+        <Fragment>
+          <CardContent>
+            <div>
               <div>
-                <div>
-                  <Avatar className={classes.avatar}>
-                    {" "}
-                    {/* <Gravatar email={job.owner.emails[0].address}> </Gravatar> */}
-                  </Avatar>
-                </div>
+                <Avatar className={classes.avatar}>
+                  {" "}
+                  {/* <Gravatar email={job.owner.emails[0].address}> </Gravatar> */}
+                </Avatar>
               </div>
+            </div>
 
-              <Typography variant="display1">{job.description}</Typography>
+            <Typography variant="display1">{job.description}</Typography>
 
-              <Typography variant="display1">{job.title}</Typography>
+            <Typography variant="display1">{job.title}</Typography>
 
-              <Typography variant="display1">{job.time}</Typography>
+            <Typography variant="display1">{job.time}</Typography>
 
-              <Typography variant="display1">{job.location}</Typography>
-              {/* <Typography variant="display1">
+            <Typography variant="display1">{job.location}</Typography>
+            {/* <Typography variant="display1">
                 {job.professions.join(", ")}
               </Typography> */}
-            </CardContent>
-          </Fragment>
-          <CardActions>
-            {this.state.requested ? (
-              <Button
-                className={classes.button}
-                variant="outlined"
-                size="small"
-                type="submit"
-                color="primary"
-              >
-                Pending
-              </Button>
-            ) : (
-              <Button
-                className={classes.button}
-                variant="outlined"
-                size="small"
-                type="submit"
-                color="primary"
-                onClick={() => {
-                  this.handleSubmit(job._id, job.owner);
-                }}
-              >
-                Request
-              </Button>
-            )}
-          </CardActions>
-        </Card>
-      </div>
-    );
-  }
-}
-
-// JobCards.defaultProps = { user: users };
+          </CardContent>
+        </Fragment>
+        <CardActions>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            size="small"
+            type="submit"
+            color="primary"
+            onClick={() => {
+              if (status === "Request") applyToJob(job._id, job.owner._id);
+            }}
+          >
+            {status}
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
+};
 
 export default withStyles(styles)(JobCards);

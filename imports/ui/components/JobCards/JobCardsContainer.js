@@ -4,10 +4,9 @@ import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
 class JobCardsContainer extends Component {
-   
   render() {
-    const {job}=this.props;
-    return <JobCards job={job}/>;
+    const { job, status } = this.props;
+    return <JobCards job={job} status={status} />;
   }
 }
 
