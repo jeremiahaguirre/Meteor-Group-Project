@@ -17,7 +17,8 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
-import {createJob} from "../../../api/functions"
+import { createJob } from "../../../api/functions";
+import { TextField } from "@material-ui/core";
 
 const professions = [
   "React",
@@ -68,7 +69,12 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    createJob({ ...values, location: this.state.location, time: this.state.date._d, professions: this.state.profession });
+    createJob({
+      ...values,
+      location: this.state.location,
+      time: this.state.date._d,
+      professions: this.state.profession
+    });
     this.handleClose();
   };
 
@@ -108,13 +114,25 @@ class SubmitPost extends React.Component {
                 <DialogContent>
                   <Field
                     name="job"
-                    component="input"
                     className={classes.textField}
                     placeholder="Job"
                     margin="normal"
                     variant="outlined"
                     type="text"
-                  />
+                  >
+                    {({ input, meta }) => (
+                      <FormControl fullWidth className={classes.formControl}>
+                        <InputLabel htmlFor={name}>Job</InputLabel>
+                        <Input
+                          inputProps={{ ...input }}
+                          type="text"
+                          value={input.value}
+                          id={name}
+                          className={classes.textField}
+                        />
+                      </FormControl>
+                    )}
+                  </Field>
                   <Field
                     name="description"
                     component="input"
@@ -123,7 +141,20 @@ class SubmitPost extends React.Component {
                     margin="normal"
                     variant="outlined"
                     type="text"
-                  />
+                  >
+                    {({ input, meta }) => (
+                      <FormControl fullWidth className={classes.formControl}>
+                        <InputLabel htmlFor={name}>Descripton</InputLabel>
+                        <Input
+                          inputProps={{ ...input }}
+                          type="text"
+                          value={input.value}
+                          id={name}
+                          className={classes.textField}
+                        />
+                      </FormControl>
+                    )}
+                  </Field>
 
                   <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="location-simple">Location</InputLabel>
@@ -151,7 +182,9 @@ class SubmitPost extends React.Component {
                     numberOfMonths={1}
                   />
                   <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="select-multiple-chip">Chip</InputLabel>
+                    <InputLabel htmlFor="select-multiple-chip">
+                      Skills
+                    </InputLabel>
                     <Select
                       multiple
                       value={this.state.profession}
