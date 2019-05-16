@@ -13,10 +13,10 @@ import Input from "@material-ui/core/Input";
 import styles from "./styles";
 import { withTracker } from "meteor/react-meteor-data";
 import { Jobs } from "../../../api/jobs";
-
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
 import Modal from "@material-ui/core/Modal";
+import { applyToJob } from "../../../api/functions";
 
 class JobCards extends Component {
   constructor(props) {
@@ -34,26 +34,18 @@ class JobCards extends Component {
   //   e.preventDefault();
   // }
 
-  handleSubmit = values => {
-    Meteor.call(
-      "jobs.open",
-      values.job,
-      values.description,
-      values.professions,
-      this.setState({
-        requested: true
-      })
-      // moment(this.state.date._d).format("ddd, MMM D"),
-      // this.state.profession,
-    );
-    console.log(">>>>>>hello>>>>>>>");
+  handleSubmit = (jobid, ownerid) => {
+    this.setState({
+      requested: true
+    });
+    applyToJob(jobid, ownerid);
     this.handleClose();
   };
 
   render() {
     const { jobTitleInput, jobDescriptionInput } = this.state;
     const { classes, job } = this.props;
-    console.log("Job card", job);
+
     return (
       <div>
         <Card className={classes.card}>
@@ -88,7 +80,6 @@ class JobCards extends Component {
                 size="small"
                 type="submit"
                 color="primary"
-                onClick={this.handleSubmit}
               >
                 Pending
               </Button>
@@ -99,7 +90,9 @@ class JobCards extends Component {
                 size="small"
                 type="submit"
                 color="primary"
-                onClick={this.handleSubmit}
+                onClick={() => {
+                  this.handleSubmit(job._id, job.owner);
+                }}
               >
                 Request
               </Button>

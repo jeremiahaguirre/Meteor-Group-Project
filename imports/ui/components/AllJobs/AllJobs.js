@@ -11,60 +11,62 @@ import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
 import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
-import { Jobs } from "../../../api/jobs";
 import moment from "moment";
 import styles from "./styles";
+import { getJobPosts } from "../../../api/functions";
 
 const ItemsList = props => {
-  const { classes, jobs } = props;
+  const { classes, filter, jobs } = props;
+
   return (
     <div>
       <Typography className={classes.h2} component="h2">
         All Jobs
       </Typography>
       <Card className={classes.card}>
-        <List className={classes.root}>
-          {jobs.map(job => {
-            return (
-              <div key={job._id}>
-                <Divider />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar>
-                      <Gravatar
-                        email={job.owner && job.owner.emails[0].address}
-                      />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={job.title}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
-                          {job.description}{" "}
-                        </Typography>
-                        <Typography
-                          component="span"
-                          className={classes.inline}
-                          color="textPrimary"
-                        >
-                          Date:{" "}
-                          {moment(jobs.createdAt)
-                            .add(10, "days")
-                            .calendar()}
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider />
-              </div>
-            );
-          })}
+        <List>
+          {jobs
+            .filter(j =>
+              filter ? new RegExp(filter, "i").test(j.location) : 1
+            )
+            .map(job => {
+              console.log(job);
+              return (
+                <div className={classes.root} key={job._id}>
+                  <Divider />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Gravatar email={job.owner.emails[0].address} />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={job.title}
+                      secondary={
+                        <React.Fragment>
+                          <Typography component="span" color="textPrimary">
+                            Description: {job.description}{" "}
+                          </Typography>{" "}
+                          <Typography component="span" color="textPrimary">
+                            Date:{" "}
+                            {moment(job.createdAt)
+                              .add(10, "days")
+                              .calendar()}
+                          </Typography>{" "}
+                          <Typography component="span" color="textPrimary">
+                            Requierments: {job.professions.join(", ")}
+                          </Typography>{" "}
+                          <Typography component="span" color="textPrimary">
+                            Location: {job.location}
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider />
+                </div>
+              );
+            })}
         </List>
       </Card>
     </div>
@@ -72,21 +74,26 @@ const ItemsList = props => {
 };
 
 ItemsList.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  filter: PropTypes.string.isRequired
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("jobs");
-  Meteor.subscribe("allUsers");
-  console.log(Jobs.find().fetch());
-  const jobs = Jobs.find({}).map(job => {
-    const owner = Meteor.users.findOne({ _id: job.owner });
-    return { ...job, owner: owner };
-  });
+  Meteor.subscribe("openJobs");
+  Meteor.subscribe("userProfiles");
 
+  // const jobs = Jobs.find({}).map(job => {
+  //   const owner = Meteor.users.findOne({ _id: job.ownerId });
+  //   return { ...job, owner: owner };
+  // });
+
+  // const jobs = MOCK_JOBS.map(job => {
+  //   const owner = Meteor.users.findOne({ _id: job.ownerId });
+  //   return { ...job, owner: owner };
+  // });
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs
+    jobs: getJobPosts()
   };
 })(withStyles(styles)(ItemsList));

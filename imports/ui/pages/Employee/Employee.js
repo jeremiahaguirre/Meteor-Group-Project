@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import JobCards from "../../components/JobCards";
+import NavBar from "../../components/NavBar";
 import styles from "./styles";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
@@ -43,78 +44,82 @@ class SimpleModal extends React.Component {
   render() {
     const { classes, jobs } = this.props;
     const { selectedDate } = this.state;
-    console.log("employee", jobs);
+    // console.log("employee", jobs);
     return (
       <div>
-        <Grid container spacing={8}>
-          <Grid item x={8} />
-          <Grid item x={8}>
-            {" "}
-            {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid container className={classes.grid} justify="space-around">
-                <DatePicker
-                  margin="normal"
-                  label="Date picker"
-                  value={selectedDate}
-                  onChange={this.handleDateChange}
-                />
-              </Grid>
+        <NavBar />
+        <Typography gutterBottom>
+          Click to get the full Modal experience!
+        </Typography>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Grid container className={classes.grid} justify="space-around">
+            <DatePicker
+              margin="normal"
+              label="Date picker"
+              value={selectedDate}
+              onChange={this.handleDateChange}
+            />
+          </Grid>
+        </MuiPickersUtilsProvider>
 
-              
-            </MuiPickersUtilsProvider> */}
-            {
-              <SingleDatePicker
-                date={this.state.date} 
-                onDateChange={date => this.setState({ date })} 
-                focused={this.state.focused} 
-                onFocusChange={({ focused }) => this.setState({ focused })} 
-                id="datePicker" 
-                numberOfMonths={1}
-              />
-            }
-            <Typography gutterBottom>List of Jobs:</Typography>
-            <Drawer
-              className={classes.drawer}
-              variant="persistent"
-              anchor="left"
-              open={open}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-            >
-              <List dense className={classes.root}>
-                {jobs.map(job => (
-                  <ListItem key={job._id}>
-                    <JobCards job={job} />
-                    <ListItemSecondaryAction />
-                  </ListItem>
-                ))}
-              </List>
-            </Drawer>
-          </Grid>{" "}
-          {/* <Grid item>//    for the second list 
-            <Typography>Jobs Requested</Typography>
-            <Drawer
-              className={classes.drawer}
-              variant="persistent"
-              anchor="right"
-              open={open}
-              classes={{
-                paper: classes.drawerPaper
-              }}
-            >
-              <List dense className={classes.root}>
-                {jobs.map(job => (
-                  <ListItem key={job._id}>
-                    {(job.requested = true ? <JobCards job={job} /> : " null")}
-                    ;
-                    <ListItemSecondaryAction />
-                  </ListItem>
-                ))}
-              </List>
-            </Drawer>
-          </Grid> */}
+        {/* {jobs.map(job => {
+          <div key={job.id}> */}
+        {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
+        <Button onClick={this.handleOpen}>Open Modal</Button>
+
+        <SingleDatePicker
+          date={this.state.date}
+          onDateChange={date => this.setState({ date })}
+          focused={this.state.focused}
+          onFocusChange={({ focused }) => this.setState({ focused })}
+          id="datePicker"
+          numberOfMonths={1}
+        />
+
+        <Typography gutterBottom>List of Jobs:</Typography>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+        >
+          <List dense className={classes.root}>
+            {jobs.map(job => (
+              <ListItem key={job._id}>
+                <JobCards job={job} />
+                <ListItemSecondaryAction />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        {/* </Grid>{" "} */}
+        <Grid item>
+          // for the second list
+          <Typography>Jobs Requested</Typography>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="right"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <List dense className={classes.root}>
+              {jobs.map(job => (
+                <ListItem key={job._id}>
+                  {(job.requested = true ? <JobCards job={job} /> : " null")}
+                  ;
+                  <ListItemSecondaryAction />
+                </ListItem>
+              ))}
+            </List>
+          </Drawer>
         </Grid>
+        {/* </Grid> */}
       </div>
     );
   }
