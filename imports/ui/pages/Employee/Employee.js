@@ -44,12 +44,11 @@ class SimpleModal extends React.Component {
   render() {
     const { classes, jobs } = this.props;
     const { selectedDate } = this.state;
-    // console.log("employee", jobs);
     return (
       <div>
         <NavBar />
         <Typography gutterBottom>
-          Click to get the full Modal experience!
+         Request A Job 
         </Typography>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container className={classes.grid} justify="space-around">
@@ -95,41 +94,11 @@ class SimpleModal extends React.Component {
             ))}
           </List>
         </Drawer>
-        {/* </Grid>{" "} */}
-        <Grid item>
-          // for the second list
-          <Typography>Jobs Requested</Typography>
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="right"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper
-            }}
-          >
-            <List dense className={classes.root}>
-              {jobs.map(job => (
-                <ListItem key={job._id}>
-                  {(job.requested = true ? <JobCards job={job} /> : " null")}
-                  ;
-                  <ListItemSecondaryAction />
-                </ListItem>
-              ))}
-            </List>
-          </Drawer>
-        </Grid>
-        {/* </Grid> */}
+
       </div>
     );
   }
 }
-
-// SimpleModal.propTypes = {
-//   classes: PropTypes.object.isRequired
-// };
-
-// We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
 export default withTracker(() => {
