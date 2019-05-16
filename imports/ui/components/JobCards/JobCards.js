@@ -59,7 +59,10 @@ class JobCards extends Component {
             <CardContent>
               <div>
                 <div>
-                  <Avatar className={classes.avatar} > <Gravita email= {Employer.users}> </Gravita></Avatar>
+                  <Avatar className={classes.avatar}>
+                    {" "}
+                    {/* <Gravatar email={job.owner.emails[0].address}> </Gravatar> */}
+                  </Avatar>
                 </div>
               </div>
               {/* <Typography variant="display1">{user.name}</Typography> */}
@@ -83,16 +86,31 @@ class JobCards extends Component {
             </CardContent>
           </Fragment>
           <CardActions>
-            <Button
-              className={classes.button}
-              variant="outlined"
-              size="small"
-              type="submit"
-              color="primary"
-              onClick={this.handleSubmit}
-            >
-              Request
-            </Button>
+            {
+              (this.state.requested = true ? (
+                <Button
+                  className={classes.button}
+                  variant="outlined"
+                  size="small"
+                  type="submit"
+                  color="primary"
+                  onClick={this.handleSubmit}
+                >
+                  Pending
+                </Button>
+              ) : (
+                <Button
+                  className={classes.button}
+                  variant="outlined"
+                  size="small"
+                  type="submit"
+                  color="primary"
+                  onClick={this.handleSubmit}
+                >
+                  Request
+                </Button>
+              ))
+            }
           </CardActions>
         </Card>
       </div>
