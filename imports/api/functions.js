@@ -32,7 +32,19 @@ export function replyToApplication(app, reply) {
 }
 
 export function createJob(job) {
+<<<<<<< HEAD
+  Meteor.call(
+    "jobs.open",
+    job.title,
+    job.description,
+    job.location,
+    moment(job.time).format("ddd, MMM D"),
+    job.professions
+  );
+}
+=======
     Meteor.call('jobs.open',job.title, job.description, job.location, moment(job.time).format("ddd, MMM D"), job.professions );
  }
 
 
+>>>>>>> 76d16258dd84ea5b43bbadc51ec2cb5d6a0f869e
