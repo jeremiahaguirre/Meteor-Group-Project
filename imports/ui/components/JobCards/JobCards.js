@@ -11,25 +11,40 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import styles from "./styles";
+import { withTracker } from "meteor/react-meteor-data";
+import { Jobs } from "../../../api/jobs";
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
+import Modal from "@material-ui/core/Modal";
+import { applyToJob } from "../../../api/functions";
 
 class JobCards extends Component {
   constructor(props) {
     super(props);
     this.state = {
       jobTitleInput: "",
-      jobDescriptionInput: ""
+      jobDescriptionInput: "",
+      open: false,
+      requested: false
     };
-    this.handleInput = this.handleInput.bind(this);
+    //this.handleInput = this.handleInput.bind(this);
     this.jobInput = React.createRef();
   }
-  handleSubmit(e) {
-    e.preventDefault();
-  }
+  // handleSubmit(e) {
+  //   e.preventDefault();
+  // }
+
+  handleSubmit = (jobid, ownerid) => {
+    this.setState({
+      requested: true
+    });
+    applyToJob(jobid, ownerid);
+    this.handleClose();
+  };
+
   render() {
     const { jobTitleInput, jobDescriptionInput } = this.state;
-    const { classes, user } = this.props;
+    const { classes, job } = this.props;
 
     return (
       <div>
@@ -38,51 +53,50 @@ class JobCards extends Component {
             <CardContent>
               <div>
                 <div>
-                  <Avatar className={classes.avatar} />
+                  <Avatar className={classes.avatar}>
+                    {" "}
+                    {/* <Gravatar email={job.owner.emails[0].address}> </Gravatar> */}
+                  </Avatar>
                 </div>
               </div>
-              {/* <Typography variant="display1">{user.name}</Typography> */}
 
-              <form onSubmit={this.handleSubmit}>
-                <FormControl fullWidth className={classes.formControl}>
-                  <InputLabel className={classes.text} htmlFor="fullname">
-                    Username
-                  </InputLabel>
-                  <Input
-                    id="title"
-                    type="text"
-                    inputProps={{ autoComplete: "off" }}
-                    value={jobTitleInput}
-                    onChange={e => this.handleInput(e, "jobTitleInput")}
-                    className={classes.text}
-                    ref={this.jobInput}
-                  />
-                </FormControl>
-              </form>
+              <Typography variant="display1">{job.description}</Typography>
 
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Date</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Location</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">
-                {user.professions.join(", ")}
-              </Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Description</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">{user.workplaces}</Typography>
+              <Typography variant="display1">{job.title}</Typography>
+
+              <Typography variant="display1">{job.time}</Typography>
+
+              <Typography variant="display1">{job.location}</Typography>
+              {/* <Typography variant="display1">
+                {job.professions.join(", ")}
+              </Typography> */}
             </CardContent>
           </Fragment>
           <CardActions>
-            <Button
-              className={classes.button}
-              variant="outlined"
-              size="small"
-              color="primary"
-            >
-              Request
-            </Button>
+            {this.state.requested ? (
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="small"
+                type="submit"
+                color="primary"
+              >
+                Pending
+              </Button>
+            ) : (
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="small"
+                type="submit"
+                color="primary"
+                onClick={() => {
+                  this.handleSubmit(job._id, job.owner);
+                }}
+              >
+                Request
+              </Button>
+            )}
           </CardActions>
         </Card>
       </div>
@@ -90,6 +104,6 @@ class JobCards extends Component {
   }
 }
 
-JobCards.defaultProps = { user: users };
+// JobCards.defaultProps = { user: users };
 
 export default withStyles(styles)(JobCards);

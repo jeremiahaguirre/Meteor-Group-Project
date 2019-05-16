@@ -1,18 +1,27 @@
-import { format, formatDistance, formatRelative, subDays } from "date-fns";
-import { startOfDay } from "date-fns";
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
-import { Jobs } from "../../../api/jobs";
 import JobCards from "../../components/JobCards";
 import NavBar from "../../components/NavBar";
 import styles from "./styles";
 import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
+import { Jobs } from "../../../api/jobs";
+import { withTracker } from "meteor/react-meteor-data";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
+import Checkbox from "@material-ui/core/Checkbox";
+import { GridList } from "@material-ui/core";
+import "react-dates/initialize";
+import { SingleDatePicker } from "react-dates";
+import "react-dates/lib/css/_datepicker.css";
+import Drawer from "@material-ui/core/Drawer";
 
 class SimpleModal extends React.Component {
   state = {
@@ -35,7 +44,7 @@ class SimpleModal extends React.Component {
   render() {
     const { classes, jobs } = this.props;
     const { selectedDate } = this.state;
-
+    // console.log("employee", jobs);
     return (
       <div>
         <NavBar />
@@ -58,29 +67,80 @@ class SimpleModal extends React.Component {
         {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
         <Button onClick={this.handleOpen}>Open Modal</Button>
 
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.open}
-          onClose={this.handleClose}
-        >
-          <div className={classes.paper}>
-            <JobCards />
-          </div>
-        </Modal>
+        <SingleDatePicker
+          date={this.state.date}
+          onDateChange={date => this.setState({ date })}
+          focused={this.state.focused}
+          onFocusChange={({ focused }) => this.setState({ focused })}
+          id="datePicker"
+          numberOfMonths={1}
+        />
 
-        {/* </div>;
-        })} */}
+        <Typography gutterBottom>List of Jobs:</Typography>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+        >
+          <List dense className={classes.root}>
+            {jobs.map(job => (
+              <ListItem key={job._id}>
+                <JobCards job={job} />
+                <ListItemSecondaryAction />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        {/* </Grid>{" "} */}
+        <Grid item>
+          // for the second list
+          <Typography>Jobs Requested</Typography>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="right"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+          >
+            <List dense className={classes.root}>
+              {jobs.map(job => (
+                <ListItem key={job._id}>
+                  {(job.requested = true ? <JobCards job={job} /> : " null")}
+                  ;
+                  <ListItemSecondaryAction />
+                </ListItem>
+              ))}
+            </List>
+          </Drawer>
+        </Grid>
+        {/* </Grid> */}
       </div>
     );
   }
 }
 
-SimpleModal.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// SimpleModal.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 // We need an intermediary variable for handling the recursive nesting.
 const SimpleModalWrapped = withStyles(styles)(SimpleModal);
 
-export default SimpleModalWrapped;
+export default withTracker(() => {
+  Meteor.subscribe("jobs");
+  const jobs = Jobs.find({}).map(job => {
+    return { ...job };
+  });
+
+  return {
+    currentUser: Meteor.user(),
+    currentUserId: Meteor.userId(),
+    jobs: jobs
+  };
+})(SimpleModalWrapped);

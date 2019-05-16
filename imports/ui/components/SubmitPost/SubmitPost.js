@@ -7,7 +7,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { Meteor } from "meteor/meteor";
 import { Form, Field } from "react-final-form";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
@@ -18,6 +17,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
+import {createJob} from "../../../api/functions"
 
 const professions = [
   "React",
@@ -68,14 +68,7 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    Meteor.call(
-      "jobs.open",
-      values.job,
-      values.description,
-      this.state.location,
-      moment(this.state.date._d).format("ddd, MMM D"),
-      this.state.profession
-    );
+    createJob({ ...values, location: this.state.location, time: this.state.date._d, professions: this.state.profession });
     this.handleClose();
   };
 
