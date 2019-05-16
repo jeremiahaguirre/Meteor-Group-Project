@@ -16,11 +16,6 @@ import { getJobPosts, getApplications } from "../../../api/functions";
 class SimpleModal extends React.Component {
   state = {
     open: false,
-    selectedDate: new Date("2014-08-18T21")
-  };
-
-  handleDateChange = date => {
-    this.setState({ selectedDate: date });
   };
 
   handleOpen = () => {
