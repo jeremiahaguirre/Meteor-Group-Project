@@ -64,11 +64,11 @@ class SimpleModal extends React.Component {
             </MuiPickersUtilsProvider> */}
             {
               <SingleDatePicker
-                date={this.state.date} // momentPropTypes.momentObj or null
-                onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
-                focused={this.state.focused} // PropTypes.bool
-                onFocusChange={({ focused }) => this.setState({ focused })} // PropTypes.func.isRequired
-                id="datePicker" // PropTypes.string.isRequired,
+                date={this.state.date} 
+                onDateChange={date => this.setState({ date })} 
+                focused={this.state.focused} 
+                onFocusChange={({ focused }) => this.setState({ focused })} 
+                id="datePicker" 
                 numberOfMonths={1}
               />
             }

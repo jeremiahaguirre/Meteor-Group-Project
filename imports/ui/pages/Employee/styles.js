@@ -8,7 +8,7 @@ const styles = {
     alignSelf: "center"
   },
 drawerPaper: {
-  top: 100,
+  top: 130,
   width: '50%'
 }
 };

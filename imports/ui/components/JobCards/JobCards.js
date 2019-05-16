@@ -24,7 +24,8 @@ class JobCards extends Component {
     this.state = {
       jobTitleInput: "",
       jobDescriptionInput: "",
-      open: false
+      open: false,
+      requested: false
     };
     //this.handleInput = this.handleInput.bind(this);
     this.jobInput = React.createRef();
@@ -39,10 +40,11 @@ class JobCards extends Component {
       values.job,
       values.description,
       values.professions,
-      // this.state.location,
+      this.setState({
+        requested: true
+      })
       // moment(this.state.date._d).format("ddd, MMM D"),
       // this.state.profession,
-      (this.state.requested = true)
     );
     console.log(">>>>>>hello>>>>>>>");
     this.handleClose();
@@ -65,20 +67,13 @@ class JobCards extends Component {
                   </Avatar>
                 </div>
               </div>
-              {/* <Typography variant="display1">{user.name}</Typography> */}
 
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
               <Typography variant="display1">{job.description}</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              {/* <Typography variant="display1">{user.email}</Typography> */}
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">
-                {/* {job.title ? job.title : ""} */}
-                {job.title}
-              </Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+
+              <Typography variant="display1">{job.title}</Typography>
+
               <Typography variant="display1">{job.time}</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
+
               <Typography variant="display1">{job.location}</Typography>
               {/* <Typography variant="display1">
                 {job.professions.join(", ")}
@@ -86,31 +81,29 @@ class JobCards extends Component {
             </CardContent>
           </Fragment>
           <CardActions>
-            {
-              (this.state.requested = true ? (
-                <Button
-                  className={classes.button}
-                  variant="outlined"
-                  size="small"
-                  type="submit"
-                  color="primary"
-                  onClick={this.handleSubmit}
-                >
-                  Pending
-                </Button>
-              ) : (
-                <Button
-                  className={classes.button}
-                  variant="outlined"
-                  size="small"
-                  type="submit"
-                  color="primary"
-                  onClick={this.handleSubmit}
-                >
-                  Request
-                </Button>
-              ))
-            }
+            {this.state.requested ? (
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="small"
+                type="submit"
+                color="primary"
+                onClick={this.handleSubmit}
+              >
+                Pending
+              </Button>
+            ) : (
+              <Button
+                className={classes.button}
+                variant="outlined"
+                size="small"
+                type="submit"
+                color="primary"
+                onClick={this.handleSubmit}
+              >
+                Request
+              </Button>
+            )}
           </CardActions>
         </Card>
       </div>
