@@ -30,13 +30,14 @@ const ItemsList = props => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
+              console.log(job)
               return (
                 <div className={classes.root} key={job._id}>
                   <Divider />
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
-                        <Gravatar email={job.owner.emails[0].address} />
+                        <Gravatar email={job.owner?job.owner.emails[0].address:''} />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
