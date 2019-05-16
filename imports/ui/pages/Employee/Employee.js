@@ -27,12 +27,12 @@ import { getJobPosts, getApplications } from "../../../api/functions";
 class SimpleModal extends React.Component {
   state = {
     open: false,
-    selectedDate: new Date("2014-08-18T21")
+    // selectedDate: new Date("2014-08-18T21")
   };
 
-  handleDateChange = date => {
-    this.setState({ selectedDate: date });
-  };
+  // handleDateChange = date => {
+  //   this.setState({ selectedDate: date });
+  // };
 
   handleOpen = () => {
     this.setState({ open: true });
@@ -65,32 +65,18 @@ class SimpleModal extends React.Component {
       <div>
         <NavBar />
         <Typography gutterBottom>Request A Job</Typography>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Grid container className={classes.grid} justify="space-around">
-            <DatePicker
-              margin="normal"
-              label="Date picker"
-              value={this.state.selectedDate}
-              onChange={this.handleDateChange}
-            />
-          </Grid>
-        </MuiPickersUtilsProvider>
 
-        {/* {jobs.map(job => {
-          <div key={job.id}> */}
-        {/* <Button onClick={this.handleOpen}>{job.title}</Button>; */}
-        <Button onClick={this.handleOpen}>Open Modal</Button>
 
-        <SingleDatePicker
+        {/* <SingleDatePicker
           date={this.state.date}
           onDateChange={date => this.setState({ date })}
           focused={this.state.focused}
           onFocusChange={({ focused }) => this.setState({ focused })}
           id="datePicker"
           numberOfMonths={1}
-        />
+        /> */}
 
-        <Typography gutterBottom>List of Jobs:</Typography>
+        
         <Drawer
           className={classes.drawer}
           variant="persistent"

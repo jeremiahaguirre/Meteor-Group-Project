@@ -6,8 +6,8 @@ const styles = theme => ({
   },
   formButton: {
     marginTop: theme.spacing.unit * 2,
-    background: "rgb(233,86,86)",
-    color: "black"
+    background: "#C2DFFF",
+    color: "#1589FF"
   },
   formToggle: {
     background: "none",
