@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
 import Employer from "../pages/Employer";
 import EmployeePage from "../pages/Employee";
+import Profile from "../pages/Profile";
 import { withTracker } from "meteor/react-meteor-data";
 import { Jobs } from "../../api/jobs";
 
@@ -21,6 +22,7 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
         <Fragment>
           <Switch>
             <Route exact path="/employee" component={EmployeePage} />
+            <Route path="/profile" component={Profile} />
             <Redirect from="/*" to="/employee" />
             <Route component={EmployeePage} />
           </Switch>
@@ -30,6 +32,7 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
           <Switch>
             <Route exact path="/employer" component={Employer} />
             <Route exact path="/employee" component={EmployeePage} />
+            <Route path="/profile" component={Profile} />
             <Redirect from="/*" to="/employer" />
           </Switch>
         </Fragment>
