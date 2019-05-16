@@ -17,7 +17,6 @@ import { getJobPosts } from "../../../api/functions";
 
 const ItemsList = props => {
   const { classes, filter, jobs } = props;
-
   return (
     <div>
       <Typography className={classes.h2} component="h2">
@@ -30,7 +29,6 @@ const ItemsList = props => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
-              console.log(job);
               return (
                 <div className={classes.root} key={job._id}>
                   <Divider />
@@ -81,11 +79,11 @@ ItemsList.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("openJobs");
+  Meteor.subscribe("postedJobs");
   Meteor.subscribe("userProfiles");
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: getJobPosts()
+    jobs: getJobPosts().filter((job)=>!job.taken)
   };
 })(withStyles(styles)(ItemsList));
