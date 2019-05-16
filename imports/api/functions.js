@@ -1,5 +1,5 @@
-import { Jobs } from "../../api/jobs";
-import { Applications } from "../../api/applications";
+import { Jobs } from "../api/jobs";
+import { Applications } from "../api/applications";
 
 export function getJobPosts() {
     const jobs = Jobs.find({}).map(job => {
