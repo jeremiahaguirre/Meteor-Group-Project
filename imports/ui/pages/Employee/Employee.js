@@ -92,7 +92,7 @@ class SimpleModal extends React.Component {
               </List>
             </Drawer>
           </Grid>{" "}
-          <Grid item>
+          {/* <Grid item>//    for the second list 
             <Typography>Jobs Requested</Typography>
             <Drawer
               className={classes.drawer}
@@ -113,7 +113,7 @@ class SimpleModal extends React.Component {
                 ))}
               </List>
             </Drawer>
-          </Grid>
+          </Grid> */}
         </Grid>
       </div>
     );
