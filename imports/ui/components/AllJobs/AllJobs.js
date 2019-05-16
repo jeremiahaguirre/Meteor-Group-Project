@@ -30,7 +30,6 @@ const ItemsList = props => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
-              console.log(job);
               return (
                 <div className={classes.root} key={job._id}>
                   <Divider />

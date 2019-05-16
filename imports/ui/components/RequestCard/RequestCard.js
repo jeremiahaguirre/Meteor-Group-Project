@@ -13,11 +13,11 @@ import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
-import { Jobs } from "../../../api/jobs";
+import { getApplications, applyToJob } from "../../../api/functions";
 import styles from "./styles";
 
 function RequestCard(props) {
-  const { classes, jobs } = props;
+  const { classes, applications } = props;
 
   return (
     <div>
@@ -26,7 +26,8 @@ function RequestCard(props) {
       </Typography>
       <Card className={classes.card}>
         <List>
-          {jobs.map(job => {
+          {applications.map(application => {
+            const { job, jobOwner } = application;
             return (
               <div className={classes.root} key={job._id}>
                 <Divider />
@@ -34,7 +35,7 @@ function RequestCard(props) {
                   <ListItemAvatar>
                     <Avatar>
                       <Gravatar
-                        email={job.owner && job.owner.emails[0].address}
+                        email={jobOwner && jobOwner.emails[0].address}
                       />
                     </Avatar>
                   </ListItemAvatar>
@@ -47,9 +48,15 @@ function RequestCard(props) {
                         </Typography>
                         <Typography component="span" color="textPrimary">
                           Date:{" "}
-                          {moment(jobs.createdAt)
+                          {moment(application.job.createdAt)
                             .add(10, "days")
                             .calendar()}
+                        </Typography>
+                        <Typography component="span" color="textPrimary">
+                          Requierments: {job.professions.join(", ")}{" "}
+                        </Typography>
+                        <Typography component="span" color="textPrimary">
+                          Location: {job.location}{" "}
                         </Typography>
                       </React.Fragment>
                     }
@@ -87,17 +94,13 @@ RequestCard.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("jobs");
-  Meteor.subscribe("allUsers");
-  console.log(Jobs.find().fetch());
-  const jobs = Jobs.find({}).map(job => {
-    const owner = Meteor.users.findOne({ _id: job.owner });
-    return { ...job, owner: owner };
-  });
-
+  Meteor.subscribe("postedJobs");
+  Meteor.subscribe("userProfiles");
+  Meteor.subscribe("recievedApplications");
+  console.log(getApplications());
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs
+    applications: getApplications()
   };
 })(withStyles(styles)(RequestCard));
