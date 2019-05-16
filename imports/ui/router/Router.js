@@ -7,6 +7,12 @@ import EmployeePage from "../pages/Employee";
 import Profile from "../pages/Profile";
 import { withTracker } from "meteor/react-meteor-data";
 import { Jobs } from "../../api/jobs";
+import posed, { PoseGroup } from "react-pose";
+
+const RouteContainer = posed.div({
+  enter: { opacity: 1, delay: 400, beforeChildren: true },
+  exit: { opacity: 0 }
+});
 
 const Router = ({ jobs, currentUser, currentUserId }) => {
   return (
@@ -40,8 +46,6 @@ const Router = ({ jobs, currentUser, currentUserId }) => {
     </div>
   );
 };
-
-//       <Route path="/test" component={Test} />
 
 export default withTracker(() => {
   Meteor.subscribe("jobs");

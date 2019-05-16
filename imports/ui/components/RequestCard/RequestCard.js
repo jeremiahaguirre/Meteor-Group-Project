@@ -14,6 +14,7 @@ import Gravatar from "react-gravatar";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
 import { getApplications, replyToApplication } from "../../../api/functions";
+import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
 function RequestCard(props) {
@@ -29,58 +30,67 @@ function RequestCard(props) {
           {applications.map(application => {
             const { job, jobOwner } = application;
             return (
-              <div className={classes.root} key={job._id}>
-                <Divider />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar>
-                      <Gravatar
-                        email={jobOwner && jobOwner.emails[0].address}
-                      />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={job.title}
-                    secondary={
-                      <React.Fragment>
-                        <Typography component="span" color="textPrimary">
-                          Description: {job.description}{" "}
-                        </Typography>
-                        <Typography component="span" color="textPrimary">
-                          Date:{" "}
-                          {moment(application.job.createdAt)
-                            .add(10, "days")
-                            .calendar()}
-                        </Typography>
-                        <Typography component="span" color="textPrimary">
-                          Requierments: {job.professions.join(", ")}{" "}
-                        </Typography>
-                        <Typography component="span" color="textPrimary">
-                          Location: {job.location}{" "}
-                        </Typography>
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider />
-                <div className={classes.buttons}>
-                  <Button
-                    variant="contained"
-                    className={classes.btn}
-                    onClick={() => replyToApplication(application, true)}
-                  >
-                    Accept
-                  </Button>
-                  <Button
-                    variant="contained"
-                    className={classes.btn}
-                    onClick={() => replyToApplication(application, false)}
-                  >
-                    Decline
-                  </Button>
+              <QueueAnim
+                key={job._id}
+                component="ul"
+                type={["right", "left"]}
+                leaveReverse
+              >
+                <div className={classes.root} key={job._id}>
+                  <Divider />
+
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar>
+                        <Gravatar
+                          email={jobOwner && jobOwner.emails[0].address}
+                        />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={job.title}
+                      secondary={
+                        <React.Fragment>
+                          <Typography component="span" color="textPrimary">
+                            Description: {job.description}{" "}
+                          </Typography>
+                          <Typography component="span" color="textPrimary">
+                            Date:{" "}
+                            {moment(application.job.createdAt)
+                              .add(10, "days")
+                              .calendar()}
+                          </Typography>
+                          <Typography component="span" color="textPrimary">
+                            Requierments: {job.professions.join(", ")}{" "}
+                          </Typography>
+                          <Typography component="span" color="textPrimary">
+                            Location: {job.location}{" "}
+                          </Typography>
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+
+                  <Divider />
+                  <div className={classes.buttons}>
+                    <Button
+                      variant="contained"
+                      className={classes.btn}
+                      onClick={() => replyToApplication(application, true)}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      variant="contained"
+                      className={classes.btn}
+                      onClick={() => replyToApplication(application, false)}
+                    >
+                      Decline
+                    </Button>
+                  </div>
+                  <Divider />
                 </div>
-                <Divider />
-              </div>
+              </QueueAnim>
             );
           })}
         </List>
@@ -97,7 +107,6 @@ export default withTracker(() => {
   Meteor.subscribe("postedJobs");
   Meteor.subscribe("userProfiles");
   Meteor.subscribe("recievedApplications");
-  console.log(getApplications());
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),

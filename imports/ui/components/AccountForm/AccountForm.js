@@ -44,7 +44,6 @@ class AccountForm extends Component {
           profile: {
             name: this.state.nameInput,
             employer: values["profile-status"] === "employer" ? true : false,
-            description: values.job
           },
           email: values.email,
           password: values.password
@@ -130,27 +129,6 @@ class AccountForm extends Component {
                     </FormControl>
                   )}
                 </Field>
-                <Field
-                  name="job"
-                  render={({ input, meta }) => (
-                    <FormControl fullWidth className={classes.formControl}>
-                      <InputLabel className={classes.text} htmlFor="job">
-                        Job Description
-                      </InputLabel>
-                      <Input
-                        id="job"
-                        className={classes.text}
-                        type="text"
-                        inputProps={{
-                          autoComplete: "off",
-                          ...input
-                        }}
-                        value={input.value}
-                        required
-                      />
-                    </FormControl>
-                  )}
-                />
               </>
             )}
             <Field name="email">
