@@ -39,7 +39,7 @@ function RequestCard(props) {
                 <div className={classes.root} key={job._id}>
                   <Divider />
 
-                  <ListItem alignItems="flex-start">
+                  <ListItem className={classes.list} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
                         <Gravatar

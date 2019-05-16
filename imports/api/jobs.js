@@ -29,8 +29,9 @@ Meteor.methods({
   }
 });
 
-if (Meteor.isServer) {
-  Meteor.publish("jobs", function jobsPublication() {
+if (Meteor.isServer)
+{
+  Meteor.publish("allJobs", function openJobsPublication() {
     return Jobs.find({});
   });
   Meteor.publish("openJobs", function openJobsPublication() {
