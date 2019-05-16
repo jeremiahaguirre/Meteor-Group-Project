@@ -13,7 +13,7 @@ import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
-import { getApplications, applyToJob } from "../../../api/functions";
+import { getApplications, replyToApplication } from "../../../api/functions";
 import styles from "./styles";
 
 function RequestCard(props) {
@@ -67,14 +67,14 @@ function RequestCard(props) {
                   <Button
                     variant="contained"
                     className={classes.btn}
-                    onClick={() => console.log("I was Accepted")}
+                    onClick={() => replyToApplication(application, true)}
                   >
                     Accept
                   </Button>
                   <Button
                     variant="contained"
                     className={classes.btn}
-                    onClick={() => console.log("I was Declined")}
+                    onClick={() => replyToApplication(application, false)}
                   >
                     Decline
                   </Button>
