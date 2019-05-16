@@ -24,7 +24,7 @@ const Employer = ({ classes }) => {
 
   return (
     <div>
-      <NavBar onChange={setJobsQuery} />
+      <NavBar onChange={setJobsQuery}/>
       <div className={classes.top}>
         <SubmitPost />
       </div>

@@ -5,7 +5,8 @@ import styles from "./styles";
 
 class JobCardsContainer extends Component {
   render() {
-    return <JobCards />;
+    const { job, status } = this.props;
+    return <JobCards job={job} status={status} />;
   }
 }
 

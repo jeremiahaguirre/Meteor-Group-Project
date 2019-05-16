@@ -11,85 +11,57 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import styles from "./styles";
+import { withTracker } from "meteor/react-meteor-data";
+import { Jobs } from "../../../api/jobs";
 import TextField from "@material-ui/core/TextField";
 import { users } from "../../../mock/mockdatabase";
+import Modal from "@material-ui/core/Modal";
+import { applyToJob } from "../../../api/functions";
 
-class JobCards extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      jobTitleInput: "",
-      jobDescriptionInput: ""
-    };
-    this.handleInput = this.handleInput.bind(this);
-    this.jobInput = React.createRef();
-  }
-  handleSubmit(e) {
-    e.preventDefault();
-  }
-  render() {
-    const { jobTitleInput, jobDescriptionInput } = this.state;
-    const { classes, user } = this.props;
-
-    return (
-      <div>
-        <Card className={classes.card}>
-          <Fragment>
-            <CardContent>
+const JobCards = ({ classes, job, status }) => {
+  return (
+    <div>
+      <Card className={classes.card}>
+        <Fragment>
+          <CardContent>
+            <div>
               <div>
-                <div>
-                  <Avatar className={classes.avatar} />
-                </div>
+                <Avatar className={classes.avatar}>
+                  {" "}
+                  {/* <Gravatar email={job.owner.emails[0].address}> </Gravatar> */}
+                </Avatar>
               </div>
-              {/* <Typography variant="display1">{user.name}</Typography> */}
+            </div>
 
-              <form onSubmit={this.handleSubmit}>
-                <FormControl fullWidth className={classes.formControl}>
-                  <InputLabel className={classes.text} htmlFor="fullname">
-                    Username
-                  </InputLabel>
-                  <Input
-                    id="title"
-                    type="text"
-                    inputProps={{ autoComplete: "off" }}
-                    value={jobTitleInput}
-                    onChange={e => this.handleInput(e, "jobTitleInput")}
-                    className={classes.text}
-                    ref={this.jobInput}
-                  />
-                </FormControl>
-              </form>
+            <Typography variant="display1">{job.description}</Typography>
 
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Date</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Location</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">
-                {user.professions.join(", ")}
-              </Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">Description</Typography>
-              {/* <TextField inputProps ={{ inputProps: {}  }} /> */}
-              <Typography variant="display1">{user.workplaces}</Typography>
-            </CardContent>
-          </Fragment>
-          <CardActions>
-            <Button
-              className={classes.button}
-              variant="outlined"
-              size="small"
-              color="primary"
-            >
-              Request
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
-    );
-  }
-}
+            <Typography variant="display1">{job.title}</Typography>
 
-JobCards.defaultProps = { user: users };
+            <Typography variant="display1">{job.time}</Typography>
+
+            <Typography variant="display1">{job.location}</Typography>
+            {/* <Typography variant="display1">
+                {job.professions.join(", ")}
+              </Typography> */}
+          </CardContent>
+        </Fragment>
+        <CardActions>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            size="small"
+            type="submit"
+            color="primary"
+            onClick={() => {
+              if (status === "Request") applyToJob(job._id, job.owner._id);
+            }}
+          >
+            {status}
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
+};
 
 export default withStyles(styles)(JobCards);

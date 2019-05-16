@@ -7,10 +7,11 @@ const styles = {
     minWidth: 275,
     width: "600px",
     height: "400px",
-    overflowY: "scroll"
+    overflowY: "scroll",
+    background: "rgb(0,32,80)"
   },
   h2: {
-    color: "black",
+    color: "white",
     fontSize: "32px",
     fontWeight: "400",
     textAlign: "center"
@@ -20,6 +21,9 @@ const styles = {
   },
   btn: {
     marginRight: "10px"
+  },
+  list: {
+    background: "rgb(235,247,253)"
   }
 };
 

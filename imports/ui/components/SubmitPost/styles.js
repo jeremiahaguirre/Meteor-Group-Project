@@ -27,7 +27,7 @@ const styles = {
   },
   btn: {
     color: "white",
-    background: "rgb(233,86,86)"
+    background: "rgb(65,168,237)"
   },
   modalSize: {
     width: "80vw"
