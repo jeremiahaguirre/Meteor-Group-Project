@@ -53,7 +53,7 @@ const JobCards = ({ classes, job, status }) => {
             type="submit"
             color="primary"
             onClick={() => {
-              if (status === "Request") applyToJob(job._id, job.owner);
+              if (status === "Request") applyToJob(job._id, job.owner._id);
             }}
           >
             {status}
