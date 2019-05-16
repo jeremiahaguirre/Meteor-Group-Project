@@ -6,6 +6,9 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
 import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -15,6 +18,7 @@ import Input from "./Input";
 
 const Profile = ({ classes }) => {
   const [passError, setPassError] = useState();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleProfileSubmit = values => {
     values["profile-status"] &&
@@ -51,9 +55,7 @@ const Profile = ({ classes }) => {
     if (!values["old-password"] || !values["new-password"]) return;
 
     Accounts.changePassword(values["old-password"], values["new-password"], e =>
-      e && e.reason === "Incorrect password"
-        ? setPassError(e.reason)
-        : alert("Something went wrong please refresh")
+      e ? setPassError(e.reason) : setModalIsOpen(false)
     );
   };
 
@@ -109,42 +111,81 @@ const Profile = ({ classes }) => {
                 </Field>
                 <Button
                   variant="contained"
+                  color="secondary"
+                  type="submit"
+                  onClick={() => setModalIsOpen(true)}
+                  className={classes.textWhite}
+                >
+                  Change password
+                </Button>
+                <Button
+                  variant="contained"
                   color="primary"
                   type="submit"
-                  className={`${classes.formButton} ${classes.textWhite}`}
+                  className={classes.textWhite}
                 >
                   Save changes
                 </Button>
               </form>
             )}
           />
-          <Typography variant="h3" color="inherit" noWrap>
-            Change Password
-          </Typography>
-          <Form
-            onSubmit={handleChangePassword}
-            render={({ handleSubmit, pristine, invalid }) => (
-              <form onSubmit={handleSubmit}>
-                <Input name="old-password" type="password" classes={classes}>
-                  Current password
-                </Input>
-                <Input name="new-password" type="password" classes={classes}>
-                  New password
-                </Input>
-                <Typography className={classes.errorMessage}>
-                  {passError}
-                </Typography>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  className={`${classes.formButton} ${classes.textWhite}`}
-                >
-                  Change password
-                </Button>
-              </form>
-            )}
-          />
+
+          <Dialog
+            open={modalIsOpen}
+            onClose={() => setModalIsOpen(false)}
+            aria-labelledby="password-modal-label"
+          >
+            <DialogContent>
+              <Typography
+                variant="h3"
+                color="inherit"
+                id="password-modal-label"
+                noWrap
+              >
+                Change Password
+              </Typography>
+              <Form
+                onSubmit={handleChangePassword}
+                render={({ handleSubmit, pristine, invalid }) => (
+                  <form onSubmit={handleSubmit}>
+                    <Input
+                      name="old-password"
+                      type="password"
+                      classes={classes}
+                    >
+                      Current password
+                    </Input>
+                    <Input
+                      name="new-password"
+                      type="password"
+                      classes={classes}
+                    >
+                      New password
+                    </Input>
+                    <DialogActions>
+                      <Typography className={classes.errorMessage}>
+                        {passError}
+                      </Typography>
+                      <Button
+                        onClick={() => setModalIsOpen(false)}
+                        color="primary"
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.textWhite}
+                      >
+                        Save
+                      </Button>
+                    </DialogActions>
+                  </form>
+                )}
+              />
+            </DialogContent>
+          </Dialog>
         </Paper>
       </main>
     </>

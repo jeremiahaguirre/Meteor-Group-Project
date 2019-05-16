@@ -9,11 +9,6 @@ const styles = theme => ({
     width: "100%",
     color: "white"
   },
-  formButton: {
-    marginTop: theme.spacing.unit * 2,
-    background: "rgb(233,86,86)",
-    color: "black"
-  },
   accountForm: {
     width: "100%",
     [theme.breakpoints.up("sm")]: {
