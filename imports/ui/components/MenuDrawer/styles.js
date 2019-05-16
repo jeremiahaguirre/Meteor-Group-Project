@@ -11,7 +11,8 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     width: "70px",
-    background: "rgb(233,86,86)",
+    background: "none",
+    borderRadius: "40px",
     boxShadow: "none",
     position: "relative"
   },

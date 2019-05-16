@@ -30,14 +30,16 @@ const ItemsList = props => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
-              console.log(job)
+              console.log(job);
               return (
                 <div className={classes.root} key={job._id}>
                   <Divider />
-                  <ListItem alignItems="flex-start">
+                  <ListItem className={classes.list} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
-                        <Gravatar email={job.owner?job.owner.emails[0].address:''} />
+                        <Gravatar
+                          email={job.owner ? job.owner.emails[0].address : ""}
+                        />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
@@ -81,16 +83,6 @@ ItemsList.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe("openJobs");
   Meteor.subscribe("userProfiles");
-
-  // const jobs = Jobs.find({}).map(job => {
-  //   const owner = Meteor.users.findOne({ _id: job.ownerId });
-  //   return { ...job, owner: owner };
-  // });
-
-  // const jobs = MOCK_JOBS.map(job => {
-  //   const owner = Meteor.users.findOne({ _id: job.ownerId });
-  //   return { ...job, owner: owner };
-  // });
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
