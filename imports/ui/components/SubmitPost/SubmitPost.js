@@ -107,10 +107,10 @@ class SubmitPost extends React.Component {
               >
                 <DialogContent>
                   <Field
-                    name="job"
+                    name="title"
                     component="input"
                     className={classes.textField}
-                    placeholder="Job"
+                    placeholder="title"
                     margin="normal"
                     variant="outlined"
                     type="text"
