@@ -17,7 +17,6 @@ import { getJobPosts } from "../../../ui/helpers/functions";
 
 const ItemsList = props => {
   const { classes, filter, jobs } = props;
-  console.log(jobs);
   return (
     <div>
       <Typography className={classes.h2} component="h2">
