@@ -1,8 +1,8 @@
 const styles = {
     card: {
         minWidth: 275,
-        width: "600px",
-        height: "600px",
+        width: "700px",
+        height: "650px",
         overflowY: "scroll",
         // background: "#003550",
         background: "rgba(235,247,253,0.5)",
