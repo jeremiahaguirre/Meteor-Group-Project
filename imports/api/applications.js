@@ -19,7 +19,7 @@ Meteor.methods({
     });
     
   },
-  "applications.reply"(_id, status) {
+  "applications.reply"(_id,applicantId, status) {
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
@@ -28,7 +28,7 @@ Meteor.methods({
         status
       }
     });
-   
+    Meteor.users.update({ _id: applicantId }, { $push: { "profile.notifications": _id } });
   }
 });
 
