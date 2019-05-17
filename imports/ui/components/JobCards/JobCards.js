@@ -13,7 +13,7 @@ import { applyToJob } from "../../../ui/helpers/functions";
 
 const JobCards = ({ classes, job, status }) => {
   return (
-    <div>
+    <div className={classes.infoCard}>
       
       <Avatar>
         <Gravatar email={job.owner ? job.owner.emails[0].address : ""} />
@@ -37,7 +37,8 @@ const JobCards = ({ classes, job, status }) => {
         </Typography>
       </React.Fragment>
 
-      <Button
+      <p align="right">
+      <Button 
         className={classes.button}
         variant="outlined"
         size="small"
@@ -49,6 +50,7 @@ const JobCards = ({ classes, job, status }) => {
       >
         {status}
       </Button>
+      </p>
     </div>
   );
 };

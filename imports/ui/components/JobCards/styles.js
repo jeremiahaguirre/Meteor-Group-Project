@@ -23,13 +23,22 @@ button: {
   color: 'black',
   padding: '6px 16px',
   fontSize: '0.875rem',
+  marginRight: '20px',
+  borderRadius: "10px"
 },
 cardDescription:{
   width: "90%",
   margin: "auto",
   background: "rgba(235,247,253,0.5)",
+  borderRadius: "10px",
+},
+infoCard: {
+  width: "90%",
+  margin: "auto",
+  background: "rgba(235,247,253,0.5)",
   borderRadius: "10px"
 }
+
 };
 
 export default styles;
