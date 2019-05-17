@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withTracker } from "meteor/react-meteor-data";
 import AppBar from "@material-ui/core/AppBar";
@@ -14,7 +15,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import styles from "./styles";
 import MenuDrawer from "../MenuDrawer";
-import SearchBar from "../SearchBar"
+import SearchBar from "../SearchBar";
 
 class NavBar extends Component {
   state = {
@@ -53,7 +54,13 @@ class NavBar extends Component {
         open={isMenuOpen}
         onClose={this.handleMenuClose}
       >
-        <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
+        {!window.location.pathname.includes("profile") && (
+          <MenuItem>
+            <Link to="/profile" className={classes.link}>
+              Settings
+            </Link>
+          </MenuItem>
+        )}
         <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
       </Menu>
     );
@@ -98,7 +105,7 @@ class NavBar extends Component {
             >
               Hived
             </Typography>
-            {onChange && <SearchBar onChange={onChange}/>}
+            {onChange && <SearchBar onChange={onChange} />}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
               <IconButton color="inherit">
@@ -139,7 +146,6 @@ NavBar.propTypes = {
 };
 
 export default withTracker(() => {
-
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId()

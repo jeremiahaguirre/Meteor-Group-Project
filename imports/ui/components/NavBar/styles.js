@@ -35,6 +35,10 @@ const styles = theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  link: {
+    color: "inherit",
+    textDecoration: "none"
   }
 });
 
