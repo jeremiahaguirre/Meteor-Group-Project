@@ -14,7 +14,10 @@ Meteor.methods({
       jobOwner,
       status: null,
       createdAt: new Date()
+    }, function (err, appId) {
+        if(!err)Meteor.users.update({ _id: jobOwner }, { $push: { "profile.notifications": appId } });
     });
+    
   },
   "applications.reply"(_id, status) {
     if (!this.userId) {
@@ -25,6 +28,7 @@ Meteor.methods({
         status
       }
     });
+   
   }
 });
 
