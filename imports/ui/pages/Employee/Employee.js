@@ -49,15 +49,7 @@ class SimpleModal extends React.Component {
       <div>
         <NavBar />
         <Typography gutterBottom>List of Jobs:</Typography>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={!this.state.open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
+
           <List dense className={classes.root}>
             {jobs.map(job => (
               <ListItem key={job._id}>
@@ -66,7 +58,7 @@ class SimpleModal extends React.Component {
               </ListItem>
             ))}
           </List>
-        </Drawer>
+        
       </div>
     );
   }

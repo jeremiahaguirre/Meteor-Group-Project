@@ -21,30 +21,34 @@ import { applyToJob } from "../../../ui/helpers/functions";
 const JobCards = ({ classes, job, status }) => {
   return (
     <div>
+      <Typography className={classes.h2} component="h2">
+        List of Jobs
+      </Typography>
       <Card className={classes.card}>
-        <Fragment>
-          <CardContent>
-            <div>
-              <div>
-                <Avatar className={classes.avatar}>
-                  {" "}
-                  {/* <Gravatar email={job.owner.emails[0].address}> </Gravatar> */}
-                </Avatar>
-              </div>
-            </div>
+        <CardContent>
+          <Avatar>
+            <Gravatar email={job.owner ? job.owner.emails[0].address : ""} />
+          </Avatar>
 
-            <Typography variant="display1">{job.description}</Typography>
+          <React.Fragment>
+            <Typography component="span" color="textPrimary">
+              Description: {job.description}{" "}
+            </Typography>{" "}
+            <Typography component="span" color="textPrimary">
+              Date:{" "}
+              {moment(job.createdAt)
+                .add(10, "days")
+                .calendar()}
+            </Typography>{" "}
+            <Typography component="span" color="textPrimary">
+              Requierments: {job.professions.join(", ")}
+            </Typography>{" "}
+            <Typography component="span" color="textPrimary">
+              Location: {job.location}
+            </Typography>
+          </React.Fragment>
+        </CardContent>
 
-            <Typography variant="display1">{job.title}</Typography>
-
-            <Typography variant="display1">{job.time}</Typography>
-
-            <Typography variant="display1">{job.location}</Typography>
-            {/* <Typography variant="display1">
-                {job.professions.join(", ")}
-              </Typography> */}
-          </CardContent>
-        </Fragment>
         <CardActions>
           <Button
             className={classes.button}
