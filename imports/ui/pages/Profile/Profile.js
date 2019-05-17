@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
 import { Form, Field } from "react-final-form";
+import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -16,11 +17,12 @@ import Typography from "@material-ui/core/Typography";
 import NavBar from "../../components/NavBar";
 import Input from "./Input";
 
-const Profile = ({ classes }) => {
+const Profile = ({ history, classes }) => {
   const [passError, setPassError] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleProfileSubmit = values => {
+    // only uses non-empty field
     values["profile-status"] &&
       Meteor.users.update(
         { _id: Meteor.userId() },
@@ -49,10 +51,14 @@ const Profile = ({ classes }) => {
           }
         }
       );
+
+    if (values["profile-status"] || values.username || values.description)
+      history.push("/");
   };
 
   const handleChangePassword = values => {
-    if (!values["old-password"] || !values["new-password"]) return;
+    if (!values["old-password"] || !values["new-password"])
+      return setPassError("Please fill both fields");
 
     Accounts.changePassword(values["old-password"], values["new-password"], e =>
       e ? setPassError(e.reason) : setModalIsOpen(false)
@@ -60,14 +66,19 @@ const Profile = ({ classes }) => {
   };
 
   return (
-    <>
+    <div className={classes.bg}>
       <header>
         <NavBar />
       </header>
 
       <main>
         <Paper className={classes.root} elevation={1}>
-          <Typography variant="h3" color="inherit" noWrap>
+          <Typography
+            className={classes.h2}
+            variant="h2"
+            color="inherit"
+            noWrap
+          >
             Update Profile
           </Typography>
           <Form
@@ -114,7 +125,7 @@ const Profile = ({ classes }) => {
                   color="secondary"
                   type="submit"
                   onClick={() => setModalIsOpen(true)}
-                  className={classes.textWhite}
+                  className={classes.btnSecondary}
                 >
                   Change password
                 </Button>
@@ -122,7 +133,7 @@ const Profile = ({ classes }) => {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  className={classes.textWhite}
+                  className={classes.btnPrimary}
                 >
                   Save changes
                 </Button>
@@ -137,8 +148,9 @@ const Profile = ({ classes }) => {
           >
             <DialogContent>
               <Typography
-                variant="h3"
+                variant="h2"
                 color="inherit"
+                className={classes.h2}
                 id="password-modal-label"
                 noWrap
               >
@@ -172,12 +184,7 @@ const Profile = ({ classes }) => {
                       >
                         Cancel
                       </Button>
-                      <Button
-                        type="submit"
-                        variant="contained"
-                        color="primary"
-                        className={classes.textWhite}
-                      >
+                      <Button type="submit" variant="contained" color="primary">
                         Save
                       </Button>
                     </DialogActions>
@@ -188,8 +195,8 @@ const Profile = ({ classes }) => {
           </Dialog>
         </Paper>
       </main>
-    </>
+    </div>
   );
 };
 
-export default Profile;
+export default withRouter(Profile);
