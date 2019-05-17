@@ -55,11 +55,9 @@ class NavBar extends Component {
         onClose={this.handleMenuClose}
       >
         {!window.location.pathname.includes("profile") && (
-          <MenuItem>
-            <Link to="/profile" className={classes.link}>
-              Settings
-            </Link>
-          </MenuItem>
+          <Link to="/profile" className={classes.link}>
+            <MenuItem>Settings</MenuItem>
+          </Link>
         )}
         <MenuItem onClick={() => Meteor.logout()}>Logout</MenuItem>
       </Menu>
