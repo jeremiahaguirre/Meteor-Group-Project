@@ -83,6 +83,7 @@ const Profile = ({ history, classes }) => {
           </Typography>
           <Form
             onSubmit={handleProfileSubmit}
+            className={classes.form}
             render={({ handleSubmit, pristine, invalid }) => (
               <form onSubmit={handleSubmit}>
                 <Input name="username" classes={classes}>
@@ -123,7 +124,6 @@ const Profile = ({ history, classes }) => {
                 <Button
                   variant="contained"
                   color="secondary"
-                  type="submit"
                   onClick={() => setModalIsOpen(true)}
                   className={classes.btnSecondary}
                 >
@@ -164,6 +164,7 @@ const Profile = ({ history, classes }) => {
                       name="old-password"
                       type="password"
                       classes={classes}
+                      required
                     >
                       Current password
                     </Input>
@@ -171,6 +172,7 @@ const Profile = ({ history, classes }) => {
                       name="new-password"
                       type="password"
                       classes={classes}
+                      required
                     >
                       New password
                     </Input>
@@ -180,11 +182,16 @@ const Profile = ({ history, classes }) => {
                       </Typography>
                       <Button
                         onClick={() => setModalIsOpen(false)}
-                        color="primary"
+                        color="secondary"
                       >
                         Cancel
                       </Button>
-                      <Button type="submit" variant="contained" color="primary">
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.btnSmall}
+                      >
                         Save
                       </Button>
                     </DialogActions>
