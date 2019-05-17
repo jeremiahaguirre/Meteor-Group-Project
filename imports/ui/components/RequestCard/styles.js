@@ -21,7 +21,8 @@ const styles = {
     color: "Black",
     fontSize: "32px",
     fontWeight: "400",
-    textAlign: "center"
+    textAlign: "center",
+    textShadow: "5px 5px 11px rgba(68,68,68,0.94)"
   },
   buttons: {
     padding: "10px"
@@ -30,8 +31,6 @@ const styles = {
     marginRight: "10px"
   },
   list: {
-    width: "90%",
-    margin: "auto",
     background: "rgba(235,247,253,0.5)",
     borderRadius: "10px"
   }

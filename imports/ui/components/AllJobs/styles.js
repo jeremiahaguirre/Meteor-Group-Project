@@ -21,7 +21,8 @@ const styles = theme => ({
     color: "black",
     fontSize: "32px",
     fontWeight: "400",
-    textAlign: "center"
+    textAlign: "center",
+    textShadow: "5px 5px 11px rgba(68,68,68,0.94)"
   },
   list: {
     width: "90%",

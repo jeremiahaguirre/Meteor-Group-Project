@@ -13,7 +13,10 @@ import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
-import { getApplications, replyToApplication } from "../../../ui/helpers/functions";
+import {
+  getApplications,
+  replyToApplication
+} from "../../../ui/helpers/functions";
 import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
@@ -70,8 +73,6 @@ function RequestCard(props) {
                       }
                     />
                   </ListItem>
-
-                  <Divider />
                   <div className={classes.buttons}>
                     <Button
                       variant="contained"

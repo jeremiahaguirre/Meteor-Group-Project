@@ -36,7 +36,10 @@ infoCard: {
   width: "90%",
   margin: "auto",
   background: "rgba(235,247,253,0.5)",
-  borderRadius: "10px"
+  borderRadius: "10px",
+  paddingLeft: '16px',
+    paddingRight: '16px',
+    paddingTop: '8px',
 }
 
 };

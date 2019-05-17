@@ -5,7 +5,7 @@ const styles = theme => ({
     color: "white"
   },
   back: {
-    background: "rgba(235,247,253,0.2)",
+    background: "rgba(235,247,253,0.5)",
     borderRadius: "10px",
     height: "80vh"
   },
@@ -21,15 +21,10 @@ const styles = theme => ({
     background:
       "-webkit-linear-gradient(top,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
     background:
-      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)"
-  },
-  date: {
-    background:
-      "-moz-linear-gradient(top,  #003550 0%, #2989d8 50%, #003550 100%, #207cca 100%, #7db9e8 100%)d",
-    background:
-      "-webkit-linear-gradient(top,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
-    background:
-      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)"
+      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
+
+    paddingLeft: "10%",
+    paddingRight: "10%"
   },
   card: {
     minWidth: 275
@@ -58,6 +53,9 @@ const styles = theme => ({
     width: 200
   },
   btn: {
+    width: "190px",
+    padding: "10px",
+    fontWeight: "bold",
     color: "white",
     background: "rgb(65,168,237)"
   },

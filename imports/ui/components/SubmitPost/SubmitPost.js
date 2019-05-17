@@ -175,7 +175,6 @@ class SubmitPost extends React.Component {
                   </FormControl>
 
                   <SingleDatePicker
-                    className={classes.CalendarDay__selected_span}
                     date={this.state.date} // momentPropTypes.momentObj or null
                     onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                     focused={this.state.focused} // PropTypes.bool

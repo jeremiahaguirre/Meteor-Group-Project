@@ -51,7 +51,12 @@ class SimpleModal extends React.Component {
     return (
       <div>
         <NavBar />
-        <Typography gutterBottom>List of Jobs:</Typography>
+        <Typography className={classes.h1} >
+          List of Job Posts:
+
+          </Typography>
+
+
         <Card className={classes.card}>
           <List dense className={classes.root}>
             {jobs.map(job => (
