@@ -1,4 +1,8 @@
 const styles = theme => ({
+  bg: {
+    backgroundColor: "aliceblue",
+    minHeight: "100vh"
+  },
   root: {
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
@@ -7,7 +11,8 @@ const styles = theme => ({
     maxWidth: "650px",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2
   },
   formControl: {
     marginBottom: theme.spacing.unit * 2,
@@ -35,6 +40,7 @@ const styles = theme => ({
     color: "Black",
     fontSize: "32px",
     lineHeight: "37px",
+    padding: "10px 0 15px 0",
     fontWeight: "400",
     textAlign: "center"
   },

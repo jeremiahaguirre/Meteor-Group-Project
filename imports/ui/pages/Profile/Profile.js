@@ -66,7 +66,7 @@ const Profile = ({ history, classes }) => {
   };
 
   return (
-    <>
+    <div className={classes.bg}>
       <header>
         <NavBar />
       </header>
@@ -195,7 +195,7 @@ const Profile = ({ history, classes }) => {
           </Dialog>
         </Paper>
       </main>
-    </>
+    </div>
   );
 };
 
