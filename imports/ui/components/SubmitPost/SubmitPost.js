@@ -17,8 +17,8 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
-import {createJob} from "../../../ui/helpers/functions"
-import { TextField } from "@material-ui/core";
+import { createJob } from "../../../ui/helpers/functions";
+import { TextField, Typography } from "@material-ui/core";
 
 const professions = [
   "React",
@@ -102,16 +102,16 @@ class SubmitPost extends React.Component {
               fullScreen={true}
               fullWidth={true}
             >
-              <DialogTitle id="alert-dialog-title">
-                {"New Shift Post"}
-              </DialogTitle>
               <form
-                className={classes.container}
+                className={classes.Form}
                 noValidate
                 onSubmit={handleSubmit}
                 autoComplete="off"
               >
-                <DialogContent>
+                <Typography className={classes.header} component="h2">
+                  New Shift Post
+                </Typography>
+                <DialogContent className={classes.back}>
                   <Field
                     name="title"
                     component="input"
@@ -175,6 +175,7 @@ class SubmitPost extends React.Component {
                   </FormControl>
 
                   <SingleDatePicker
+                    className={classes.CalendarDay__selected_span}
                     date={this.state.date} // momentPropTypes.momentObj or null
                     onDateChange={date => this.setState({ date })} // PropTypes.func.isRequired
                     focused={this.state.focused} // PropTypes.bool
@@ -212,10 +213,19 @@ class SubmitPost extends React.Component {
                     </Select>
                   </FormControl>
                   <DialogActions>
-                    <Button onClick={() => this.handleClose()} color="primary">
+                    <Button
+                      className={classes.btn}
+                      onClick={() => this.handleClose()}
+                      color="primary"
+                    >
                       Cancel
                     </Button>
-                    <Button type="submit" color="primary" autoFocus>
+                    <Button
+                      className={classes.btn}
+                      type="submit"
+                      color="primary"
+                      autoFocus
+                    >
                       Submit
                     </Button>
                   </DialogActions>
