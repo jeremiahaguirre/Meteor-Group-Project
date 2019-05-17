@@ -1,4 +1,36 @@
-const styles = {
+const styles = theme => ({
+  formControl: {
+    marginBottom: theme.spacing.unit * 2,
+    width: "100%",
+    color: "white"
+  },
+  back: {
+    background: "rgba(235,247,253,0.2)",
+    borderRadius: "10px",
+    height: "80vh"
+  },
+  header: {
+    color: "white",
+    fontSize: "30px",
+    padding: "20px"
+  },
+  Form: {
+    height: "100vh",
+    background:
+      "-moz-linear-gradient(top,  #003550 0%, #2989d8 50%, #003550 100%, #207cca 100%, #7db9e8 100%)d",
+    background:
+      "-webkit-linear-gradient(top,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
+    background:
+      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)"
+  },
+  date: {
+    background:
+      "-moz-linear-gradient(top,  #003550 0%, #2989d8 50%, #003550 100%, #207cca 100%, #7db9e8 100%)d",
+    background:
+      "-webkit-linear-gradient(top,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
+    background:
+      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)"
+  },
   card: {
     minWidth: 275
   },
@@ -32,6 +64,6 @@ const styles = {
   modalSize: {
     width: "80vw"
   }
-};
+});
 
 export default styles;
