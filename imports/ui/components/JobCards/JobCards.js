@@ -1,24 +1,20 @@
 import React, { Fragment, Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Gravatar from "react-gravatar";
-
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 import styles from "./styles";
-import { withTracker } from "meteor/react-meteor-data";
-
 import { applyToJob } from "../../../ui/helpers/functions";
 
 const JobCards = ({ classes, job, status }) => {
   return (
     <div className={classes.infoCard}>
-      
       <Avatar>
         <Gravatar email={job.owner ? job.owner.emails[0].address : ""} />
       </Avatar>
-
       <React.Fragment>
         <Typography component="span" color="textPrimary">
           Description: {job.description}{" "}
@@ -36,20 +32,19 @@ const JobCards = ({ classes, job, status }) => {
           Location: {job.location}
         </Typography>
       </React.Fragment>
-
       <p align="right">
-      <Button 
-        className={classes.button}
-        variant="outlined"
-        size="small"
-        type="submit"
-        color="primary"
-        onClick={() => {
-          if (status === "Request") applyToJob(job._id, job.owner._id);
-        }}
-      >
-        {status}
-      </Button>
+        <Button
+          className={classes.button}
+          variant="outlined"
+          size="small"
+          type="submit"
+          color="primary"
+          onClick={() => {
+            if (status === "Request") applyToJob(job._id, job.owner._id);
+          }}
+        >
+          {status}
+        </Button>
       </p>
     </div>
   );

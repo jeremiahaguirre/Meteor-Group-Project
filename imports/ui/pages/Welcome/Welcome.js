@@ -32,9 +32,6 @@ const Welcome = ({ classes }) => {
           <Form />
         </Grid>
       </Grid>
-      <div className={classes.welcomePage}>hello
-
-      </div>
     </>
   );
 };

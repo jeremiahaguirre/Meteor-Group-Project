@@ -5,7 +5,7 @@ const styles = theme => ({
     color: "white"
   },
   back: {
-    background: "rgba(235,247,253,0.5)",
+    background: "#e0e0e0",
     borderRadius: "10px",
     height: "80vh"
   },
@@ -57,7 +57,8 @@ const styles = theme => ({
     padding: "10px",
     fontWeight: "bold",
     color: "white",
-    background: "rgb(65,168,237)"
+    background: "rgb(65,168,237)",
+    border: "none"
   },
   modalSize: {
     width: "80vw"

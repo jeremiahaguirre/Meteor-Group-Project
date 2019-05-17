@@ -35,13 +35,12 @@ function RequestCard(props) {
             return (
               <QueueAnim
                 key={job._id}
+                className={classes.animation}
                 component="ul"
                 type={["right", "left"]}
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <Divider />
-
                   <ListItem className={classes.list} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
