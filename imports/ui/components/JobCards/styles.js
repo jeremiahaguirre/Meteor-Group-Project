@@ -19,12 +19,12 @@ const styles = {
     borderRadius: "10px"
   },
   button: {
-    background: "#e0e0e0",
+    background: "#f79e02",
     color: "black",
     padding: "6px 16px",
     fontSize: "0.875rem",
     marginRight: "20px",
-    borderRadius: "10px"
+    borderRadius: "15px"
   },
   cardDescription: {
     width: "90%",
