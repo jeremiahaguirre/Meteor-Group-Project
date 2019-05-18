@@ -20,8 +20,8 @@ const styles = {
     paddingTop: "3%"
   },
   container: {
-    width: '90%',
-    margin: 'auto',
+    width: "90%",
+    margin: "auto"
   }
 };
 

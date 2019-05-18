@@ -16,6 +16,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Drawer from "@material-ui/core/Drawer";
 import { getJobPosts, getApplications } from "../../../ui/helpers/functions";
 
+
 class SimpleModal extends React.Component {
   state = {
     open: false
@@ -51,6 +52,7 @@ class SimpleModal extends React.Component {
     return (
       <div>
         <NavBar />
+
         <div className={classes.container}>
           <Typography className={classes.h1}>List of Job Posts:</Typography>
 
