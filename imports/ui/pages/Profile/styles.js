@@ -51,17 +51,18 @@ const styles = theme => ({
     textAlign: "center"
   },
   btnPrimary: {
-    background: "rgb(65,168,237)",
+    //background: "rgb(65,168,237)",
+    background: "#f79e02",
     marginTop: "15px",
-    color: "white"
+    color: "black"
   },
   btnSecondary: {
     marginRight: "20px",
     marginTop: "15px",
-    color: "white"
+    color: "black"
   },
   btnSmall: {
-    background: "rgb(65,168,237)"
+    background: "#f79e02"
   }
 });
 
