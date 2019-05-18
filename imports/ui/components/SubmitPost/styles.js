@@ -55,10 +55,9 @@ const styles = theme => ({
   btn: {
     width: "190px",
     padding: "10px",
-    fontWeight: "bold",
-    color: "white",
-    background: "rgb(65,168,237)",
-    border: "none"
+    color: "black",
+    background: "#f79e02",
+    borderRadius: "20px"
   },
   modalSize: {
     width: "80vw"
