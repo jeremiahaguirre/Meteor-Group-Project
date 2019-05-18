@@ -1,4 +1,9 @@
+import { easeInOut } from "@popmotion/easing";
+
 const styles = theme => ({
+  container: {
+    display: "flex"
+  },
   root: {
     flexGrow: 1,
     height: "100vh",
@@ -32,10 +37,21 @@ const styles = theme => ({
   text: {
     textShadow: "5px 5px 11px rgba(68,68,68,0.94)",
     color: "white"
+  },
+
+  image: {
+    background: "#003550",
+    background:
+      "-moz-linear-gradient(top,  #003550 0%, #2989d8 50%, #003550 100%, #207cca 100%, #7db9e8 100%)d",
+    background:
+      "-webkit-linear-gradient(top,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
+    background:
+      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
+    justifyContent: "center",
+    alignItems: "center",
+    display: "flex",
+    paddingRight: 231
   }
-  // welcomePage: {
-  //   height: 400
-  // }
 });
 
 export default styles;

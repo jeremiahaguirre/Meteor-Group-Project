@@ -2,7 +2,7 @@ const styles = {
   card: {
     minWidth: 275,
     width: "700px",
-    height: "600px",
+    height: "85vh",
     overflowY: "scroll",
     // background: "#003550",
     background: "rgba(235,247,253,0.5)",
@@ -17,7 +17,11 @@ const styles = {
   h1: {
     marginLeft: "11%",
     fontSize: "3rem",
-    paddingTop: '3%',
+    paddingTop: "3%"
+  },
+  container: {
+    width: '90%',
+    margin: 'auto',
   }
 };
 
