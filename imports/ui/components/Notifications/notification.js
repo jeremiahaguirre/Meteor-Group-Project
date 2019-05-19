@@ -10,9 +10,7 @@ class Notification extends Component{
   handleClick = (notifications) => {
     console.log(notifications);
   }
-  clearNotifications = (_id) => {
-    Meteor.users.update({ _id },{$set:{'profile.notifications':[]}});
-  }
+
   
   render() {
     const { notifications  } = this.props;
