@@ -7,12 +7,15 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
-    width: "80%",
-    maxWidth: "650px",
+    width: "80vw",
+    maxWidth: "850px",
     marginLeft: "auto",
     marginRight: "auto",
-    marginTop: theme.spacing.unit * 2,
-    marginBottom: theme.spacing.unit * 2
+    marginTop: theme.spacing.unit * 6,
+    marginBottom: theme.spacing.unit * 5
+  },
+  form: {
+    ...theme.mixins.gutters()
   },
   formControl: {
     marginBottom: theme.spacing.unit * 2,
@@ -29,9 +32,12 @@ const styles = theme => ({
   errorMessage: {
     color: "red"
   },
+  radioFormControl: {
+    marginTop: theme.spacing.unit
+  },
   radioGroup: {
-    "flex-direction": "row",
-    "margin-bottom": 0
+    flexDirection: "row",
+    marginBottom: theme.spacing.unit * 2
   },
   textWhite: {
     color: "white"
@@ -39,19 +45,24 @@ const styles = theme => ({
   h2: {
     color: "Black",
     fontSize: "32px",
-    lineHeight: "37px",
+    lineHeight: 1.15,
     padding: "10px 0 15px 0",
     fontWeight: "400",
     textAlign: "center"
   },
   btnPrimary: {
-    color: "white",
-    marginTop: "15px"
+    //background: "rgb(65,168,237)",
+    background: "#f79e02",
+    marginTop: "15px",
+    color: "black"
   },
   btnSecondary: {
-    color: "white",
     marginRight: "20px",
-    marginTop: "15px"
+    marginTop: "15px",
+    color: "black"
+  },
+  btnSmall: {
+    background: "#f79e02"
   }
 });
 

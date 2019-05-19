@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Meteor } from "meteor/meteor";
 import { Accounts } from "meteor/accounts-base";
+import { withTracker } from "meteor/react-meteor-data";
 import { Form, Field } from "react-final-form";
 import { withRouter } from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -17,7 +18,7 @@ import Typography from "@material-ui/core/Typography";
 import NavBar from "../../components/NavBar";
 import Input from "./Input";
 
-const Profile = ({ history, classes }) => {
+const Profile = ({ currentUser, history, classes }) => {
   const [passError, setPassError] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -83,6 +84,14 @@ const Profile = ({ history, classes }) => {
           </Typography>
           <Form
             onSubmit={handleProfileSubmit}
+            className={classes.form}
+            initialValues={{
+              username: currentUser ? currentUser.profile.name : "",
+              description: currentUser
+                ? currentUser.profile.professions.join(", ")
+                : ""
+              // TODO: radio initial values
+            }}
             render={({ handleSubmit, pristine, invalid }) => (
               <form onSubmit={handleSubmit}>
                 <Input name="username" classes={classes}>
@@ -123,7 +132,6 @@ const Profile = ({ history, classes }) => {
                 <Button
                   variant="contained"
                   color="secondary"
-                  type="submit"
                   onClick={() => setModalIsOpen(true)}
                   className={classes.btnSecondary}
                 >
@@ -164,6 +172,7 @@ const Profile = ({ history, classes }) => {
                       name="old-password"
                       type="password"
                       classes={classes}
+                      required
                     >
                       Current password
                     </Input>
@@ -171,6 +180,7 @@ const Profile = ({ history, classes }) => {
                       name="new-password"
                       type="password"
                       classes={classes}
+                      required
                     >
                       New password
                     </Input>
@@ -180,11 +190,16 @@ const Profile = ({ history, classes }) => {
                       </Typography>
                       <Button
                         onClick={() => setModalIsOpen(false)}
-                        color="primary"
+                        color="secondary"
                       >
                         Cancel
                       </Button>
-                      <Button type="submit" variant="contained" color="primary">
+                      <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.btnSmall}
+                      >
                         Save
                       </Button>
                     </DialogActions>
@@ -199,4 +214,8 @@ const Profile = ({ history, classes }) => {
   );
 };
 
-export default withRouter(Profile);
+export default withTracker(() => {
+  Meteor.subscribe("userProfiles");
+
+  return { currentUser: Meteor.user() };
+})(withRouter(Profile));

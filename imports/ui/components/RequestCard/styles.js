@@ -5,7 +5,7 @@ const styles = {
   },
   card: {
     minWidth: 275,
-    width: "600px",
+    width: "700px",
     height: "400px",
     overflowY: "scroll",
     background: "rgba(0,0,0,0.0)",
@@ -23,7 +23,8 @@ const styles = {
     padding: "10px"
   },
   btn: {
-    marginRight: "10px"
+    marginRight: "10px",
+    background: "#f79e02"
   },
   list: {
     background: "rgba(235,247,253,0.5)",

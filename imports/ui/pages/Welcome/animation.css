@@ -1,0 +1,19 @@
+.animation {
+  border-radius: 200px;
+  height: 400px;
+  width: 400px;
+
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-right: 231;
+  animation: App-logo-spin infinite 10s linear;
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotateX(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
