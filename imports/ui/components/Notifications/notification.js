@@ -1,20 +1,38 @@
 import React, { Component } from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import { withTracker } from "meteor/react-meteor-data";
+import PropTypes from "prop-types";
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
 
-const Notification = ({ classes }) => {
-  return (
-    <div className={classes.popup}>
-      <Card>
-        <CardContent>
-          <Typography>Request has been sent!</Typography>
-        </CardContent>
-      </Card>
+class Notification extends Component{
+  handleNotificationsClick = (userId) => {
+    
+  }
+  
+  render() {
+    const {currentUserId}=this.props;
+    return(
+    <div>
+      <IconButton onClick={() => this.handleNotificationsClick(currentUserId)} color="inherit">
+        <Badge badgeContent={0} color="secondary">
+          <NotificationsIcon />
+        </Badge>
+      </IconButton>
     </div>
   );
+};}
+
+Notification.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Notification);
+export default withTracker(() => {
+
+  return {
+    currentUser: Meteor.user(),
+    currentUserId: Meteor.userId()
+  };
+})(withStyles(styles)(Notification));

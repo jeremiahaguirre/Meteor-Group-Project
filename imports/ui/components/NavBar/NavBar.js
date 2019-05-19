@@ -5,12 +5,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { withStyles } from "@material-ui/core/styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import Notifications from "../Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import styles from "./styles";
 import MenuDrawer from "../MenuDrawer";
@@ -48,7 +47,6 @@ class NavBar extends Component {
     const { classes, currentUser,currentUserId, onChange } = this.props;
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-    const notifications = (currentUser && currentUser.profile.notifications) ? currentUser.profile.notifications.length : 0;
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -71,11 +69,7 @@ class NavBar extends Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton onClick={() => this.handleNotificationsClick(currentUserId)} color="inherit">
-            <Badge badgeContent={notifications} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Notifications/>
           <p>Notifications</p>
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
@@ -105,11 +99,7 @@ class NavBar extends Component {
             {onChange && <SearchBar onChange={onChange}/>}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton onClick={() => this.handleNotificationsClick(currentUserId)} color="inherit">
-                <Badge badgeContent={notifications} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              <Notifications/>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
