@@ -6,12 +6,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import { withStyles } from "@material-ui/core/styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import Notifications from "../Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import styles from "./styles";
 import MenuDrawer from "../MenuDrawer";
@@ -40,12 +39,14 @@ class NavBar extends Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
+
+
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, currentUser, onChange } = this.props;
+    const { classes, currentUser, currentUserId, onChange } = this.props;
+    const notifications = currentUser && currentUser.profile.notifications ? currentUser.profile.notifications : [];
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
     const renderMenu = (
       <Menu
         anchorEl={anchorEl}
@@ -72,11 +73,7 @@ class NavBar extends Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMobileMenuClose}>
-          <IconButton color="inherit">
-            <Badge badgeContent={11} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          <Notifications userId={currentUserId} notifications={notifications}/>
           <p>Notifications</p>
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
@@ -106,11 +103,7 @@ class NavBar extends Component {
             {onChange && <SearchBar onChange={onChange} />}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <IconButton color="inherit">
-                <Badge badgeContent={0} color="secondary">
-                  <NotificationsIcon />
-                </Badge>
-              </IconButton>
+              <Notifications userId={currentUserId} notifications={notifications}/>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"
