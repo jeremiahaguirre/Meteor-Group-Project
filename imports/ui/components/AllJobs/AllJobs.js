@@ -45,19 +45,19 @@ const ItemsList = props => {
                       secondary={
                         <React.Fragment>
                           <Typography component="span" color="textPrimary">
-                            Description: {job.description}{" "}
-                          </Typography>{" "}
+                            Description: {job.description}
+                          </Typography>
                           <Typography component="span" color="textPrimary">
-                            Date:{" "}
+                            Date:
                             {moment(job.createdAt)
                               .add(10, "days")
                               .calendar()}
-                          </Typography>{" "}
+                          </Typography>
                           <Typography component="span" color="textPrimary">
                             Requierments: {job.professions.join(", ")}
-                          </Typography>{" "}
+                          </Typography>
                           <Typography component="span" color="textPrimary">
-                            Location: {job.location}
+                            {/* Location: {job.location} */}
                           </Typography>
                         </React.Fragment>
                       }
@@ -83,6 +83,6 @@ export default withTracker(() => {
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: getJobPosts().filter((job)=>!job.taken)
+    jobs: getJobPosts().filter(job => !job.taken)
   };
 })(withStyles(styles)(ItemsList));
