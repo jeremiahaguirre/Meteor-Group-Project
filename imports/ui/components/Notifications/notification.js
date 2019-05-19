@@ -21,8 +21,8 @@ class Notification extends Component{
     const { notifications,userId  } = this.props;
     const applications = notifications.filter((not) => (not.jobOwnerId === userId) && (!not.status));
     const replies = notifications.filter((not) => (not.applicantId === userId) && (not.status));
-    if (applications) this.addToQue(applications.length,'application');
-    if (replies) this.addToQue(replies.length,'reply');
+    if (applications.length>0) this.addToQue(applications.length,'application');
+    if (replies.length>0) this.addToQue(replies.length,'reply');
     if (this.state.open) {
       this.setState({ open: false });
     } else {
@@ -30,8 +30,8 @@ class Notification extends Component{
     }
   };
 
-  addToQue=(number,messageType)=>{
-    const message=messageType==='reply'?`${number} new job replies recieved`:`${number} new applications recieved`
+  addToQue = (number, messageType) => {
+    const message=messageType==='reply'?`${number} new job replies recieved`:messageType==='application'?`${number} new applications recieved`:''
     this.queue.push({
       message,
       messageType,
@@ -60,7 +60,11 @@ class Notification extends Component{
   };
 
   handleRead=(messageType)=>{
-    console.log(messageType);
+    if (messageType === 'reply') {
+      Meteor.call('users.clearRepliesRecieved');
+    } else if (messageType==='application') {
+      Meteor.call('users.clearAppsRecieved');
+    }
     this.handleClose();
   }
   
