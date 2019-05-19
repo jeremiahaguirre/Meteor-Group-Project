@@ -38,13 +38,13 @@ class NavBar extends Component {
     this.setState({ mobileMoreAnchorEl: null });
   };
 
-  handleNotificationsClick = (_id) => {
-    Meteor.users.update({ _id },{$set:{'profile.notifications':[]}});
-  }
+
 
   render() {
     const { anchorEl, mobileMoreAnchorEl } = this.state;
-    const { classes, currentUser,currentUserId, onChange } = this.props;
+    const { classes, currentUser, currentUserId, onChange } = this.props;
+    const notifications = currentUser && currentUser.profile.notifications ? currentUser.profile.notifications : [];
+    console.log(notifications);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const renderMenu = (
@@ -69,7 +69,7 @@ class NavBar extends Component {
         onClose={this.handleMenuClose}
       >
         <MenuItem onClick={this.handleMobileMenuClose}>
-          <Notifications/>
+          <Notifications notifications={notifications}/>
           <p>Notifications</p>
         </MenuItem>
         <MenuItem onClick={this.handleProfileMenuOpen}>
@@ -99,7 +99,7 @@ class NavBar extends Component {
             {onChange && <SearchBar onChange={onChange}/>}
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-              <Notifications/>
+              <Notifications notifications={notifications}/>
               <IconButton
                 aria-owns={isMenuOpen ? "material-appbar" : undefined}
                 aria-haspopup="true"

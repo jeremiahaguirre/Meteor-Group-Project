@@ -1,23 +1,25 @@
 import React, { Component } from "react";
 import styles from "./styles";
 import { withStyles } from "@material-ui/core/styles";
-import { withTracker } from "meteor/react-meteor-data";
 import PropTypes from "prop-types";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 
 class Notification extends Component{
-  handleNotificationsClick = (userId) => {
-    
+  handleClick = (notifications) => {
+    console.log(notifications);
+  }
+  clearNotifications = (_id) => {
+    Meteor.users.update({ _id },{$set:{'profile.notifications':[]}});
   }
   
   render() {
-    const {currentUserId}=this.props;
+    const { notifications  } = this.props;
     return(
     <div>
-      <IconButton onClick={() => this.handleNotificationsClick(currentUserId)} color="inherit">
-        <Badge badgeContent={0} color="secondary">
+      <IconButton onClick={() => this.handleClick(notifications)} color="inherit">
+        <Badge badgeContent={notifications.length} color="secondary">
           <NotificationsIcon />
         </Badge>
       </IconButton>
@@ -27,12 +29,7 @@ class Notification extends Component{
 
 Notification.propTypes = {
   classes: PropTypes.object.isRequired,
+  notifications: PropTypes.array.isRequired;
 };
 
-export default withTracker(() => {
-
-  return {
-    currentUser: Meteor.user(),
-    currentUserId: Meteor.userId()
-  };
-})(withStyles(styles)(Notification));
+export default (withStyles(styles)(Notification));
