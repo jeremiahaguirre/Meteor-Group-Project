@@ -29,7 +29,7 @@ class Notification extends Component{
 
 Notification.propTypes = {
   classes: PropTypes.object.isRequired,
-  notifications: PropTypes.array.isRequired;
+  notifications: PropTypes.array.isRequired
 };
 
 export default (withStyles(styles)(Notification));
