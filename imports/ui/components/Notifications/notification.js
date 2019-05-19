@@ -8,7 +8,10 @@ import Badge from "@material-ui/core/Badge";
 
 class Notification extends Component{
   handleClick = (notifications) => {
-    console.log(notifications);
+    const { userId } = this.props;
+    const recievedApp =notifications.filter((not)=>(not.jobOwnerId===userId)&&(!not.status));
+    const recievedAppResult =notifications.filter((not)=>(not.applicantId===userId)&&(not.status));
+    
   }
 
   
@@ -27,7 +30,8 @@ class Notification extends Component{
 
 Notification.propTypes = {
   classes: PropTypes.object.isRequired,
-  notifications: PropTypes.array.isRequired
+  notifications: PropTypes.array.isRequired,
+  userId: PropTypes.string.isRequired
 };
 
 export default (withStyles(styles)(Notification));
