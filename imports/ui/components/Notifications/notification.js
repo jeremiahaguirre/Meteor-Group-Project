@@ -5,25 +5,104 @@ import PropTypes from "prop-types";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
 
 class Notification extends Component{
-  handleClick = (notifications) => {
-    const { userId } = this.props;
-    const recievedApp =notifications.filter((not)=>(not.jobOwnerId===userId)&&(!not.status));
-    const recievedAppResult =notifications.filter((not)=>(not.applicantId===userId)&&(not.status));
-    
+  queue = [];
+
+  state = {
+    open: false,
+    messageInfo: {},
+  };
+
+  handleClick = () => {
+    const { notifications,userId  } = this.props;
+    const applications = notifications.filter((not) => (not.jobOwnerId === userId) && (!not.status));
+    const replies = notifications.filter((not) => (not.applicantId === userId) && (not.status));
+    if (applications) this.addToQue(applications.length,'application');
+    if (replies) this.addToQue(replies.length,'reply');
+    if (this.state.open) {
+      this.setState({ open: false });
+    } else {
+      this.processQueue();
+    }
+  };
+
+  addToQue=(number,messageType)=>{
+    const message=messageType==='reply'?`${number} new job replies recieved`:`${number} new applications recieved`
+    this.queue.push({
+      message,
+      messageType,
+      key: new Date().getTime(),
+    });
   }
 
+  processQueue = () => {
+    if (this.queue.length > 0) {
+      this.setState({
+        messageInfo: this.queue.shift(),
+        open: true,
+      });
+    }
+  }
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ open: false });
+  };
+
+  handleExited = () => {
+    this.processQueue();
+  };
+
+  handleRead=(messageType)=>{
+    console.log(messageType);
+    this.handleClose();
+  }
   
   render() {
-    const { notifications  } = this.props;
+    const { notifications,classes  } = this.props;
+    const { messageInfo } = this.state;
     return(
     <div>
-      <IconButton onClick={() => this.handleClick(notifications)} color="inherit">
+      <IconButton onClick={() => this.handleClick()} color="inherit">
         <Badge badgeContent={notifications.length} color="secondary">
           <NotificationsIcon />
         </Badge>
       </IconButton>
+        <Snackbar
+          key={messageInfo.key}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
+          onExited={this.handleExited}
+          ContentProps={{
+            'aria-describedby': 'message-id',
+          }}
+          message={<span id="message-id">{messageInfo.message}</span>}
+          action={[
+            <Button key="undo" color="secondary" size="small" onClick={() => this.handleRead(messageInfo.messageType)}>
+              MARK AS READ
+            </Button>,
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              className={classes.close}
+              onClick={this.handleClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
     </div>
   );
 };}
