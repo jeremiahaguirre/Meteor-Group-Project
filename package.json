@@ -46,7 +46,9 @@
   "directories": {
     "test": "tests"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/react-geosuggest": "^2.7.8"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
