@@ -41,3 +41,7 @@ export function createJob(job) {
     job.professions
   );
 }
+
+export function deleteJob(job){
+  console.log(job);
+}
