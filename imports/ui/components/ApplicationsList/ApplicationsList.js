@@ -21,7 +21,7 @@ import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
 ApplicationsList = ({ classes, applications }) => {
-
+  
   return (
     <div>
       <Typography className={classes.h2} component="h2">
