@@ -43,7 +43,7 @@ const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    height: "100vh"
+    height: "100%"
   },
 
   dense: {
@@ -61,10 +61,6 @@ const styles = theme => ({
   },
   modalSize: {
     width: "80vw"
-  },
-  dialogPaper: {
-    minHeight: "80vh",
-    maxHeight: "80vh"
   }
 });
 
