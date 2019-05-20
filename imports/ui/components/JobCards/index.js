@@ -1,3 +1,3 @@
-import JobCardsContainer from "./JobCardsContainer";
+import JobCards from "./JobCards";
 
-export default JobCardsContainer;
+export default JobCards;
