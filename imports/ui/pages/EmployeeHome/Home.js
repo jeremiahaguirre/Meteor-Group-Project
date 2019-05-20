@@ -13,11 +13,9 @@ const Home = ({ currentUser, classes }) => {
   return (
     <div>
       <NavBar onChange={setJobsQuery} />
-      {currentUser && currentUser.profile.employer === true ? (
-        <div className={classes.top}>
-          <SubmitPost />
-        </div>
-      ) : null}
+      <div className={classes.top}>
+        <SubmitPost />
+      </div>
       <div className={classes.main}>
         <div className={classes.leftSide}>
           <JobsList filter={jobsQuery} />
