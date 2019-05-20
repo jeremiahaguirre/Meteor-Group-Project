@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SubmitPost from "../../components/SubmitPost";
-import ItemsList from "../../components/AllJobs";
-import RequestCard from "../../components/RequestCard";
+import JobsList from "../../components/AllJobs";
+import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -30,10 +30,10 @@ const Home = ({ classes }) => {
       </div>
       <div className={classes.main}>
         <div className={classes.leftSide}>
-          <ItemsList filter={jobsQuery} />
+          <JobsList filter={jobsQuery} />
         </div>
         <div className={classes.rightSide}>
-          <RequestCard />
+          <ApplicationsList />
         </div>
       </div>
     </div>
