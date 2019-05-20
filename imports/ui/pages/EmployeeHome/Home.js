@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SubmitPost from "../../components/SubmitPost";
 import JobsList from "../../components/JobsList";
-import ApplicationsList from "../../components/ApplicationsList";
+import SentApplications from "../../components/SentApplications";
 import { withTracker } from "meteor/react-meteor-data";
 import NavBar from "../../components/NavBar";
 import { withStyles } from "@material-ui/core/styles";
@@ -22,7 +22,7 @@ const Home = ({ currentUser, classes }) => {
         </div>
         {currentUser && currentUser.profile.employer === true ? (
           <div className={classes.rightSide}>
-            <ApplicationsList />
+            <SentApplications />
           </div>
         ) : null}
       </div>
