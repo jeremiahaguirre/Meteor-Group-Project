@@ -14,9 +14,23 @@ Meteor.methods({
       jobOwner,
       status: null,
       createdAt: new Date()
+    }, function (err, appId) {
+        if (!err) Meteor.users.update(
+          { _id: jobOwner },
+          {
+            $push: {
+              "profile.notifications":
+              {
+                applicationId: appId,
+                applicantId: this.userId,
+                jobOwnerId:jobOwner,
+                status:null}
+            }
+          });
     });
+    
   },
-  "applications.reply"(_id, status) {
+  "applications.reply"(_id,applicantId, status) {
     if (!this.userId) {
       throw new Meteor.Error("not-authorized");
     }
@@ -25,6 +39,18 @@ Meteor.methods({
         status
       }
     });
+    Meteor.users.update(
+      { _id: applicantId },
+      {
+        $push: {
+          "profile.notifications":
+          {
+            applicationId: _id,
+            applicantId,
+            jobOwnerId:this.userId,
+            status}
+        }
+      });
   }
 });
 
