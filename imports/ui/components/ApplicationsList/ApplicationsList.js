@@ -16,17 +16,16 @@ import Button from "@material-ui/core/Button";
 import {
   getApplications,
   replyToApplication
-} from "../../../ui/helpers/functions";
+} from "../../helpers/functions";
 import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
-function RequestCard(props) {
-  const { classes, applications } = props;
-
+ApplicationsList = ({ classes, applications }) => {
+  
   return (
     <div>
       <Typography className={classes.h2} component="h2">
-        Requests
+        Applications Recieved
       </Typography>
       <Card className={classes.card}>
         <List>
@@ -99,7 +98,7 @@ function RequestCard(props) {
   );
 }
 
-RequestCard.propTypes = {
+ApplicationsList.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -112,4 +111,4 @@ export default withTracker(() => {
     currentUserId: Meteor.userId(),
     applications: getApplications()
   };
-})(withStyles(styles)(RequestCard));
+})(withStyles(styles)(ApplicationsList));

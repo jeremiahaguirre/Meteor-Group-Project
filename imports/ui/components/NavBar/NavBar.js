@@ -13,7 +13,6 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import Notifications from "../Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import styles from "./styles";
-import MenuDrawer from "../MenuDrawer";
 import SearchBar from "../SearchBar";
 
 class NavBar extends Component {
@@ -89,9 +88,6 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar className={classes.menu} position="static">
           <Toolbar>
-            {currentUser && currentUser.profile.employer === true ? (
-              <MenuDrawer />
-            ) : null}
             <Typography
               className={classes.title}
               variant="h6"

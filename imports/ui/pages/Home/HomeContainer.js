@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import Employer from "./Employer";
+import Home from "./Home";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
-class EmployerContainer extends Component {
+class HomeContainer extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.main}>
-        <Employer />
+      <div>
+        <Home />
       </div>
     );
   }
 }
 
-export default withStyles(styles)(EmployerContainer);
+export default withStyles(styles)(HomeContainer);

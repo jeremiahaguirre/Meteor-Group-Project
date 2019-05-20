@@ -2,8 +2,7 @@ import React, { Fragment } from "react";
 import { Meteor } from "meteor/meteor";
 import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
-import Employer from "../pages/Employer";
-import EmployeePage from "../pages/Employee";
+import HomePage from "../pages/Home";
 import Profile from "../pages/Profile";
 import JobMap from "../pages/Map";
 import { withTracker } from "meteor/react-meteor-data";
@@ -17,31 +16,19 @@ const RouteContainer = posed.div({
 const Router = ({ currentUser, currentUserId }) => {
   return (
     <div>
-      {currentUserId === null ? (
+      {!currentUserId ? (
         <div>
           <Switch>
-            <Route exact path="/home" component={Welcome} />
-            <Redirect from="/*" to="/home" />
+            <Route exact path="/welcome" component={Welcome} />
+            <Redirect from="/*" to="/welcome" />
           </Switch>
         </div>
-      ) : currentUser && currentUser.profile.employer === false ? (
-        <Fragment>
-          <Switch>
-            <Route exact path="/map" component={JobMap} />
-            <Route exact path="/employee" component={EmployeePage} />
-            <Route path="/profile" component={Profile} />
-            <Redirect from="/*" to="/employee" />
-            <Route component={EmployeePage} />
-          </Switch>
-        </Fragment>
       ) : (
         <Fragment>
           <Switch>
-            <Route exact path="/map" component={JobMap} />
-            <Route exact path="/employer" component={Employer} />
-            <Route exact path="/employee" component={EmployeePage} />
+            <Route path="/home" component={HomePage} />
             <Route path="/profile" component={Profile} />
-            <Redirect from="/*" to="/employer" />
+            <Redirect from="/*" to="/Home" />
           </Switch>
         </Fragment>
       )}
