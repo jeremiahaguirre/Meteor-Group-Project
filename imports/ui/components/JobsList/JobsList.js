@@ -8,6 +8,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import styles from "./styles";
 import { getJobPosts,getApplications } from "../../helpers/functions";
 import JobItem from '../JobItem';
+import SubmitPost from "../../components/SubmitPost";
 
 const JobsList = ({ classes, filter, jobs }) => {
   return (
@@ -27,6 +28,7 @@ const JobsList = ({ classes, filter, jobs }) => {
               );
             })}
         </List>
+        <SubmitPost />
       </Card>
     </div>
   );
