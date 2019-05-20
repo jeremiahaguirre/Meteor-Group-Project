@@ -7,7 +7,7 @@ class HomeContainer extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.main}>
+      <div>
         <Home />
       </div>
     );
