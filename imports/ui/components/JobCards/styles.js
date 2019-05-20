@@ -3,47 +3,37 @@ const styles = {
     marginTop: "5px",
     marginbottom: "5px"
   },
-  aicon: {
-    display: "flex",
-    justifyContent: "flex-end"
+  card: {
+    minWidth: 275,
+    width: "700px",
+    height: "400px",
+    overflowY: "scroll",
+    background: "rgba(0,0,0,0.0)",
+    boxShadow: "none",
+    borderRadius: "10px"
   },
-
-  alignCard: {
-    display: "flex",
-    alignItems: "center"
+  h2: {
+    color: "Black",
+    fontSize: "32px",
+    fontWeight: "400",
+    textAlign: "center",
+    textShadow: "5px 5px 11px rgba(68,68,68,0.94)"
+  },
+  buttons: {
+    padding: "10px"
+  },
+  btn: {
+    marginRight: "10px",
+    background: "#f79e02"
   },
   list: {
-    width: "90%",
-    margin: "auto",
     background: "rgba(235,247,253,0.5)",
     borderRadius: "10px"
   },
-  button: {
-    background: "#f79e02",
-    color: "black",
-    padding: "6px 16px",
-    fontSize: "0.875rem",
-    marginRight: "20px",
-    borderRadius: "15px"
-  },
-  cardDescription: {
+  animation: {
+    padding: 0,
     width: "90%",
-    margin: "auto",
-    background: "rgba(235,247,253,0.5)",
-    borderRadius: "10px"
-  },
-  infoCard: {
-    width: "90%",
-    margin: "auto",
-    background: "rgba(235,247,253,0.5)",
-    borderRadius: "10px",
-    paddingLeft: "16px",
-    paddingRight: "16px",
-    paddingTop: "8px"
-  },
-  postInfo: {
-    display: "flex"
+    margin: "auto"
   }
 };
-
 export default styles;

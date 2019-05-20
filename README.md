@@ -41,7 +41,7 @@ meteor
 
 ## Authors
 
-- Name: Jeremiah, Saveen, Emre, Gavin
+- Name: Jeremiah, Saveen, Emre, Gavin, William
 
 ## Am I missing some essential feature?
 
