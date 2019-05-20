@@ -10,12 +10,16 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import "react-dates/lib/css/_datepicker.css";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 import Drawer from "@material-ui/core/Drawer";
-import { getJobPosts, getApplications } from "../../../api/functions";
+import { getJobPosts, getApplications } from "../../../ui/helpers/functions";
+
 
 class SimpleModal extends React.Component {
   state = {
-    open: false,
+    open: false
   };
 
   handleOpen = () => {
@@ -48,25 +52,21 @@ class SimpleModal extends React.Component {
     return (
       <div>
         <NavBar />
-        <Typography gutterBottom>List of Jobs:</Typography>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={!this.state.open}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          <List dense className={classes.root}>
-            {jobs.map(job => (
-              <ListItem key={job._id}>
-                <JobCards status={this.findStatus(job)} job={job} />
-                <ListItemSecondaryAction />
-              </ListItem>
-            ))}
-          </List>
-        </Drawer>
+
+        <div className={classes.container}>
+          <Typography className={classes.h1}>List of Job Posts:</Typography>
+
+          <Card className={classes.card}>
+            <List dense className={classes.root}>
+              {jobs.map(job => (
+                <ListItem key={job._id}>
+                  <JobCards status={this.findStatus(job)} job={job} />
+                  <ListItemSecondaryAction />
+                </ListItem>
+              ))}
+            </List>
+          </Card>
+        </div>
       </div>
     );
   }

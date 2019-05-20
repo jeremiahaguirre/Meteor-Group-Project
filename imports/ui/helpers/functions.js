@@ -1,5 +1,5 @@
-import { Jobs } from "../api/jobs";
-import { Applications } from "../api/applications";
+import { Jobs } from "../../api/jobs";
+import { Applications } from "../../api/applications";
 
 export function getJobPosts() {
   const jobs = Jobs.find({}).map(job => {
@@ -24,7 +24,7 @@ export function applyToJob(jobid, ownerid) {
 }
 
 export function replyToApplication(app, reply) {
-  Meteor.call("applications.reply", app._id, reply);
+  Meteor.call("applications.reply", app._id,app.applicant._id, reply);
   if (reply) {
     const jobId = app.job._id;
     Meteor.call("jobs.close", jobId);

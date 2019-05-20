@@ -108,16 +108,16 @@ class SubmitPost extends React.Component {
               maxWidth="lg"
               fullWidth={true}
             >
-              <DialogTitle id="alert-dialog-title">
-                {"New Shift Post"}
-              </DialogTitle>
               <form
-                className={classes.container}
+                className={classes.Form}
                 noValidate
                 onSubmit={handleSubmit}
                 autoComplete="off"
               >
-                <DialogContent>
+                <Typography className={classes.header} component="h2">
+                  New Shift Post
+                </Typography>
+                <DialogContent className={classes.back}>
                   <Field
                     name="title"
                     component="input"
@@ -205,10 +205,19 @@ class SubmitPost extends React.Component {
                     </Select>
                   </FormControl>
                   <DialogActions>
-                    <Button onClick={() => this.handleClose()} color="primary">
+                    <Button
+                      className={classes.btn}
+                      onClick={() => this.handleClose()}
+                      color="primary"
+                    >
                       Cancel
                     </Button>
-                    <Button type="submit" color="primary" autoFocus>
+                    <Button
+                      className={classes.btn}
+                      type="submit"
+                      color="primary"
+                      autoFocus
+                    >
                       Submit
                     </Button>
                   </DialogActions>

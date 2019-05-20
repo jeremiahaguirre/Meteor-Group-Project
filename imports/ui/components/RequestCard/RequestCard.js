@@ -13,7 +13,10 @@ import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
-import { getApplications, replyToApplication } from "../../../api/functions";
+import {
+  getApplications,
+  replyToApplication
+} from "../../../ui/helpers/functions";
 import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
@@ -32,13 +35,12 @@ function RequestCard(props) {
             return (
               <QueueAnim
                 key={job._id}
+                className={classes.animation}
                 component="ul"
                 type={["right", "left"]}
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <Divider />
-
                   <ListItem className={classes.list} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
@@ -70,8 +72,6 @@ function RequestCard(props) {
                       }
                     />
                   </ListItem>
-
-                  <Divider />
                   <div className={classes.buttons}>
                     <Button
                       variant="contained"
