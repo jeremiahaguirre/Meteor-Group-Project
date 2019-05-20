@@ -26,10 +26,6 @@ const styles = {
     marginRight: "10px",
     background: "#f79e02"
   },
-  list: {
-    background: "rgba(235,247,253,0.5)",
-    borderRadius: "10px"
-  },
   animation: {
     padding: 0,
     width: "90%",
