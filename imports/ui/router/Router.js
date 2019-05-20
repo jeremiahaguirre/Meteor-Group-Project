@@ -2,7 +2,8 @@ import React, { Fragment } from "react";
 import { Meteor } from "meteor/meteor";
 import { Redirect, Route, Switch } from "react-router";
 import Welcome from "../pages/Welcome";
-import HomePage from "../pages/Home";
+import Employer from "../pages/EmployerHome";
+import Employee from "../pages/EmployeeHome";
 import Profile from "../pages/Profile";
 import { withTracker } from "meteor/react-meteor-data";
 import posed, { PoseGroup } from "react-pose";
@@ -13,6 +14,7 @@ const RouteContainer = posed.div({
 });
 
 const Router = ({ currentUser, currentUserId }) => {
+  const employer = currentUser&&(currentUser.profile.employer === true);
   return (
     <div>
       {!currentUserId ? (
@@ -25,7 +27,7 @@ const Router = ({ currentUser, currentUserId }) => {
       ) : (
         <Fragment>
           <Switch>
-            <Route path="/home" component={HomePage} />
+            <Route path="/home" component={employer?Employer:Employee} />
             <Route path="/profile" component={Profile} />
             <Redirect from="/*" to="/Home" />
           </Switch>
