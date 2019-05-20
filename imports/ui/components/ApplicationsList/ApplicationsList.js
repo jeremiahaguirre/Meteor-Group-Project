@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
 import Card from "@material-ui/core/Card";
+import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -12,77 +12,103 @@ import { withTracker } from "meteor/react-meteor-data";
 import Divider from "@material-ui/core/Divider";
 import Gravatar from "react-gravatar";
 import moment from "moment";
+import Button from "@material-ui/core/Button";
+import {
+  getApplications,
+  replyToApplication
+} from "../../helpers/functions";
+import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
-import { getJobPosts } from "../../../ui/helpers/functions";
 
-const ItemsList = props => {
-  const { classes, filter, jobs } = props;
+ApplicationsList = ({ classes, applications }) => {
+
   return (
     <div>
       <Typography className={classes.h2} component="h2">
-        All Jobs
+        Applications Recieved
       </Typography>
       <Card className={classes.card}>
         <List>
-          {jobs
-            .filter(j =>
-              filter ? new RegExp(filter, "i").test(j.location) : 1
-            )
-            .map(job => {
-              return (
+          {applications.map(application => {
+            const { job, jobOwner } = application;
+            return (
+              <QueueAnim
+                key={job._id}
+                className={classes.animation}
+                component="ul"
+                type={["right", "left"]}
+                leaveReverse
+              >
                 <div className={classes.root} key={job._id}>
                   <ListItem className={classes.list} alignItems="flex-start">
                     <ListItemAvatar>
                       <Avatar>
                         <Gravatar
-                          email={job.owner ? job.owner.emails[0].address : ""}
+                          email={jobOwner && jobOwner.emails[0].address}
                         />
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      className={classes.h1}
                       primary={job.title}
                       secondary={
                         <React.Fragment>
                           <Typography component="span" color="textPrimary">
                             Description: {job.description}{" "}
-                          </Typography>{" "}
+                          </Typography>
                           <Typography component="span" color="textPrimary">
                             Date:{" "}
-                            {moment(job.createdAt)
+                            {moment(application.job.createdAt)
                               .add(10, "days")
                               .calendar()}
-                          </Typography>{" "}
+                          </Typography>
                           <Typography component="span" color="textPrimary">
-                            Requierments: {job.professions.join(", ")}
-                          </Typography>{" "}
+                            Requierments: {job.professions.join(", ")}{" "}
+                          </Typography>
                           <Typography component="span" color="textPrimary">
-                            Location: {job.location}
+                            Location: {job.location}{" "}
                           </Typography>
                         </React.Fragment>
                       }
                     />
                   </ListItem>
+                  <div className={classes.buttons}>
+                    <Button
+                      variant="contained"
+                      className={classes.btn}
+                      onClick={() => replyToApplication(application, true)}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      variant="contained"
+                      className={classes.btn}
+                      onClick={() => replyToApplication(application, false)}
+                    >
+                      Decline
+                    </Button>
+                  </div>
+                  <Divider />
                 </div>
-              );
-            })}
+              </QueueAnim>
+            );
+          })}
         </List>
       </Card>
     </div>
   );
-};
+}
 
-ItemsList.propTypes = {
-  classes: PropTypes.object.isRequired,
-  filter: PropTypes.string.isRequired
+ApplicationsList.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("openJobs");
+  Meteor.subscribe("postedJobs");
   Meteor.subscribe("userProfiles");
+  Meteor.subscribe("recievedApplications");
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: getJobPosts()
+    applications: getApplications()
   };
-})(withStyles(styles)(ItemsList));
+})(withStyles(styles)(ApplicationsList));

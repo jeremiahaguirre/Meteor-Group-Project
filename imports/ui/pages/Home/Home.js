@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import SubmitPost from "../../components/SubmitPost";
-import ItemsList from "../../components/AllJobs";
-import RequestCard from "../../components/RequestCard";
+import JobsList from "../../components/JobsList";
+import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";
 import { withStyles } from "@material-ui/core/styles";
+import styles from './styles'
 
-const styles = {
-  main: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "90%",
-    margin: "auto"
-  },
-  top: {
-    width: "100%",
-    padding: "30px",
-    textAlign: "center"
-  }
-};
-
-const Employer = ({ classes }) => {
+const Home = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");
 
   return (
@@ -30,14 +17,14 @@ const Employer = ({ classes }) => {
       </div>
       <div className={classes.main}>
         <div className={classes.leftSide}>
-          <ItemsList filter={jobsQuery} />
+          <JobsList filter={jobsQuery} />
         </div>
         <div className={classes.rightSide}>
-          <RequestCard />
+          <ApplicationsList />
         </div>
       </div>
     </div>
   );
 };
 
-export default withStyles(styles)(Employer);
+export default withStyles(styles)(Home);
