@@ -4,20 +4,7 @@ import JobsList from "../../components/AllJobs";
 import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";
 import { withStyles } from "@material-ui/core/styles";
-
-const styles = {
-  main: {
-    display: "flex",
-    justifyContent: "space-between",
-    width: "90%",
-    margin: "auto"
-  },
-  top: {
-    width: "100%",
-    padding: "30px",
-    textAlign: "center"
-  }
-};
+import styles from './styles'
 
 const Home = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");

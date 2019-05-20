@@ -1,8 +1,14 @@
 const styles = {
   main: {
-    background: "rgb(231,234,237)",
-    height: "100vh",
-    margin: 0
+    display: "flex",
+    justifyContent: "space-between",
+    width: "90%",
+    margin: "auto"
+  },
+  top: {
+    width: "100%",
+    padding: "30px",
+    textAlign: "center"
   }
 };
 
