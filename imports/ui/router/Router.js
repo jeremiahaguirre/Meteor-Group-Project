@@ -5,6 +5,7 @@ import Welcome from "../pages/Welcome";
 import Employer from "../pages/EmployerHome";
 import Employee from "../pages/EmployeeHome";
 import Profile from "../pages/Profile";
+import JobMap from "../pages/Map";
 import { withTracker } from "meteor/react-meteor-data";
 import posed, { PoseGroup } from "react-pose";
 
@@ -14,12 +15,13 @@ const RouteContainer = posed.div({
 });
 
 const Router = ({ currentUser, currentUserId }) => {
-  const employer = currentUser&&(currentUser.profile.employer === true);
+  const employer = currentUser && currentUser.profile.employer === true;
   return (
     <div>
       {!currentUserId ? (
         <div>
           <Switch>
+            <Route exact path="/map" component={JobMap} />
             <Route exact path="/welcome" component={Welcome} />
             <Redirect from="/*" to="/welcome" />
           </Switch>
@@ -27,7 +29,8 @@ const Router = ({ currentUser, currentUserId }) => {
       ) : (
         <Fragment>
           <Switch>
-            <Route path="/home" component={employer?Employer:Employee} />
+            <Route exact path="/map" component={JobMap} />
+            <Route path="/home" component={HomePage} />
             <Route path="/profile" component={Profile} />
             <Redirect from="/*" to="/Home" />
           </Switch>
@@ -40,6 +43,6 @@ const Router = ({ currentUser, currentUserId }) => {
 export default withTracker(() => {
   return {
     currentUser: Meteor.user(),
-    currentUserId: Meteor.userId(),
+    currentUserId: Meteor.userId()
   };
 })(Router);

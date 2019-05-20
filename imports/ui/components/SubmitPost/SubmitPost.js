@@ -17,8 +17,10 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
-import { createJob } from "../../../ui/helpers/functions";
-import { TextField, Typography } from "@material-ui/core";
+// import { createJob } from "../../../api/functions";
+import { TextField } from "@material-ui/core";
+import LocationSuggest from "../LocationSuggest/";
+import Geosuggest from "react-geosuggest";
 
 const professions = [
   "React",
@@ -48,9 +50,12 @@ class SubmitPost extends React.Component {
       open: false,
       date: null,
       profession: [],
-      location: ""
+      location: {}
     };
   }
+  handleLocationChange = location => {
+    this.setState({ location });
+  };
 
   handleMultiChange = event => {
     this.setState({ profession: event.target.value });
@@ -69,12 +74,13 @@ class SubmitPost extends React.Component {
   };
 
   handleSubmit = values => {
-    createJob({
-      ...values,
-      location: this.state.location,
-      time: this.state.date._d,
-      professions: this.state.profession
-    });
+    console.log(values);
+    // createJob({
+    //   ...values,
+    //   location: this.state.location,
+    //   time: this.state.date._d,
+    //   professions: this.state.profession
+    // });
     this.handleClose();
   };
 
@@ -98,8 +104,8 @@ class SubmitPost extends React.Component {
               onClose={this.handleClose}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
-              className="modalSize"
-              fullScreen={true}
+              classes={{ paper: classes.dialogPaper }}
+              maxWidth="lg"
               fullWidth={true}
             >
               <form
@@ -157,22 +163,9 @@ class SubmitPost extends React.Component {
                     )}
                   </Field>
 
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="location-simple">Location</InputLabel>
-                    <Select
-                      value={this.state.location}
-                      onChange={this.handleChange}
-                      inputProps={{
-                        name: "location",
-                        id: "location-simple"
-                      }}
-                    >
-                      <MenuItem value="Vancouver">Vancouver</MenuItem>
-                      <MenuItem value="Burnaby">Burnaby</MenuItem>
-                      <MenuItem value="Richmond">Richmond</MenuItem>
-                      <MenuItem value="Surrey">Surrey</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <LocationSuggest
+                    handleLocationChange={this.handleLocationChange}
+                  />
 
                   <SingleDatePicker
                     date={this.state.date} // momentPropTypes.momentObj or null
