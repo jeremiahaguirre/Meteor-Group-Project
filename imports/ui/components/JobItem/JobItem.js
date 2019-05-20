@@ -9,7 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
-
+import Button from '@material-ui/core/Button';
+import {deleteJob} from '../../helpers/functions';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 const JobItem = ({ classes, job }) => {
@@ -46,6 +48,9 @@ const JobItem = ({ classes, job }) => {
                 </React.Fragment>
                 }
                 />
+                <Button variant="contained" color="primary" onClick={(job) => { deleteJob(job)}}>
+                    <DeleteIcon />
+                </Button>
         </ListItem>
     </div>
     );}
