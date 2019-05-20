@@ -19,6 +19,7 @@ const Router = ({ currentUser, currentUserId }) => {
       {!currentUserId ? (
         <div>
           <Switch>
+            <Route exact path="/map" component={JobMap} />
             <Route exact path="/welcome" component={Welcome} />
             <Redirect from="/*" to="/welcome" />
           </Switch>
@@ -26,6 +27,7 @@ const Router = ({ currentUser, currentUserId }) => {
       ) : (
         <Fragment>
           <Switch>
+            <Route exact path="/map" component={JobMap} />
             <Route path="/home" component={HomePage} />
             <Route path="/profile" component={Profile} />
             <Redirect from="/*" to="/Home" />
