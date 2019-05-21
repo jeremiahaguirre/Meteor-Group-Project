@@ -52,13 +52,6 @@ const styles = theme => ({
   menu: {
     width: 200
   },
-  btn: {
-    width: "190px",
-    padding: "10px",
-    color: "black",
-    background: "#f79e02",
-    borderRadius: "20px"
-  },
   modalSize: {
     width: "80vw"
   }

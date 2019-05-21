@@ -19,6 +19,7 @@ import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import { createJob } from "../../../ui/helpers/functions";
 import { TextField, Typography } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 
 const professions = [
   "React",
@@ -86,9 +87,8 @@ class SubmitPost extends React.Component {
           variant="outlined"
           color="primary"
           onClick={() => this.handleClickOpen()}
-          className={classes.btn}
         >
-          New Post
+          <AddIcon/>
         </Button>
         <Form
           onSubmit={this.handleSubmit}

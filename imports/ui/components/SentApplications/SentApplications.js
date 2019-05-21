@@ -10,17 +10,17 @@ import ApplicationBox from '../ApplicationBox';
 import Button from "@material-ui/core/Button";
 import {
   getApplications,
-  replyToApplication
+  removeApplication
 } from "../../helpers/functions";
 import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
-ApplicationsList = ({ classes, applications }) => {
+SentApplicationsList = ({ classes, applications }) => {
   
   return (
     <div>
       <Typography className={classes.h2} component="h2">
-        Applications Recieved
+        Applications Sent
       </Typography>
       <Card className={classes.card}>
         <List>
@@ -36,21 +36,8 @@ ApplicationsList = ({ classes, applications }) => {
               >
                 <div className={classes.root} key={job._id}>
                   <ApplicationBox job={job}/>
-                  <div className={classes.buttons}>
-                    <Button
-                      variant="contained"
-                      className={classes.btn}
-                      onClick={() => replyToApplication(application, true)}
-                    >
-                      Accept
-                    </Button>
-                    <Button
-                      variant="contained"
-                      className={classes.btn}
-                      onClick={() => replyToApplication(application, false)}
-                    >
-                      Decline
-                    </Button>
+                  <div>
+                    Status: {application.status===true?'Accepted':application.status===false?'Rejected':'Pending'} 
                   </div>
                   <Divider />
                 </div>
@@ -63,17 +50,17 @@ ApplicationsList = ({ classes, applications }) => {
   );
 }
 
-ApplicationsList.propTypes = {
+SentApplicationsList.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("postedJobs");
+  Meteor.subscribe("allJobs");
   Meteor.subscribe("userProfiles");
-  Meteor.subscribe("recievedApplications");
+  Meteor.subscribe("sentApplications");
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
     applications: getApplications()
   };
-})(withStyles(styles)(ApplicationsList));
+})(withStyles(styles)(SentApplicationsList));
