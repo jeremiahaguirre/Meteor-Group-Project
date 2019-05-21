@@ -4,13 +4,9 @@ const styles = {
     marginTop: "5px",
     marginbottom: "5px"
   },
-  main: {
-    paddingTop: 70,
-    paddingLeft: 76
-  },
   card: {
     minWidth: 275,
-    width: "auto",
+    width: "100%",
     height: "400px",
     overflowY: "scroll",
     background: "rgba(0,0,0,0.0)",
@@ -19,7 +15,7 @@ const styles = {
   },
   h2: {
     color: "Black",
-    fontSize: "24px",
+    fontSize: "32px",
     fontWeight: "400",
     textAlign: "left"
   },

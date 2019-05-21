@@ -3,9 +3,16 @@ const styles = {
     marginTop: "5px",
     marginbottom: "5px"
   },
+  status: {
+    background: "rgba(235,247,253,0.5)",
+    padding: "15px",
+    borderBottomLeftRadius: "10px",
+    borderBottomRightRadius: "10px",
+    boxShadow: "none"
+  },
   card: {
     minWidth: 275,
-    width: "700px",
+    width: "100%",
     height: "400px",
     overflowY: "scroll",
     background: "rgba(0,0,0,0.0)",
@@ -16,8 +23,7 @@ const styles = {
     color: "Black",
     fontSize: "32px",
     fontWeight: "400",
-    textAlign: "center",
-    textShadow: "5px 5px 11px rgba(68,68,68,0.94)"
+    textAlign: "center"
   },
   buttons: {
     padding: "10px"

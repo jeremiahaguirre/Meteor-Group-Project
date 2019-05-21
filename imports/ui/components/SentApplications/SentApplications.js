@@ -14,7 +14,7 @@ import styles from "./styles";
 
 SentApplicationsList = ({ classes, applications }) => {
   return (
-    <div>
+    <div className={classes.main}>
       <Typography className={classes.h2} component="h2">
         Requests
       </Typography>
@@ -32,8 +32,8 @@ SentApplicationsList = ({ classes, applications }) => {
               >
                 <div className={classes.root} key={job._id}>
                   <ApplicationBox job={job} jobOwner={jobOwner} />
-                  <div>
-                    Status:{" "}
+                  <div className={classes.status}>
+                    This Job Is{" "}
                     {application.status === true
                       ? "Accepted"
                       : application.status === false

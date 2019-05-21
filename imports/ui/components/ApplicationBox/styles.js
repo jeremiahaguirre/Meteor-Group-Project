@@ -1,10 +1,10 @@
 const styles = {
   list: {
     background: "rgba(235,247,253,0.5)",
-    borderRadius: "10px"
-  },
-
+    borderTopLeftRadius: "10px",
+    borderTopRightRadius: "10px",
+    boxShadow: "none"
+  }
 };
 
 export default styles;
-  
