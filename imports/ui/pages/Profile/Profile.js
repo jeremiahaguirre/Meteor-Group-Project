@@ -13,10 +13,19 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
+import Link from "@material-ui/core/Link";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
-import NavBar from "../../components/NavBar";
 import Input from "./Input";
+
+const styles = {
+  menu: {
+    position: "static",
+    width: "unset",
+    background: "rgba(255,255,255,0.1)",
+    boxShadow: "none"
+  }
+};
 
 const Profile = ({ currentUser, history, classes }) => {
   const [passError, setPassError] = useState();
@@ -68,10 +77,13 @@ const Profile = ({ currentUser, history, classes }) => {
 
   return (
     <div className={classes.bg}>
-      <header>
-        <NavBar />
-      </header>
-
+      <Button
+        onClick={() => {
+          <Link to="/employe" />;
+        }}
+      >
+        Back
+      </Button>
       <main>
         <Paper className={classes.root} elevation={1}>
           <Typography

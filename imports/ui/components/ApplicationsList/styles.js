@@ -7,7 +7,7 @@ const styles = {
   card: {
     minWidth: 275,
     width: "100%",
-    height: "400px",
+    height: "90vh",
     overflowY: "scroll",
     background: "rgba(0,0,0,0.0)",
     boxShadow: "none",
@@ -17,7 +17,7 @@ const styles = {
     color: "Black",
     fontSize: "32px",
     fontWeight: "400",
-    textAlign: "left"
+    textAlign: "center"
   },
   buttons: {
     padding: "10px"

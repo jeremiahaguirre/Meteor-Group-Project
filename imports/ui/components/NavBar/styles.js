@@ -3,6 +3,7 @@ const styles = theme => ({
     width: "100%"
   },
   menu: {
+    color: "white",
     background: "rgba(255,255,255,0.1)",
     boxShadow: "none",
     width: "76%",
