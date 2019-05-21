@@ -19,8 +19,8 @@ export function getApplications() {
   return applications;
 }
 
-export function applyToJob(jobid, ownerid) {
-  Meteor.call("applications.apply", jobid, ownerid);
+export function applyToJob(jobId, jobOwnerId) {
+  Meteor.call("applications.apply", jobId, jobOwnerId);
 }
 
 export function replyToApplication(app, reply) {
