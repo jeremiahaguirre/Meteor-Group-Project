@@ -20,7 +20,7 @@ class Notification extends Component{
   handleClick = () => {
     const { notifications,userId  } = this.props;
     const applications = notifications.filter((not) => (not.jobOwnerId === userId) && (!not.status));
-    const replies = notifications.filter((not) => (not.applicantId === userId) && (not.status));
+    const replies = notifications.filter((not) => (not.applicantId === userId) && (not.status!==null));
     if (applications.length>0) this.addToQue(applications.length,'application');
     if (replies.length>0) this.addToQue(replies.length,'reply');
     if (this.state.open) {
