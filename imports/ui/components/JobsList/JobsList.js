@@ -10,7 +10,7 @@ import styles from "./styles";
 import { getJobPosts, getApplications } from "../../helpers/functions";
 import JobItem from "../JobItem";
 
-const JobsList = ({ classes, filter, jobs }) => {
+const JobsList = ({ classes, filter, jobs,applications }) => {
   return (
     <div className={classes.main}>
       <Typography className={classes.h2} component="h2">
@@ -24,7 +24,7 @@ const JobsList = ({ classes, filter, jobs }) => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
-              return <JobItem key={job._id} job={job} />;
+              return <JobItem key={job._id} job={job} applications={applications.filter((app)=>app.jobId===job._id)} />;
             })}
         </List>
       </Card>
@@ -40,7 +40,7 @@ JobsList.propTypes = {
 export default withTracker(() => {
   Meteor.subscribe("openJobs");
   Meteor.subscribe("userProfiles");
-  Meteor.subscribe("sentApplications");
+  Meteor.subscribe("recievedApplications");
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),

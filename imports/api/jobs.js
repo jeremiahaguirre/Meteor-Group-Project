@@ -26,6 +26,12 @@ Meteor.methods({
       throw new Meteor.Error("not-authorized");
     }
     Jobs.update({ _id: _id, taken: false }, { $set: { taken: true } });
+  },
+  "jobs.delete"(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error("not-authorized");
+    }
+    Jobs.remove({ _id: _id });
   }
 });
 

@@ -43,10 +43,13 @@ export function createJob(job) {
   );
 }
 
-export function deleteJob(job){
-  console.log(job);
+export function deleteJob(job,applications) {
+  Meteor.call("jobs.delete", job._id);
+  applications.forEach(application => { 
+    removeApplication(application)
+  });
 }
 
 export function removeApplication(application){
-  console.log(application);
+  Meteor.call("applications.delete", application._id);
 }
