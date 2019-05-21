@@ -54,16 +54,18 @@ class SubmitPost extends React.Component {
   }
 
   componentDidMount(){
-    // generate random long/lat offsets for demo
-    const offSet = () => ((Math.random()-0.5) * 0.00300);
+
       if (!navigator.geolocation) {
         console.error("Geolocation is not supported by this browser");
       } else {
         navigator.geolocation.getCurrentPosition(({ coords }) =>
-          this.setState({ location: { ...coords, latitude: coords.latitude + offSet(), longitude: coords.longitude + offSet() } })
+          this.setState({ location: coords })
         );
       }
   }
+
+  // generate random long/lat offsets for demo
+  offSet = () => ((Math.random()-0.5) * 0.05000);
 
   handleMultiChange = event => {
     this.setState({ profession: event.target.value });
@@ -86,7 +88,7 @@ class SubmitPost extends React.Component {
    
     createJob({
       ...values,
-      location: this.state.location,
+      location: {...this.state.location,latitude: this.state.location.latitude + this.offSet(), longitude: this.state.location.longitude + this.offSet()},
       time: this.state.date._d,
       professions: this.state.profession
     });
