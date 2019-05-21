@@ -10,12 +10,12 @@ import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
 
-const ApplicationBox = ({ classes, job, jobOwner }) => {
+const ApplicationBox = ({ classes, job, user }) => {
   return (
     <ListItem className={classes.list} alignItems="flex-start">
       <ListItemAvatar>
         <Avatar>
-          <Gravatar email={jobOwner && jobOwner.emails[0].address} />
+          <Gravatar email={user && user.emails[0].address} />
         </Avatar>
       </ListItemAvatar>
       <ListItemText
