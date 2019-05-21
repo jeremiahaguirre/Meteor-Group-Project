@@ -35,7 +35,7 @@ SentApplicationsList = ({ classes, applications }) => {
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <ApplicationBox job={job}/>
+                  <ApplicationBox job={job} jobOwner={jobOwner}/>
                   <div>
                     Status: {application.status===true?'Accepted':application.status===false?'Rejected':'Pending'} 
                   </div>
