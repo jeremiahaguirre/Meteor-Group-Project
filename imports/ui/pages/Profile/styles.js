@@ -64,6 +64,10 @@ const styles = theme => ({
   },
   btnSmall: {
     background: "#f79e02"
+  },
+  link: {
+    color: "white",
+    textDecoration: "none"
   }
 });
 

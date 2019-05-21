@@ -34,9 +34,15 @@ const styles = {
     background: "rgb(233,65,85)"
   },
   animation: {
+    position: "relative",
     padding: 0,
     width: "90%",
     margin: "auto"
+  },
+  button: {
+    position: "absolute",
+    bottom: "10px",
+    right: "10px"
   }
 };
 

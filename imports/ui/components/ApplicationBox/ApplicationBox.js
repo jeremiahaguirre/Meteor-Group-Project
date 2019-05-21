@@ -10,7 +10,7 @@ import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
 
-const ApplicationBox = ({ classes, job,jobOwner }) => {
+const ApplicationBox = ({ classes, job, jobOwner }) => {
   return (
     <ListItem className={classes.list} alignItems="flex-start">
       <ListItemAvatar>
@@ -32,7 +32,7 @@ const ApplicationBox = ({ classes, job,jobOwner }) => {
                 .calendar()}
             </Typography>
             <Typography component="span" color="textPrimary">
-              Requierments: {job.professions.join(", ")}{" "}
+              Skills: {job.professions.join(", ")}{" "}
             </Typography>
           </React.Fragment>
         }

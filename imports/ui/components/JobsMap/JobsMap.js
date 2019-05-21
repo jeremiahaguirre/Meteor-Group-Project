@@ -8,8 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Map as GMap, Marker, GoogleApiWrapper } from "google-maps-react";
 import { withTracker } from "meteor/react-meteor-data";
 import { applyToJob } from "../../../ui/helpers/functions";
-import { getUnappliedJobs} from '../../helpers/functions';
-
+import { getUnappliedJobs } from "../../helpers/functions";
 
 const RequestModal = ({ open, onClose, children }) => (
   <Dialog
@@ -23,7 +22,6 @@ const RequestModal = ({ open, onClose, children }) => (
 );
 
 const MapContainer = ({ google, jobs, currentUserId }) => {
-  
   const [coords, setCoords] = useState();
   const [activeMarker, setActiveMarker] = useState();
   useEffect(() => {
@@ -51,27 +49,28 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
       zoom={14}
       google={google}
     >
-    <Marker
+      <Marker
         key={0}
         position={{
-          lat: coords.latitude ,
-          lng: coords.longitude 
+          lat: coords.latitude,
+          lng: coords.longitude
         }}
       />
       {jobs &&
         jobs.map(
-          ({ title, description, time, _id ,location,owner}) => (
+          ({ title, description, time, _id, location, owner, professions }) => (
             <Marker
               key={_id}
               title={title}
               name={description}
               date={time}
               owner={owner}
+              professions={professions}
               id={_id}
               onClick={(props, marker, e) => setActiveMarker(marker)}
               position={{
-                lat: location.latitude ,
-                lng: location.longitude 
+                lat: location.latitude,
+                lng: location.longitude
               }}
             />
           )
@@ -86,10 +85,13 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {activeMarker.name}
+              Description: {activeMarker.name}
             </DialogContentText>
             <DialogContentText id="alert-dialog-date">
-              {activeMarker.date}
+              Date: {activeMarker.date}
+            </DialogContentText>
+            <DialogContentText id="alert-dialog-date">
+              Skills: {activeMarker.professions.join(", ")}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -121,7 +123,7 @@ export default GoogleApiWrapper({
     Meteor.subscribe("sentApplications");
     return {
       jobs: getUnappliedJobs(),
-      currentUserId: Meteor.userId(),
+      currentUserId: Meteor.userId()
     };
   })(MapContainer)
 );

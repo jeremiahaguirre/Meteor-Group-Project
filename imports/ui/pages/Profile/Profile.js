@@ -16,9 +16,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 import Input from "./Input";
-import {
-  Link
-} from 'react-router-dom';
+import { Link } from "react-router-dom";
 const styles = {
   menu: {
     position: "static",
@@ -78,8 +76,10 @@ const Profile = ({ currentUser, history, classes }) => {
 
   return (
     <div className={classes.bg}>
-      <Button>
-          <Link to="/" >Back</Link>
+      <Button className={classes.btnPrimary}>
+        <Link className={classes.link} to="/">
+          Back
+        </Link>
       </Button>
       <main>
         <Paper className={classes.root} elevation={1}>

@@ -8,7 +8,7 @@ import { withTracker } from "meteor/react-meteor-data";
 import Divider from "@material-ui/core/Divider";
 import ApplicationBox from "../ApplicationBox";
 import Button from "@material-ui/core/Button";
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from "@material-ui/icons/Delete";
 import { getApplications, removeApplication } from "../../helpers/functions";
 import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
@@ -41,10 +41,14 @@ SentApplicationsList = ({ classes, applications }) => {
                       ? "Rejected"
                       : "Pending"}
                   </div>
-                  <Button variant="contained" color="primary" className={classes.button} onClick={()=>removeApplication(application)}>
-                    <DeleteIcon/>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    onClick={() => removeApplication(application)}
+                  >
+                    <DeleteIcon />
                   </Button>
-                  <Divider />
                 </div>
               </QueueAnim>
             );
