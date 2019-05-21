@@ -5,7 +5,7 @@ const styles = theme => ({
     color: "white"
   },
   back: {
-    background: "#e0e0e0",
+    background: "rgba(224, 224, 224,0.6)",
     borderRadius: "10px",
     height: "80vh"
   },
@@ -16,13 +16,8 @@ const styles = theme => ({
   },
   Form: {
     height: "100vh",
-    background:
-      "-moz-linear-gradient(top,  #003550 0%, #2989d8 50%, #003550 100%, #207cca 100%, #7db9e8 100%)d",
-    background:
-      "-webkit-linear-gradient(top,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
-    background:
-      "linear-gradient(to bottom,  #003550 0%,#2989d8 50%,#003550 100%,#207cca 100%,#7db9e8 100%)",
-
+    background: `url(${"/background.jpg"})`,
+    backgroundSize: "cover",
     paddingLeft: "10%",
     paddingRight: "10%"
   },
