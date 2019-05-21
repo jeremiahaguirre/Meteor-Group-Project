@@ -48,6 +48,7 @@ const RequestModal = ({ open, onClose, children }) => (
 );
 
 const MapContainer = ({ google, jobs, currentUserId }) => {
+  console.log(jobs);
   const [coords, setCoords] = useState();
   const [activeMarker, setActiveMarker] = useState();
 
@@ -78,7 +79,7 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
     >
       {MOCK_JOBS &&
         // filter unavailable jobs
-        MOCK_JOBS.filter(d => d.available).map(
+        MOCK_JOBS.filter(d => !d.taken).map(
           ({ title, description, date, _id }, i) => (
             <Marker
               key={title}
@@ -132,8 +133,8 @@ export default GoogleApiWrapper({
   apiKey: "AIzaSyDVeH1MZLc4kjzbFlgDeHRqAUtvsoUe2EI"
 })(
   withTracker(() => {
-    Meteor.subscribe("allJobs");
-
+    Meteor.subscribe("openJobs");
+    Meteor.subscribe("userProfiles");
     return {
       jobs: getJobPosts(),
       currentUserId: Meteor.userId()
