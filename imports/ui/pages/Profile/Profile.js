@@ -13,11 +13,12 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Paper from "@material-ui/core/Paper";
 import Radio from "@material-ui/core/Radio";
-import Link from "@material-ui/core/Link";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 import Input from "./Input";
-
+import {
+  Link
+} from 'react-router-dom';
 const styles = {
   menu: {
     position: "static",
@@ -77,12 +78,8 @@ const Profile = ({ currentUser, history, classes }) => {
 
   return (
     <div className={classes.bg}>
-      <Button
-        onClick={() => {
-          <Link to="/employe" />;
-        }}
-      >
-        Back
+      <Button>
+          <Link to="/" >Back</Link>
       </Button>
       <main>
         <Paper className={classes.root} elevation={1}>
