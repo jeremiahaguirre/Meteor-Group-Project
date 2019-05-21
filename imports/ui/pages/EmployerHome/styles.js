@@ -10,16 +10,21 @@ const styles = {
     textAlign: "center"
   },
   sideBar: {
-    flexBasis: "24%",
-    height: "100%",
-    width: "auto"
+    background: "white",
+    height: "100vh",
+    width: "24%",
+    position: "absolute",
+    top: 0
   },
   rightSide: {
     background: `url(${"/background.jpg"})`,
     backgroundSize: "cover",
-    flexBasis: "76%",
-    height: "100%",
-    width: "auto"
+    height: "100vh",
+    position: "absolute",
+    right: "0px",
+    top: 0,
+    zIndex: "-5",
+    width: "76%"
   }
 };
 

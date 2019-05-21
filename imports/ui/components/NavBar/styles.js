@@ -3,7 +3,11 @@ const styles = theme => ({
     width: "100%"
   },
   menu: {
-    background: "#1438ca"
+    background: "rgba(255,255,255,0.1)",
+    boxShadow: "none",
+    width: "76%",
+    position: "relative",
+    left: "374px"
   },
   grow: {
     flexGrow: 1

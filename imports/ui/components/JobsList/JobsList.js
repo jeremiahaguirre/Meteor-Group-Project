@@ -6,13 +6,13 @@ import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
 import styles from "./styles";
-import { getJobPosts,getApplications } from "../../helpers/functions";
-import JobItem from '../JobItem';
+import { getJobPosts, getApplications } from "../../helpers/functions";
+import JobItem from "../JobItem";
 import SubmitPost from "../../components/SubmitPost";
 
 const JobsList = ({ classes, filter, jobs }) => {
   return (
-    <div>
+    <div className={classes.main}>
       <Typography className={classes.h2} component="h2">
         Job Posts
       </Typography>
@@ -23,9 +23,7 @@ const JobsList = ({ classes, filter, jobs }) => {
               filter ? new RegExp(filter, "i").test(j.location) : 1
             )
             .map(job => {
-              return (
-                <JobItem key={job._id} job={job}/>
-              );
+              return <JobItem key={job._id} job={job} />;
             })}
         </List>
         <SubmitPost />
@@ -47,6 +45,6 @@ export default withTracker(() => {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
     jobs: getJobPosts(),
-    applications:getApplications()
+    applications: getApplications()
   };
 })(withStyles(styles)(JobsList));
