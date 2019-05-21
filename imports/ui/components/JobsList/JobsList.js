@@ -40,13 +40,13 @@ JobsList.propTypes = {
 };
 
 export default withTracker(() => {
-  Meteor.subscribe("openJobs");
+  Meteor.subscribe("postedJobs");
   Meteor.subscribe("userProfiles");
   Meteor.subscribe("recievedApplications");
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: getJobPosts().filter(job=>job.taken===false),
+    jobs: getJobPosts().filter(job=>(job.taken===false)),
     applications: getApplications()
   };
 })(withStyles(styles)(JobsList));

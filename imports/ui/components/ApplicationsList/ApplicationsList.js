@@ -21,7 +21,7 @@ ApplicationsList = ({ classes, applications }) => {
       <Card className={classes.card}>
         <List>
           {applications.map(application => {
-            const { job, jobOwner } = application;
+            const { job, applicant } = application;
             return (
               <QueueAnim
                 key={job._id}
@@ -31,7 +31,7 @@ ApplicationsList = ({ classes, applications }) => {
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <ApplicationBox job={job} jobOwner={jobOwner}/>
+                  <ApplicationBox job={job} user={applicant}/>
                   <div className={classes.buttons}>
                     <Button
                       variant="contained"
