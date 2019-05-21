@@ -22,14 +22,12 @@ import { TextField, Typography } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 
 const professions = [
-  "React",
-  "React Native",
-  "Meteor",
-  "Node.js",
-  "Express",
-  "Javascript",
-  "CSS",
-  "MongoDB"
+  "Cook",
+  "Teacher",
+  "Driver",
+  "Babysitter",
+  "Doctor",
+  "Basketball Player",
 ];
 
 const ITEM_HEIGHT = 48;
