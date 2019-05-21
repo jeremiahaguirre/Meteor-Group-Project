@@ -5,10 +5,10 @@ import List from "@material-ui/core/List";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
+import SubmitPost from "../../components/SubmitPost";
 import styles from "./styles";
 import { getJobPosts, getApplications } from "../../helpers/functions";
 import JobItem from "../JobItem";
-import SubmitPost from "../../components/SubmitPost";
 
 const JobsList = ({ classes, filter, jobs }) => {
   return (
@@ -16,6 +16,7 @@ const JobsList = ({ classes, filter, jobs }) => {
       <Typography className={classes.h2} component="h2">
         Job Posts
       </Typography>
+      <SubmitPost />
       <Card className={classes.card}>
         <List>
           {jobs
@@ -26,7 +27,6 @@ const JobsList = ({ classes, filter, jobs }) => {
               return <JobItem key={job._id} job={job} />;
             })}
         </List>
-        <SubmitPost />
       </Card>
     </div>
   );

@@ -19,7 +19,7 @@ import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import { createJob } from "../../../ui/helpers/functions";
 import { TextField, Typography } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 
 const professions = [
   "Cook",
@@ -27,7 +27,7 @@ const professions = [
   "Driver",
   "Babysitter",
   "Doctor",
-  "Basketball Player",
+  "Basketball Player"
 ];
 
 const ITEM_HEIGHT = 48;
@@ -51,19 +51,18 @@ class SubmitPost extends React.Component {
     };
   }
 
-  componentDidMount(){
-
-      if (!navigator.geolocation) {
-        console.error("Geolocation is not supported by this browser");
-      } else {
-        navigator.geolocation.getCurrentPosition(({ coords }) =>
-          this.setState({ location: coords })
-        );
-      }
+  componentDidMount() {
+    if (!navigator.geolocation) {
+      console.error("Geolocation is not supported by this browser");
+    } else {
+      navigator.geolocation.getCurrentPosition(({ coords }) =>
+        this.setState({ location: coords })
+      );
+    }
   }
 
   // generate random long/lat offsets for demo
-  offSet = () => ((Math.random()-0.5) * 0.05000);
+  offSet = () => (Math.random() - 0.5) * 0.05;
 
   handleMultiChange = event => {
     this.setState({ profession: event.target.value });
@@ -77,16 +76,19 @@ class SubmitPost extends React.Component {
     this.setState({ open: true });
   };
 
-  handleClose = (form) => {
-    this.setState({ open: false,date:null,profession:[] });
+  handleClose = form => {
+    this.setState({ open: false, date: null, profession: [] });
     form.reset();
   };
 
   handleSubmit = (values, form) => {
-   
     createJob({
       ...values,
-      location: {...this.state.location,latitude: this.state.location.latitude + this.offSet(), longitude: this.state.location.longitude + this.offSet()},
+      location: {
+        ...this.state.location,
+        latitude: this.state.location.latitude + this.offSet(),
+        longitude: this.state.location.longitude + this.offSet()
+      },
       time: this.state.date._d,
       professions: this.state.profession
     });
@@ -102,14 +104,14 @@ class SubmitPost extends React.Component {
           color="primary"
           onClick={() => this.handleClickOpen()}
         >
-          <AddIcon/>
+          <AddIcon />
         </Button>
         <Form
           onSubmit={this.handleSubmit}
-          render={({ handleSubmit, pristine, invalid,form }) => (
+          render={({ handleSubmit, pristine, invalid, form }) => (
             <Dialog
               open={this.state.open}
-              onClose={()=>this.handleClose(form)}
+              onClose={() => this.handleClose(form)}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               className="modalSize"

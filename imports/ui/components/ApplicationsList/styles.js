@@ -24,7 +24,7 @@ const styles = {
   },
   btn: {
     marginRight: "10px",
-    background: "#f79e02"
+    background: "rgb(233,65,85)"
   },
   animation: {
     padding: 0,
