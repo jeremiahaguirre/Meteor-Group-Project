@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import { deleteJob } from "../../helpers/functions";
 import DeleteIcon from "@material-ui/icons/Delete";
 
-const JobItem = ({ classes, job }) => {
+const JobItem = ({ classes, job,applications }) => {
   return (
     <div className={classes.root} key={job._id}>
       <ListItem className={classes.list} alignItems="flex-start">
@@ -46,7 +46,7 @@ const JobItem = ({ classes, job }) => {
           variant="contained"
           color="primary"
           onClick={() => {
-            deleteJob(job);
+            deleteJob(job,applications);
           }}
         >
           <DeleteIcon />
@@ -58,7 +58,8 @@ const JobItem = ({ classes, job }) => {
 
 JobItem.propTypes = {
   classes: PropTypes.object.isRequired,
-  job: PropTypes.object.isRequired
+  job: PropTypes.object.isRequired,
+  applications:PropTypes.array,
 };
 
 export default withStyles(styles)(JobItem);

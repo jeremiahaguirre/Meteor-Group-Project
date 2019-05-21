@@ -43,7 +43,7 @@ export function createJob(job) {
   );
 }
 
-export function deleteJob(job) {
+export function deleteJob(job,applications) {
   //Meteor.call("jobs.delete", job._id);
 }
 
