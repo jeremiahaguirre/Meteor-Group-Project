@@ -4,23 +4,23 @@ import JobsList from "../../components/JobsList";
 import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";
 import { withStyles } from "@material-ui/core/styles";
-import styles from './styles'
+import styles from "./styles";
 
 const Home = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");
 
   return (
     <div>
-      <NavBar onChange={setJobsQuery}/>
-      <div className={classes.top}>
+      <NavBar onChange={setJobsQuery} />
+      {/* <div className={classes.top}>
         <SubmitPost />
-      </div>
+      </div> */}
       <div className={classes.main}>
-        <div className={classes.leftSide}>
-          <JobsList filter={jobsQuery} />
+        <div className={classes.sideBar}>
+          <ApplicationsList />
         </div>
         <div className={classes.rightSide}>
-          <ApplicationsList />
+          <JobsList filter={jobsQuery} />
         </div>
       </div>
     </div>

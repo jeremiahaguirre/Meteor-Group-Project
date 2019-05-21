@@ -5,7 +5,7 @@ const styles = {
   },
   card: {
     minWidth: 275,
-    width: "700px",
+    width: "auto",
     height: "400px",
     overflowY: "scroll",
     background: "rgba(0,0,0,0.0)",
@@ -14,10 +14,9 @@ const styles = {
   },
   h2: {
     color: "Black",
-    fontSize: "32px",
+    fontSize: "24px",
     fontWeight: "400",
-    textAlign: "center",
-    textShadow: "5px 5px 11px rgba(68,68,68,0.94)"
+    textAlign: "center"
   },
   buttons: {
     padding: "10px"
