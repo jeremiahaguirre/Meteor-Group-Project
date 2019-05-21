@@ -57,7 +57,7 @@ const Profile = ({ currentUser, history, classes }) => {
         { _id: Meteor.userId() },
         {
           $set: {
-            "profile.professions": values.description.split(",")
+            "profile.professions": values.description.toLowerCase().split(",")
           }
         }
       );
@@ -110,7 +110,7 @@ const Profile = ({ currentUser, history, classes }) => {
                   Username
                 </Input>
                 <Input name="description" classes={classes}>
-                  Description
+                  Professions
                 </Input>
                 <Field name="profile-status" type="radio">
                   {({ input }) => (

@@ -46,3 +46,7 @@ export function createJob(job) {
 export function deleteJob(job){
   console.log(job);
 }
+
+export function removeApplication(application){
+  console.log(application);
+}
