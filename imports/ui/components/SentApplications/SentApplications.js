@@ -6,21 +6,17 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
 import Divider from "@material-ui/core/Divider";
-import ApplicationBox from '../ApplicationBox';
+import ApplicationBox from "../ApplicationBox";
 import Button from "@material-ui/core/Button";
-import {
-  getApplications,
-  removeApplication
-} from "../../helpers/functions";
+import { getApplications, removeApplication } from "../../helpers/functions";
 import QueueAnim from "rc-queue-anim";
 import styles from "./styles";
 
 SentApplicationsList = ({ classes, applications }) => {
-  
   return (
     <div>
       <Typography className={classes.h2} component="h2">
-        Applications Sent
+        Requests
       </Typography>
       <Card className={classes.card}>
         <List>
@@ -35,9 +31,14 @@ SentApplicationsList = ({ classes, applications }) => {
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <ApplicationBox job={job} jobOwner={jobOwner}/>
+                  <ApplicationBox job={job} jobOwner={jobOwner} />
                   <div>
-                    Status: {application.status===true?'Accepted':application.status===false?'Rejected':'Pending'} 
+                    Status:{" "}
+                    {application.status === true
+                      ? "Accepted"
+                      : application.status === false
+                      ? "Rejected"
+                      : "Pending"}
                   </div>
                   <Divider />
                 </div>
@@ -48,7 +49,7 @@ SentApplicationsList = ({ classes, applications }) => {
       </Card>
     </div>
   );
-}
+};
 
 SentApplicationsList.propTypes = {
   classes: PropTypes.object.isRequired
