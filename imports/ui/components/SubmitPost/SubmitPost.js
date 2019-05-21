@@ -55,7 +55,7 @@ class SubmitPost extends React.Component {
 
   componentDidMount(){
     // generate random long/lat offsets for demo
-    const offSet = () => (Math.random() * -0.0015);
+    const offSet = () => ((Math.random()-0.5) * 0.00300);
       if (!navigator.geolocation) {
         console.error("Geolocation is not supported by this browser");
       } else {
@@ -77,18 +77,20 @@ class SubmitPost extends React.Component {
     this.setState({ open: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleClose = (form) => {
+    this.setState({ open: false,date:null,profession:[] });
+    form.reset();
   };
 
-  handleSubmit = values => {
+  handleSubmit = (values, form) => {
+   
     createJob({
       ...values,
       location: this.state.location,
       time: this.state.date._d,
       professions: this.state.profession
     });
-    this.handleClose();
+    this.handleClose(form);
   };
 
   render() {
@@ -104,10 +106,10 @@ class SubmitPost extends React.Component {
         </Button>
         <Form
           onSubmit={this.handleSubmit}
-          render={({ handleSubmit, pristine, invalid }) => (
+          render={({ handleSubmit, pristine, invalid,form }) => (
             <Dialog
               open={this.state.open}
-              onClose={this.handleClose}
+              onClose={()=>this.handleClose(form)}
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               className="modalSize"
@@ -209,7 +211,7 @@ class SubmitPost extends React.Component {
                   <DialogActions>
                     <Button
                       className={classes.btn}
-                      onClick={() => this.handleClose()}
+                      onClick={() => this.handleClose(form)}
                       color="primary"
                     >
                       Cancel
