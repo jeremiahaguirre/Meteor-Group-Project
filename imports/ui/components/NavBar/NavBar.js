@@ -142,7 +142,3 @@ export default withTracker(() => {
     currentUserId: Meteor.userId()
   };
 })(withStyles(styles)(NavBar));
-
-// {currentUser && currentUser.profile.employer === true ? (
-//   <MenuDrawer />
-// ) : null}
