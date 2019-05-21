@@ -10,7 +10,7 @@ import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
 
-const ApplicationBox = ({ classes, job }) => {
+const ApplicationBox = ({ classes, job,jobOwner }) => {
   return (
     <ListItem className={classes.list} alignItems="flex-start">
       <ListItemAvatar>
@@ -27,7 +27,7 @@ const ApplicationBox = ({ classes, job }) => {
             </Typography>
             <Typography component="span" color="textPrimary">
               Date:{" "}
-              {moment(application.job.createdAt)
+              {moment(job.createdAt)
                 .add(10, "days")
                 .calendar()}
             </Typography>

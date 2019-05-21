@@ -31,7 +31,7 @@ ApplicationsList = ({ classes, applications }) => {
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <ApplicationBox job={job} />
+                  <ApplicationBox job={job} jobOwner={jobOwner}/>
                   <div className={classes.buttons}>
                     <Button
                       variant="contained"

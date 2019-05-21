@@ -21,7 +21,6 @@ const RequestModal = ({ open, onClose, children }) => (
 );
 
 const MapContainer = ({ google, jobs, currentUserId }) => {
-  console.log(jobs);
   const [coords, setCoords] = useState();
   const [activeMarker, setActiveMarker] = useState();
 
