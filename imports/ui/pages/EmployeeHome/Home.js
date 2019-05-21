@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import SubmitPost from "../../components/SubmitPost";
-import JobsList from "../../components/JobsList";
-import SentApplications from "../../components/SentApplications";
+import JobsMap from "../../components/JobsMap";
 import { withTracker } from "meteor/react-meteor-data";
 import NavBar from "../../components/NavBar";
+import SentApplications from '../../components/SentApplications'
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
 
@@ -14,8 +13,11 @@ const Home = ({ currentUser, classes }) => {
     <div>
       <NavBar onChange={setJobsQuery} />
       <div className={classes.main}>
-        <div className={classes.leftSide}>
-          <JobsList filter={jobsQuery} />
+        <div className={classes.sideBar}>
+          <SentApplications />
+        </div>
+        <div className={classes.rightSide}>
+          <JobsMap/>
         </div>
       </div>
     </div>
@@ -28,9 +30,3 @@ export default withTracker(() => {
     currentUserId: Meteor.userId()
   };
 })(withStyles(styles)(Home));
-
-// {currentUser && currentUser.profile.employer === true ? (
-//   <MenuDrawer />
-// ) : null}
-
-<SubmitPost />;
