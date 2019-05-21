@@ -44,6 +44,8 @@ class AccountForm extends Component {
           profile: {
             name: this.state.nameInput,
             employer: values["profile-status"] === "employer" ? true : false,
+            professions: [],
+            notifications: []
           },
           email: values.email,
           password: values.password
