@@ -8,7 +8,8 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { Map as GMap, Marker, GoogleApiWrapper } from "google-maps-react";
 import { withTracker } from "meteor/react-meteor-data";
 import { applyToJob } from "../../../ui/helpers/functions";
-import { Jobs } from "../../../api/jobs";
+import { getUnappliedJobs} from '../../helpers/functions';
+
 
 const RequestModal = ({ open, onClose, children }) => (
   <Dialog
@@ -22,6 +23,7 @@ const RequestModal = ({ open, onClose, children }) => (
 );
 
 const MapContainer = ({ google, jobs, currentUserId }) => {
+  
   const [coords, setCoords] = useState();
   const [activeMarker, setActiveMarker] = useState();
   useEffect(() => {
@@ -84,7 +86,10 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {activeMarker.name}({activeMarker.date})
+              {activeMarker.name}
+            </DialogContentText>
+            <DialogContentText id="alert-dialog-date">
+              {activeMarker.date}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -113,9 +118,10 @@ export default GoogleApiWrapper({
 })(
   withTracker(() => {
     Meteor.subscribe("openJobs");
+    Meteor.subscribe("sentApplications");
     return {
-      jobs: Jobs.find({taken:false}).fetch(),
-      currentUserId: Meteor.userId()
+      jobs: getUnappliedJobs(),
+      currentUserId: Meteor.userId(),
     };
   })(MapContainer)
 );

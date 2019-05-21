@@ -9,6 +9,12 @@ export function getJobPosts() {
   return jobs;
 }
 
+export function getUnappliedJobs() {
+  const apps = Applications.find({ applicant: Meteor.userId() }).fetch();
+  const jobs = Jobs.find({ taken: false }).fetch().filter(job=>!apps.find(app=>app.jobId===job._id));
+  return jobs;
+}
+
 export function getApplications() {
   const applications = Applications.find({}).map(app => {
     const applicant = Meteor.users.findOne({ _id: app.applicant });
@@ -18,6 +24,7 @@ export function getApplications() {
   });
   return applications;
 }
+
 
 export function applyToJob(jobId, jobOwnerId) {
   Meteor.call("applications.apply", jobId, jobOwnerId);
