@@ -1,10 +1,12 @@
 const styles = theme => ({
   bg: {
-    backgroundColor: "aliceblue",
+    background: `url(${"/background.jpg"})`,
+    backgroundSize: "cover",
     minHeight: "100vh"
   },
   root: {
     ...theme.mixins.gutters(),
+    background: "rgba(255,255,255,0.6)",
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
     width: "80vw",
@@ -51,15 +53,14 @@ const styles = theme => ({
     textAlign: "center"
   },
   btnPrimary: {
-    //background: "rgb(65,168,237)",
-    background: "#f79e02",
+    background: "rgb(233,65,85)",
     marginTop: "15px",
-    color: "black"
+    color: "white"
   },
   btnSecondary: {
     marginRight: "20px",
     marginTop: "15px",
-    color: "black"
+    color: "white"
   },
   btnSmall: {
     background: "#f79e02"
