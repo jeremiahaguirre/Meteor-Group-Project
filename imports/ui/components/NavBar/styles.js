@@ -7,7 +7,7 @@ const styles = theme => ({
     boxShadow: "none",
     width: "76%",
     position: "relative",
-    left: "374px"
+    left: "347px"
   },
   grow: {
     flexGrow: 1
