@@ -44,7 +44,7 @@ export default withTracker(() => {
   return {
     currentUser: Meteor.user(),
     currentUserId: Meteor.userId(),
-    jobs: getJobPosts(),
+    jobs: getJobPosts().filter(job=>job.taken===false),
     applications: getApplications()
   };
 })(withStyles(styles)(JobsList));

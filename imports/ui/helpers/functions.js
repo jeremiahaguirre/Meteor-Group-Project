@@ -44,10 +44,12 @@ export function createJob(job) {
 }
 
 export function deleteJob(job,applications) {
-  Meteor.call("jobs.delete", job._id);
-  applications.forEach(application => { 
-    removeApplication(application)
-  });
+  if (applications.length > 0) { 
+    Meteor.call("jobs.close", job._id);
+    applications.forEach(application => { 
+      replyToApplication(application, false);
+    });
+  } else { Meteor.call("jobs.delete", job._id); }
 }
 
 export function removeApplication(application){
