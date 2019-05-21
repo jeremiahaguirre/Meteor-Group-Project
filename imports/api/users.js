@@ -36,7 +36,7 @@ Meteor.methods({
 
 })
 if (Meteor.isServer) {
-  Meteor.publish("userProfiles", function userProfiles(){
-    return Meteor.users.find({_id:!this.userId}, { services: 0});
+  Meteor.publish("userProfiles", function userProfiles() {
+    return Meteor.users.find({}, { services: 0});
   });
 }
