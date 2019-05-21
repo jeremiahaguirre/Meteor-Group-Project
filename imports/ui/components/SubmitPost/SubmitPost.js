@@ -53,6 +53,18 @@ class SubmitPost extends React.Component {
     };
   }
 
+  componentDidMount(){
+    // generate random long/lat offsets for demo
+    const offSet = () => (Math.random() * -0.0015);
+      if (!navigator.geolocation) {
+        console.error("Geolocation is not supported by this browser");
+      } else {
+        navigator.geolocation.getCurrentPosition(({ coords }) =>
+          this.setState({ location: { ...coords, latitude: coords.latitude + offSet(), longitude: coords.longitude + offSet() } })
+        );
+      }
+  }
+
   handleMultiChange = event => {
     this.setState({ profession: event.target.value });
   };
@@ -156,23 +168,6 @@ class SubmitPost extends React.Component {
                       </FormControl>
                     )}
                   </Field>
-
-                  <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="location-simple">Location</InputLabel>
-                    <Select
-                      value={this.state.location}
-                      onChange={this.handleChange}
-                      inputProps={{
-                        name: "location",
-                        id: "location-simple"
-                      }}
-                    >
-                      <MenuItem value="Vancouver">Vancouver</MenuItem>
-                      <MenuItem value="Burnaby">Burnaby</MenuItem>
-                      <MenuItem value="Richmond">Richmond</MenuItem>
-                      <MenuItem value="Surrey">Surrey</MenuItem>
-                    </Select>
-                  </FormControl>
 
                   <SingleDatePicker
                     date={this.state.date} // momentPropTypes.momentObj or null
