@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SubmitPost from "../../components/SubmitPost";
 import JobsList from "../../components/JobsList";
 import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";

@@ -25,6 +25,9 @@ const styles = {
     top: 0,
     zIndex: "-5",
     width: "76%"
+  },
+  submit: {
+    position: "relative"
   }
 };
 
