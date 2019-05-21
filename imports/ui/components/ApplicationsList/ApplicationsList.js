@@ -60,7 +60,8 @@ ApplicationsList = ({ classes, applications }) => {
 };
 
 ApplicationsList.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  applications: PropTypes.array
 };
 
 export default withTracker(() => {

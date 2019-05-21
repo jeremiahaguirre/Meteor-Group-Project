@@ -43,7 +43,8 @@ const ApplicationBox = ({ classes, job, jobOwner }) => {
 
 ApplicationBox.propTypes = {
   classes: PropTypes.object.isRequired,
-  job: PropTypes.object.isRequired
+  job: PropTypes.object.isRequired,
+  jobOwner:PropTypes.object
 };
 
 export default withStyles(styles)(ApplicationBox);

@@ -34,7 +34,9 @@ const JobsList = ({ classes, filter, jobs,applications }) => {
 
 JobsList.propTypes = {
   classes: PropTypes.object.isRequired,
-  filter: PropTypes.string.isRequired
+  filter: PropTypes.string.isRequired,
+  jobs: PropTypes.array,
+  applications:PropTypes.array,
 };
 
 export default withTracker(() => {
