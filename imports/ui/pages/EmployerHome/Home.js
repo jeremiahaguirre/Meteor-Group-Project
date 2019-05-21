@@ -12,9 +12,6 @@ const Home = ({ classes }) => {
   return (
     <div>
       <NavBar onChange={setJobsQuery} />
-      {/* <div className={classes.top}>
-        <SubmitPost />
-      </div> */}
       <div className={classes.main}>
         <div className={classes.sideBar}>
           <ApplicationsList />
