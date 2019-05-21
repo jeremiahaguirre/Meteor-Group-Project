@@ -1,7 +1,12 @@
 const styles = {
   root: {
+    paddingTop: 70,
     marginTop: "5px",
     marginbottom: "5px"
+  },
+  main: {
+    paddingTop: 70,
+    paddingLeft: 76
   },
   card: {
     minWidth: 275,
@@ -16,7 +21,7 @@ const styles = {
     color: "Black",
     fontSize: "24px",
     fontWeight: "400",
-    textAlign: "center"
+    textAlign: "left"
   },
   buttons: {
     padding: "10px"

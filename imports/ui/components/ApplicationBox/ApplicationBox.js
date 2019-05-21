@@ -10,45 +10,40 @@ import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
 
-const ApplicationBox=({classes,job})=>{
-    return (
-        <ListItem className={classes.list} alignItems="flex-start">
-                <ListItemAvatar>
-                <Avatar>
-                    <Gravatar
-                    email={jobOwner && jobOwner.emails[0].address}
-                    />
-                </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                primary={job.title}
-                secondary={
-                    <React.Fragment>
-                    <Typography component="span" color="textPrimary">
-                        Description: {job.description}{" "}
-                    </Typography>
-                    <Typography component="span" color="textPrimary">
-                        Date:{" "}
-                        {moment(application.job.createdAt)
-                        .add(10, "days")
-                        .calendar()}
-                    </Typography>
-                    <Typography component="span" color="textPrimary">
-                        Requierments: {job.professions.join(", ")}{" "}
-                    </Typography>
-                    <Typography component="span" color="textPrimary">
-                        Location: {job.location}{" "}
-                    </Typography>
-                    </React.Fragment>
-                }
-                />
-        </ListItem>
-    );
-}
+const ApplicationBox = ({ classes, job }) => {
+  return (
+    <ListItem className={classes.list} alignItems="flex-start">
+      <ListItemAvatar>
+        <Avatar>
+          <Gravatar email={jobOwner && jobOwner.emails[0].address} />
+        </Avatar>
+      </ListItemAvatar>
+      <ListItemText
+        primary={job.title}
+        secondary={
+          <React.Fragment>
+            <Typography component="span" color="textPrimary">
+              Description: {job.description}{" "}
+            </Typography>
+            <Typography component="span" color="textPrimary">
+              Date:{" "}
+              {moment(application.job.createdAt)
+                .add(10, "days")
+                .calendar()}
+            </Typography>
+            <Typography component="span" color="textPrimary">
+              Requierments: {job.professions.join(", ")}{" "}
+            </Typography>
+          </React.Fragment>
+        }
+      />
+    </ListItem>
+  );
+};
 
 ApplicationBox.propTypes = {
-    classes: PropTypes.object.isRequired,
-    job: PropTypes.object.isRequired
-  };
-  
-  export default (withStyles(styles)(ApplicationBox));
+  classes: PropTypes.object.isRequired,
+  job: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(ApplicationBox);
