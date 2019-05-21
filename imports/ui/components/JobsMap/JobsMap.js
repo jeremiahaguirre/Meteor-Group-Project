@@ -9,33 +9,6 @@ import { Map as GMap, Marker, GoogleApiWrapper } from "google-maps-react";
 import { withTracker } from "meteor/react-meteor-data";
 import { applyToJob, getJobPosts } from "../../../ui/helpers/functions";
 
-// array of random long/lat offsets for demo
-const jazz = (() => new Array(20).fill(0).map(n => Math.random() * -0.0015))();
-
-const MOCK_JOBS = [
-  {
-    title: "helo",
-    description: "bldsfadfa bfdsadfdsafsdfsdala",
-    date: "Tuesday 23:00",
-    available: true,
-    _id: "32h7shyujs"
-  },
-  {
-    title: "blabla",
-    description: "wohoikjahlkajshfkjsahdkfjsoo",
-    date: "Tuesday 01:00",
-    available: true,
-    _id: "32dfsa3hyujs"
-  },
-  {
-    title: "party",
-    description: "excfdsadsafsadfsdafellent",
-    date: "Wednesday 00:00",
-    available: false,
-    _id: "3339i9ddyujs"
-  }
-];
-
 const RequestModal = ({ open, onClose, children }) => (
   <Dialog
     open={open}
@@ -77,20 +50,26 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
       zoom={14}
       google={google}
     >
-      {MOCK_JOBS &&
-        // filter unavailable jobs
-        MOCK_JOBS.filter(d => !d.taken).map(
-          ({ title, description, date, _id }, i) => (
+    <Marker
+        key={0}
+        position={{
+          lat: coords.latitude ,
+          lng: coords.longitude 
+        }}
+      />
+      {jobs &&
+        jobs.map(
+          ({ title, description, time, _id ,location}) => (
             <Marker
-              key={title}
+              key={_id}
               title={title}
               name={description}
-              date={date}
+              date={time}
               id={_id}
               onClick={(props, marker, e) => setActiveMarker(marker)}
               position={{
-                lat: coords.latitude + jazz[i],
-                lng: coords.longitude + jazz[i]
+                lat: location.latitude ,
+                lng: location.longitude 
               }}
             />
           )
