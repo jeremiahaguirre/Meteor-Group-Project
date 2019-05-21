@@ -22,6 +22,7 @@ ApplicationsList = ({ classes, applications }) => {
         <List>
           {applications.map(application => {
             const { job, jobOwner } = application;
+            console.log(applications)
             return (
               <QueueAnim
                 key={job._id}

@@ -24,6 +24,7 @@ export function applyToJob(jobId, jobOwnerId) {
 }
 
 export function replyToApplication(app, reply) {
+  
   Meteor.call("applications.reply", app._id,app.applicant._id, reply);
   if (reply) {
     const jobId = app.job._id;
