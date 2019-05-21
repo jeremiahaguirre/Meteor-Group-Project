@@ -51,6 +51,12 @@ Meteor.methods({
             status}
         }
       });
+  },
+  "applications.delete"(_id) {
+    if (!this.userId) {
+      throw new Meteor.Error("not-authorized");
+    }
+    Applications.remove({_id})
   }
 });
 

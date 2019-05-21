@@ -45,7 +45,7 @@ const JobItem = ({ classes, job }) => {
         <Button
           variant="contained"
           color="primary"
-          onClick={job => {
+          onClick={() => {
             deleteJob(job);
           }}
         >
