@@ -42,9 +42,6 @@ const JobItem = ({ classes, job }) => {
                     <Typography component="span" color="textPrimary">
                     Requierments: {job.professions.join(", ")}
                     </Typography>{" "}
-                    <Typography component="span" color="textPrimary">
-                    Location: {job.location}
-                    </Typography>
                 </React.Fragment>
                 }
                 />
