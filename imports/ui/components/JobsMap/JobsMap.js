@@ -7,7 +7,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Map as GMap, Marker, GoogleApiWrapper } from "google-maps-react";
 import { withTracker } from "meteor/react-meteor-data";
-import { applyToJob, getJobPosts } from "../../../ui/helpers/functions";
+import { applyToJob } from "../../../ui/helpers/functions";
+import { Jobs } from "../../../api/jobs";
 
 const RequestModal = ({ open, onClose, children }) => (
   <Dialog
@@ -23,7 +24,6 @@ const RequestModal = ({ open, onClose, children }) => (
 const MapContainer = ({ google, jobs, currentUserId }) => {
   const [coords, setCoords] = useState();
   const [activeMarker, setActiveMarker] = useState();
-
   useEffect(() => {
     if (!navigator.geolocation) {
       console.error("Geolocation is not supported by this browser");
@@ -58,12 +58,13 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
       />
       {jobs &&
         jobs.map(
-          ({ title, description, time, _id ,location}) => (
+          ({ title, description, time, _id ,location,owner}) => (
             <Marker
               key={_id}
               title={title}
               name={description}
               date={time}
+              owner={owner}
               id={_id}
               onClick={(props, marker, e) => setActiveMarker(marker)}
               position={{
@@ -92,7 +93,7 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
             </Button>
             <Button
               onClick={() => {
-                applyToJob(activeMarker.id, currentUserId);
+                applyToJob(activeMarker.id, activeMarker.owner);
                 setActiveMarker(null);
               }}
               color="primary"
@@ -112,9 +113,8 @@ export default GoogleApiWrapper({
 })(
   withTracker(() => {
     Meteor.subscribe("openJobs");
-    Meteor.subscribe("userProfiles");
     return {
-      jobs: getJobPosts(),
+      jobs: Jobs.find({taken:false}).fetch(),
       currentUserId: Meteor.userId()
     };
   })(MapContainer)
