@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import JobsList from "../../components/JobsList";
 import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";
+import PropTypes from "prop-types";
 
 const EmployerHome = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");
@@ -19,6 +20,10 @@ const EmployerHome = ({ classes }) => {
       </div>
     </div>
   );
+};
+
+EmployerHome.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default EmployerHome;

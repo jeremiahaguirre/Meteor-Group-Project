@@ -17,6 +17,7 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 import Input from "./Input";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Profile = ({ currentUser, history, classes }) => {
   const [passError, setPassError] = useState();
@@ -211,6 +212,12 @@ const Profile = ({ currentUser, history, classes }) => {
       </main>
     </div>
   );
+};
+
+Profile.propTypes = {
+  classes: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  history: PropTypes.object.isRequired
 };
 
 export default withTracker(() => {

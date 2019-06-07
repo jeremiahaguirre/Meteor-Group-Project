@@ -2,6 +2,7 @@ import React from "react";
 import Form from "../../components/AccountForm";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import PropTypes from "prop-types";
 
 const Welcome = ({ classes }) => {
   return (
@@ -32,6 +33,10 @@ const Welcome = ({ classes }) => {
       </Grid>
     </Grid>
   );
+};
+
+Welcome.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default Welcome;

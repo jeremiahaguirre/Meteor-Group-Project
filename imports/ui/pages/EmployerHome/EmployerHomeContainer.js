@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import EmployerHome from "./EmployerHome";
 import { withStyles } from "@material-ui/core/styles";
 import styles from "./styles";
+import PropTypes from "prop-types";
 
 class EmployerHomeContainer extends Component {
   render() {
@@ -13,4 +14,7 @@ class EmployerHomeContainer extends Component {
   }
 }
 
+EmployerHomeContainer.propTypes = {
+  classes: PropTypes.object.isRequired
+};
 export default withStyles(styles)(EmployerHomeContainer);
