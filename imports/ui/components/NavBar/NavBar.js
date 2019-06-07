@@ -132,7 +132,9 @@ class NavBar extends Component {
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  currentUser: PropTypes.object,
+  currentUserId: PropTypes.string
 };
 
 export default withTracker(() => {

@@ -6,7 +6,6 @@ import styles from "./styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import { Form, Field } from "react-final-form";
 import "react-dates/initialize";
 import { SingleDatePicker } from "react-dates";
@@ -18,8 +17,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import MenuItem from "@material-ui/core/MenuItem";
 import { createJob } from "../../../ui/helpers/functions";
-import { TextField, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import PropTypes from "prop-types";
 
 const professions = [
   "Cook",
@@ -236,4 +236,9 @@ class SubmitPost extends React.Component {
     );
   }
 }
+
+SubmitPost.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 export default withStyles(styles)(SubmitPost);

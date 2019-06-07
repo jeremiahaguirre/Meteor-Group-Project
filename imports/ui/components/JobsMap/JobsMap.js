@@ -9,6 +9,9 @@ import { Map as GMap, Marker, GoogleApiWrapper } from "google-maps-react";
 import { withTracker } from "meteor/react-meteor-data";
 import { applyToJob } from "../../../ui/helpers/functions";
 import { getUnappliedJobs } from "../../helpers/functions";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import styles from "./styles";
 
 const RequestModal = ({ open, onClose, children }) => (
   <Dialog
@@ -21,7 +24,7 @@ const RequestModal = ({ open, onClose, children }) => (
   </Dialog>
 );
 
-const MapContainer = ({ google, jobs, currentUserId }) => {
+const MapContainer = ({ google, jobs }) => {
   const [coords, setCoords] = useState();
   const [activeMarker, setActiveMarker] = useState();
   useEffect(() => {
@@ -115,6 +118,12 @@ const MapContainer = ({ google, jobs, currentUserId }) => {
   );
 };
 
+MapContainer.propTypes = {
+  classes: PropTypes.object.isRequired,
+  google: PropTypes.object.isRequired,
+  jobs: PropTypes.array.isRequired
+};
+
 export default GoogleApiWrapper({
   apiKey: "AIzaSyBUxM3tRM1REhsm8-VhU7Gjgm25CKyoZBc"
 })(
@@ -125,5 +134,5 @@ export default GoogleApiWrapper({
       jobs: getUnappliedJobs(),
       currentUserId: Meteor.userId()
     };
-  })(MapContainer)
+  })(withStyles(styles)(MapContainer))
 );

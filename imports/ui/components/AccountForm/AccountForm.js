@@ -15,6 +15,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 import styles from "./styles";
+import PropTypes from "prop-types";
 
 class AccountForm extends Component {
   constructor(props) {
@@ -209,5 +210,10 @@ class AccountForm extends Component {
     );
   }
 }
+
+AccountForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired
+};
 
 export default withStyles(styles)(withRouter(AccountForm));
