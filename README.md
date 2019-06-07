@@ -41,12 +41,16 @@ meteor
 
 ## Authors
 
-- Name: Jeremiah, Saveen, Emre, Gavin, William
+- Jeremiah
+- Saveen
+- Emre
+- Gavin
+- William
 
 ## Am I missing some essential feature?
 
 - **Nothing is impossible!**
 
-- Open an [issue](https://github.com/jeremiahaguirre/boomtown/issues/new) and let's make Boomtown better together!
+- Open an [issue](https://github.com/jeremiahaguirre/Meteor-Group-Project/issues/new) and let's make Hived better together!
 
 - _Bug reports, feature requests, patches, and well-wishes are always welcome._ :heavy_exclamation_mark:
