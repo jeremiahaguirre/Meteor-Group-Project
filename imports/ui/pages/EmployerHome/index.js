@@ -1,3 +1,3 @@
-import HomeContainer from "./HomeContainer";
+import EmployerHomeContainer from "./EmployerHomeContainer";
 
-export default HomeContainer;
+export default EmployerHomeContainer;

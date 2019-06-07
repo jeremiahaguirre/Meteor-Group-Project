@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import JobsList from "../../components/JobsList";
-import ApplicationsList from "../../components/ApplicationsList";
+import JobsMap from "../../components/JobsMap";
 import NavBar from "../../components/NavBar";
+import SentApplications from "../../components/SentApplications";
 
-const Home = ({ classes }) => {
+const EmployeeHome = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");
 
   return (
@@ -11,14 +11,14 @@ const Home = ({ classes }) => {
       <NavBar onChange={setJobsQuery} />
       <div className={classes.main}>
         <div className={classes.sideBar}>
-          <ApplicationsList />
+          <SentApplications />
         </div>
         <div className={classes.rightSide}>
-          <JobsList filter={jobsQuery} />
+          <JobsMap />
         </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default EmployeeHome;
