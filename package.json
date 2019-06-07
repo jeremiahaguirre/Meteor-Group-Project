@@ -36,8 +36,7 @@
     "mainModule": {
       "client": "client/main.js",
       "server": "server/main.js"
-    },
-    "testModule": "tests/main.js"
+    }
   },
   "version": "1.0.0",
   "main": "index.js",
