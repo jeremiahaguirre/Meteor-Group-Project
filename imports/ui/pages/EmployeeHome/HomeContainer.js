@@ -5,7 +5,6 @@ import styles from "./styles";
 
 class HomeContainer extends Component {
   render() {
-    const { classes } = this.props;
     return (
       <div>
         <Home />

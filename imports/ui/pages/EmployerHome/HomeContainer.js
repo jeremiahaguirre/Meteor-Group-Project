@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import Home from "./Home";
 import { withStyles } from "@material-ui/core/styles";
+import styles from "./styles";
 
 class HomeContainer extends Component {
   render() {
-    const { classes } = this.props;
     return (
       <div>
-        <Home />
+        <Home classes={this.props.classes} />
       </div>
     );
   }
 }
 
-export default HomeContainer;
+export default withStyles(styles)(HomeContainer);

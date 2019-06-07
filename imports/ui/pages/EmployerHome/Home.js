@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import JobsList from "../../components/JobsList";
 import ApplicationsList from "../../components/ApplicationsList";
 import NavBar from "../../components/NavBar";
-import { withStyles } from "@material-ui/core/styles";
-import styles from "./styles";
 
 const Home = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");
@@ -23,4 +21,4 @@ const Home = ({ classes }) => {
   );
 };
 
-export default withStyles(styles)(Home);
+export default Home;

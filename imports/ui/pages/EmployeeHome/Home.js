@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import JobsMap from "../../components/JobsMap";
-import { withTracker } from "meteor/react-meteor-data";
 import NavBar from "../../components/NavBar";
 import SentApplications from "../../components/SentApplications";
-import { withStyles } from "@material-ui/core/styles";
-import styles from "./styles";
 
-const Home = ({ currentUser, classes }) => {
+const Home = ({ classes }) => {
   const [jobsQuery, setJobsQuery] = useState("");
 
   return (
@@ -24,9 +21,4 @@ const Home = ({ currentUser, classes }) => {
   );
 };
 
-export default withTracker(() => {
-  return {
-    currentUser: Meteor.user(),
-    currentUserId: Meteor.userId()
-  };
-})(withStyles(styles)(Home));
+export default Home;
