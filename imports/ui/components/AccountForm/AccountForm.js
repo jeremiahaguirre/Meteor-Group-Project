@@ -98,11 +98,7 @@ class AccountForm extends Component {
                     </FormControl>
                   )}
                 </Field>
-                <Field
-                  name="profile-status"
-                  type="radio"
-                  // TODO: set initial value
-                >
+                <Field name="profile-status" type="radio">
                   {({ input, meta }) => (
                     <FormControl
                       fullWidth

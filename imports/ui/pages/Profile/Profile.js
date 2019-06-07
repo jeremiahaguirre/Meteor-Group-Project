@@ -17,21 +17,12 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import Typography from "@material-ui/core/Typography";
 import Input from "./Input";
 import { Link } from "react-router-dom";
-const styles = {
-  menu: {
-    position: "static",
-    width: "unset",
-    background: "rgba(255,255,255,0.1)",
-    boxShadow: "none"
-  }
-};
 
 const Profile = ({ currentUser, history, classes }) => {
   const [passError, setPassError] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleProfileSubmit = values => {
-    // only uses non-empty field
     values["profile-status"] &&
       Meteor.users.update(
         { _id: Meteor.userId() },
@@ -99,7 +90,6 @@ const Profile = ({ currentUser, history, classes }) => {
               description: currentUser
                 ? currentUser.profile.professions.join(", ")
                 : ""
-              // TODO: radio initial values
             }}
             render={({ handleSubmit, pristine, invalid }) => (
               <form onSubmit={handleSubmit}>
