@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
-import ApplicationBox from "../ApplicationBox";
+import ApplicationItem from "../ApplicationItem";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { getApplications, removeApplication } from "../../helpers/functions";
@@ -31,7 +31,7 @@ SentApplicationsList = ({ classes, applications }) => {
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <ApplicationBox job={job} user={jobOwner} />
+                  <ApplicationItem job={job} user={jobOwner} />
                   <div className={classes.status}>
                     This Job Is{" "}
                     {application.status === true

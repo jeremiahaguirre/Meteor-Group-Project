@@ -6,7 +6,7 @@ import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import { withTracker } from "meteor/react-meteor-data";
 import Divider from "@material-ui/core/Divider";
-import ApplicationBox from "../ApplicationBox";
+import ApplicationItem from "../ApplicationItem";
 import Button from "@material-ui/core/Button";
 import { getApplications, replyToApplication } from "../../helpers/functions";
 import QueueAnim from "rc-queue-anim";
@@ -31,7 +31,7 @@ ApplicationsList = ({ classes, applications }) => {
                 leaveReverse
               >
                 <div className={classes.root} key={job._id}>
-                  <ApplicationBox job={job} user={applicant}/>
+                  <ApplicationItem job={job} user={applicant} />
                   <div className={classes.buttons}>
                     <Button
                       variant="contained"

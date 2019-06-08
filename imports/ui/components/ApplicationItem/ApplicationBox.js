@@ -10,7 +10,7 @@ import Gravatar from "react-gravatar";
 import moment from "moment";
 import styles from "./styles";
 
-const ApplicationBox = ({ classes, job, user }) => {
+const ApplicationItem = ({ classes, job, user }) => {
   return (
     <ListItem className={classes.list} alignItems="flex-start">
       <ListItemAvatar>
@@ -41,10 +41,10 @@ const ApplicationBox = ({ classes, job, user }) => {
   );
 };
 
-ApplicationBox.propTypes = {
+ApplicationItem.propTypes = {
   classes: PropTypes.object.isRequired,
   job: PropTypes.object.isRequired,
-  jobOwner:PropTypes.object
+  jobOwner: PropTypes.object
 };
 
-export default withStyles(styles)(ApplicationBox);
+export default withStyles(styles)(ApplicationItem);
