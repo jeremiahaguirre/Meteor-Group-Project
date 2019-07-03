@@ -125,7 +125,7 @@ MapContainer.propTypes = {
 };
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyBUxM3tRM1REhsm8-VhU7Gjgm25CKyoZBc"
+  apiKey: ""
 })(
   withTracker(() => {
     Meteor.subscribe("openJobs");
